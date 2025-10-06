@@ -10,6 +10,8 @@ import (
 	"github.com/suyuan32/simple-admin-example-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
+
+	"github.com/fayipon/gg-pr-plusins/example/internal/handler/sysapi"
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
@@ -22,4 +24,10 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 	)
+
+	server.AddRoute(rest.Route{
+		Method:  http.MethodGet,
+		Path:    "/sys-api/version",
+		Handler: sysapi.VersionHandler(serverCtx),
+	})
 }
