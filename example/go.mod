@@ -1,4 +1,4 @@
-module github.com/suyuan32/simple-admin-example-api
+module github.com/fayipon/gg-pr-plusins/example
 
 go 1.25.0
 
