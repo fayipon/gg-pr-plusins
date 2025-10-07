@@ -1,13 +1,16 @@
-Name: plusinsrpc.rpc
-ListenOn: 0.0.0.0:9110
+Name: plusins-rpc
+ListenOn: 0.0.0.0:9103
 
+DB:
+  DataSource: postgres://user:password@host.docker.internal:5432/simple_admin?sslmode=disable
+
+Cache:
+  - Host: host.docker.internal:6379
 
 Log:
-  ServiceName: plusinsrpcRpcLogger
+  ServiceName: PlusinsRpcLogger
   Mode: file
-  Path: /home/data/logs/plusinsrpc/rpc
-  Encoding: json
+  Path: /home/data/logs/plusins_rpc
   Level: info
-  Compress: false
+  Encoding: json
   KeepDays: 7
-  StackCoolDownMillis: 100

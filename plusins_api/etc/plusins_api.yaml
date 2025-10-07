@@ -3,51 +3,42 @@ Host: 0.0.0.0
 Port: 8081
 Timeout: 2000
 
+# 使用 core 的数据库与 redis
+CoreAPI:
+  Host: host.docker.internal:8088   # 如果 Linux，可换成宿主 IP 或 172.17.0.1
+  JwtSecret: your-jwt-secret
+
+Rpc:
+  Endpoint: plusins-rpc:9103
+
 Auth:
-  AccessSecret: # the same as core
+  AccessSecret: your-jwt-secret
   AccessExpire: 259200
 
 CROSConf:
   Address: '*'
 
-Log:
-  ServiceName: PlusinsApiApiLogger
-  Mode: file
-  Path: /home/data/logs/PlusinsApi/api
-  Level: info
-  Compress: false
-  Encoding: json
-  KeepDays: 7
-  StackCoolDownMillis: 100
-
-
 RedisConf:
-  Host: 127.0.0.1:6379
+  Host: host.docker.internal:6379   # 使用 core 的 redis
 
 CasbinDatabaseConf:
-  Type: mysql
-  Host: 127.0.0.1
-  Port: 3306
+  Type: postgres
+  Host: host.docker.internal        # core 的数据库
+  Port: 5432
   DBName: simple_admin
-  Username: # set your username
-  Password: # set your password
-  MaxOpenConn: 100
+  Username: user
+  Password: password
   SSLMode: disable
+  MaxOpenConn: 100
   CacheTime: 5
 
-CasbinConf:
-  ModelText: |
-    [request_definition]
-    r = sub, obj, act
-    [policy_definition]
-    p = sub, obj, act
-    [role_definition]
-    g = _, _
-    [policy_effect]
-    e = some(where (p.eft == allow))
-    [matchers]
-    m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
-
+Log:
+  ServiceName: PlusinsApiLogger
+  Mode: file
+  Path: /home/data/logs/plusins_api
+  Level: info
+  Encoding: json
+  KeepDays: 7
 
 I18nConf:
-  Dir:  
+  Dir: /home/a/simple-admin-core/resource/i18n
