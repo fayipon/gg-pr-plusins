@@ -26,9 +26,9 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/suyuan32/simple-admin-example-api/internal/config"
-	"github.com/suyuan32/simple-admin-example-api/internal/handler"
-	"github.com/suyuan32/simple-admin-example-api/internal/svc"
+	"github.com/fayipon/gg-pr-plusins/example/internal/config"
+	"github.com/fayipon/gg-pr-plusins/example/internal/handler"
+	"github.com/fayipon/gg-pr-plusins/example/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

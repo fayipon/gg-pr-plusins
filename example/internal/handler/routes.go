@@ -6,8 +6,8 @@ package handler
 import (
 	"net/http"
 
-	base "github.com/suyuan32/simple-admin-example-api/internal/handler/base"
-	"github.com/suyuan32/simple-admin-example-api/internal/svc"
+	base "github.com/fayipon/gg-pr-plusins/example/internal/handler/base"
+	"github.com/fayipon/gg-pr-plusins/example/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 

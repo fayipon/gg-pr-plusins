@@ -12,7 +12,7 @@ CROSConf:
 
 Log:
   ServiceName: ExampleApiLogger
-  Mode: file
+  Mode: console
   Path: /home/data/logs/Example/api
   Level: info
   Compress: false
@@ -25,12 +25,12 @@ RedisConf:
   Host: 127.0.0.1:6379
 
 CasbinDatabaseConf:
-  Type: mysql
+  Type: postgres
   Host: 127.0.0.1
-  Port: 3306
+  Port: 5432
   DBName: simple_admin
-  Username: # set your username
-  Password: # set your password
+  Username: postgres
+  Password: simple-admin.
   MaxOpenConn: 100
   SSLMode: disable
   CacheTime: 5

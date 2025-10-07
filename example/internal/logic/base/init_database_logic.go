@@ -3,8 +3,8 @@ package base
 import (
 	"context"
 
-	"github.com/suyuan32/simple-admin-example-api/internal/svc"
-	"github.com/suyuan32/simple-admin-example-api/internal/types"
+	"github.com/fayipon/gg-pr-plusins/example/internal/svc"
+	"github.com/fayipon/gg-pr-plusins/example/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

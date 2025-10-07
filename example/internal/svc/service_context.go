@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"github.com/suyuan32/simple-admin-example-api/internal/config"
-	i18n2 "github.com/suyuan32/simple-admin-example-api/internal/i18n"
-	"github.com/suyuan32/simple-admin-example-api/internal/middleware"
+	"github.com/fayipon/gg-pr-plusins/example/internal/config"
+	i18n2 "github.com/fayipon/gg-pr-plusins/example/internal/i18n"
+	"github.com/fayipon/gg-pr-plusins/example/internal/middleware"
 
 	"github.com/suyuan32/simple-admin-common/i18n"
 
