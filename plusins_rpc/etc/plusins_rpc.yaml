@@ -1,16 +1,17 @@
-Name: plusins-rpc
-ListenOn: 0.0.0.0:9103
-
-DB:
-  DataSource: postgres://user:password@host.docker.internal:5432/simple_admin?sslmode=disable
-
-Cache:
-  - Host: host.docker.internal:6379
-
-Log:
-  ServiceName: PlusinsRpcLogger
-  Mode: file
-  Path: /home/data/logs/plusins_rpc
-  Level: info
-  Encoding: json
-  KeepDays: 7
+  plusins-rpc:
+    build:
+      context: ./plusins_rpc
+      args:
+        PROJECT: plusins
+    container_name: plusins-rpc
+    image: gg-pr-plusins-plusins-rpc
+    ports:
+      - "9103:9103"
+    restart: always
+    environment:
+      TZ: Asia/Manila
+    volumes:
+      - /home/a/gg-pr-plusins/plusins_rpc/etc:/app/etc
+      - /home/a/gg-pr-plusins/plusins_rpc/logs:/home/data/logs/plusins_rpc
+    networks:
+      - plusins-net

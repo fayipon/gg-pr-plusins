@@ -1,44 +1,23 @@
-Name: plusins-api
-Host: 0.0.0.0
-Port: 8081
-Timeout: 2000
-
-# 使用 core 的数据库与 redis
-CoreAPI:
-  Host: host.docker.internal:8088   # 如果 Linux，可换成宿主 IP 或 172.17.0.1
-  JwtSecret: your-jwt-secret
-
-Rpc:
-  Endpoint: plusins-rpc:9103
-
-Auth:
-  AccessSecret: your-jwt-secret
-  AccessExpire: 259200
-
-CROSConf:
-  Address: '*'
-
-RedisConf:
-  Host: host.docker.internal:6379   # 使用 core 的 redis
-
-CasbinDatabaseConf:
-  Type: postgres
-  Host: host.docker.internal        # core 的数据库
-  Port: 5432
-  DBName: simple_admin
-  Username: user
-  Password: password
-  SSLMode: disable
-  MaxOpenConn: 100
-  CacheTime: 5
-
-Log:
-  ServiceName: PlusinsApiLogger
-  Mode: file
-  Path: /home/data/logs/plusins_api
-  Level: info
-  Encoding: json
-  KeepDays: 7
-
-I18nConf:
-  Dir: /home/a/simple-admin-core/resource/i18n
+  # -------------------------------------------------
+  # 🧠 Plusins API 服务（供前端通过 /plusin-api/ 访问）
+  # -------------------------------------------------
+  plusins-api:
+    build:
+      context: ./plusins_api                # 指向 plusins_api 目录
+      args:
+        PROJECT: plusins                   # Go 项目前缀，用于编译输出名
+    container_name: plusins-api
+    image: gg-pr-plusins-plusins-api       # 可选：指定镜像名（方便识别）
+    ports:
+      - "8081:8081"                        # 宿主机端口:容器端口
+    restart: always
+    environment:
+      TZ: Asia/Manila                      # 设置时区
+      GIN_MODE: release                    # 可选：go框架环境变量
+    depends_on:
+      - plusins-rpc                        # 依赖 rpc 服务
+    volumes:
+      - /home/a/gg-pr-plusins/plusins_api/etc:/app/etc   # ✅ 挂载配置文件（绝对路径）
+      - /home/a/gg-pr-plusins/plusins_api/logs:/home/data/logs/plusins_api   # ✅ 可选: 挂载日志目录
+    networks:
+      - plusins-net                         # 自定义内部网络
