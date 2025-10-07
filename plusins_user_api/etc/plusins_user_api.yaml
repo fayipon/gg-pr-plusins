@@ -4,7 +4,7 @@ Port: 8082
 Timeout: 2000
 
 Auth:
-  AccessSecret: # the same as core
+  AccessSecret: "plusins_secret" # the same as core
   AccessExpire: 259200
 
 CROSConf:
