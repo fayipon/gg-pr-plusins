@@ -1,0 +1,13 @@
+Name: plusinsrpc.rpc
+ListenOn: 0.0.0.0:9110
+
+
+Log:
+  ServiceName: plusinsrpcRpcLogger
+  Mode: file
+  Path: /home/data/logs/plusinsrpc/rpc
+  Encoding: json
+  Level: info
+  Compress: false
+  KeepDays: 7
+  StackCoolDownMillis: 100
