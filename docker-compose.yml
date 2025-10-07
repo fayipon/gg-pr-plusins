@@ -1,0 +1,52 @@
+# docker-compose.yml
+# 部署 plusins-api 与 plusins-rpc
+# 共用 core-api 的数据库与 Redis
+# 不再独立启动 postgres/redis 容器
+
+services:
+  # -------------------------------------------------
+  # 🧠 Plusins API 服务（前端入口）
+  # -------------------------------------------------
+  plusins-api:
+    build:
+      context: ./plusins_api
+      args:
+        PROJECT: plusins
+    container_name: plusins-api
+    ports:
+      - "8081:8081"
+    restart: always
+    environment:
+      TZ: Asia/Manila
+    depends_on:
+      - plusins-rpc
+    volumes:
+      - ./plusins_api/etc:/app/etc
+    networks:
+      - plusins-net
+
+  # -------------------------------------------------
+  # ⚙️ Plusins RPC 服务（内部通信）
+  # -------------------------------------------------
+  plusins-rpc:
+    build:
+      context: ./plusins_rpc
+      args:
+        PROJECT: plusins
+    container_name: plusins-rpc
+    ports:
+      - "9103:9103"
+    restart: always
+    environment:
+      TZ: Asia/Manila
+    volumes:
+      - ./plusins_rpc/etc:/app/etc
+    networks:
+      - plusins-net
+
+# -------------------------------------------------
+# 🕸️ 网络定义
+# -------------------------------------------------
+networks:
+  plusins-net:
+    driver: bridge
