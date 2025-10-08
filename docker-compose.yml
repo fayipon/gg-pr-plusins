@@ -8,11 +8,12 @@ services:
         PROJECT: plusins
     container_name: plusins-api
     ports:
-      - "9010:8081"  # ✅ 對外只用 9010
+      - "8081:8081"
+      - "9010:8081"   # ✅ 同時支援 8081 與 9010
     restart: always
     environment:
       TZ: Asia/Manila
-      GOMODCACHE: /go/pkg/mod         # ✅ Go module 快取環境變數
+      GOMODCACHE: /go/pkg/mod         # ✅ Go module 快取
     depends_on:
       - plusins-rpc
     volumes:
