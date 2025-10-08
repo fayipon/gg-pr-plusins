@@ -1,0 +1,38 @@
+# ========================
+# Plusins RPC Config (Final)
+# ========================
+
+Name: plusins-rpc
+ListenOn: 0.0.0.0:9103
+Timeout: 2000
+
+# ✅ 数据库配置（使用 core 的 PostgreSQL）
+DatabaseConf:
+  Type: postgres
+  Host: 172.17.0.1            # 宿主机 Postgres
+  Port: 5432
+  DBName: simple_admin
+  Username: postgres
+  Password: your_db_password  # ⚠️ 改为 core 的实际密码
+  SSLMode: disable
+  MaxOpenConn: 100
+  CacheTime: 5
+
+# ✅ 缓存配置（使用 core 的 Redis）
+CacheConf:
+  - Host: 172.17.0.1:6379
+
+# ✅ 日志
+Log:
+  ServiceName: PlusinsRpcLogger
+  Mode: file
+  Path: /home/data/logs/plusins_rpc
+  Level: info
+  Encoding: json
+  KeepDays: 7
+  StackCoolDownMillis: 100
+
+# ✅ 可选国际化（如果用到 i18n）
+I18nConf:
+  Dir: /app/resource/i18n
+
