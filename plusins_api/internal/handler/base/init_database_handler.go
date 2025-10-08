@@ -1,4 +1,4 @@
-package svc
+package base
 
 import (
 	"github.com/casbin/casbin/v2"
