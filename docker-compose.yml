@@ -9,10 +9,11 @@ services:
     container_name: plusins-api
     ports:
       - "8081:8081"
-      - "9010:8081"   # ✅ 新增，对外暴露9010方便测试
+      - "9010:8081"
     restart: always
     environment:
       TZ: Asia/Manila
+      GOMODCACHE: /go/pkg/mod
     depends_on:
       - plusins-rpc
     volumes:
