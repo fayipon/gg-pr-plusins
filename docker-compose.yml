@@ -8,17 +8,17 @@ services:
         PROJECT: plusins
     container_name: plusins-api
     ports:
-      - "8081:8081"
-      - "9010:8081"
+      - "9010:8081"  # ✅ 對外只用 9010
     restart: always
     environment:
       TZ: Asia/Manila
-      GOMODCACHE: /go/pkg/mod
+      GOMODCACHE: /go/pkg/mod         # ✅ Go module 快取環境變數
     depends_on:
       - plusins-rpc
     volumes:
       - /home/a/gg-pr-plusins/plusins_api/etc:/app/etc
       - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
+      - /home/a/.cache/go-mod:/go/pkg/mod   # ✅ 模組快取持久化
     networks:
       - plusins-net
 
@@ -34,10 +34,10 @@ services:
       GOMODCACHE: /go/pkg/mod
     volumes:
       - /home/a/gg-pr-plusins/plusins_rpc/etc:/app/etc
+      - /home/a/.cache/go-mod:/go/pkg/mod   # ✅ 模組快取持久化
     networks:
       - plusins-net
 
 networks:
   plusins-net:
     driver: bridge
-
