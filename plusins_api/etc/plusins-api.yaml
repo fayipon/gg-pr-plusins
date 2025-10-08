@@ -59,4 +59,4 @@ Log:
   StackCoolDownMillis: 100
 
 I18nConf:
-  Dir: ""
+  Dir: /app/resource/i18n

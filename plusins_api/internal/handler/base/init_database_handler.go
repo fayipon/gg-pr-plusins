@@ -1,32 +1,39 @@
-package base
+package svc
 
 import (
-	"net/http"
+	"github.com/casbin/casbin/v2"
+	"github.com/zeromicro/go-zero/rest"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
-
-	"github.com/fayipon/gg-pr-plusins/plusins_api/internal/logic/base"
-	"github.com/fayipon/gg-pr-plusins/plusins_api/internal/svc"
+	"github.com/suyuan32/simple-admin-common/i18n"
+	"github.com/fayipon/gg-pr-plusins/plusins_api/internal/config"
+	"github.com/fayipon/gg-pr-plusins/plusins_api/internal/middleware"
 )
 
-// swagger:route get /init/database base InitDatabase
-//
-// Initialize database | 初始化数据库
-//
-// Initialize database | 初始化数据库
-//
-// Responses:
-//  200: BaseMsgResp
+type ServiceContext struct {
+	Config    config.Config
+	Casbin    *casbin.Enforcer
+	Authority rest.Middleware
+	Trans     *i18n.Translator
+}
 
-func InitDatabaseHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		l := base.NewInitDatabaseLogic(r.Context(), svcCtx)
-		resp, err := l.InitDatabase()
-		if err != nil {
-			err = svcCtx.Trans.TransError(r.Context(), err)
-			httpx.ErrorCtx(r.Context(), w, err)
-		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
-		}
+func NewServiceContext(c config.Config) *ServiceContext {
+	rds := c.RedisConf.MustNewUniversalRedis()
+	cbn := c.CasbinConf.MustNewCasbinWithOriginalRedisWatcher(
+		c.CasbinDatabaseConf.Type,
+		c.CasbinDatabaseConf.GetDSN(),
+		c.RedisConf,
+	)
+
+	// ✅ 新增這行：初始化 Translator，避免 nil pointer
+	var trans *i18n.Translator
+	if c.I18nConf.Dir != "" {
+		trans = i18n.NewTranslator(c.I18nConf)
+	}
+
+	return &ServiceContext{
+		Config:    c,
+		Casbin:    cbn,
+		Authority: middleware.NewAuthorityMiddleware(cbn, rds).Handle,
+		Trans:     trans,
 	}
 }
