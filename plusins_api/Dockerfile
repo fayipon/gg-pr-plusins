@@ -1,29 +1,48 @@
 # syntax=docker/dockerfile:1
 
-# ---------- Build 阶段 ----------
+##############################
+# 🧱 Build 階段
+##############################
 FROM golang:1.25-alpine AS builder
 WORKDIR /app
 
-# 安装依赖工具（git、tzdata）
-RUN apk add --no-cache git tzdata
+# 安裝必要工具
+RUN apk add --no-cache git tzdata ca-certificates
 
-# 复制当前模块代码（不再用 ${PROJECT}_api）
-COPY ./ ./
+# ✅ 預先複製 go.mod / go.sum 以利用 Docker layer cache
+COPY go.mod go.sum ./
+RUN go mod download
 
-# 整理依赖并编译
-RUN go mod tidy && go build -o plusins_api plusins_api.go
+# ✅ 再複製專案代碼
+COPY . .
 
-# ---------- Runtime 阶段 ----------
+# ✅ 加入環境變數與快取設定
+ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+    GOMODCACHE=/go/pkg/mod \
+    GOPROXY=https://proxy.golang.org,direct
+
+# ✅ 編譯可執行檔（strip debug symbols 減少體積）
+RUN go build -ldflags="-s -w" -o plusins_api plusins_api.go
+
+
+##############################
+# 🚀 Runtime 階段
+##############################
 FROM alpine:3.19
 WORKDIR /app
 
-# 拷贝编译结果和配置文件
+# 安裝時區與憑證
+RUN apk add --no-cache tzdata ca-certificates && update-ca-certificates
+
+# 拷貝執行檔與配置
 COPY --from=builder /app/plusins_api ./
 COPY --from=builder /app/etc ./etc
 
+# 設定時區
 ENV TZ=Asia/Manila
 
+# 開放端口
 EXPOSE 8081
 
-# 启动服务
+# 啟動服務
 CMD ["./plusins_api", "-f", "etc/plusins-api.yaml"]
