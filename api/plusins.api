@@ -1,0 +1,13 @@
+type PingResp {
+    code int `json:"code"`
+    msg  string `json:"msg"`
+}
+
+@server(
+    group: base
+    prefix: /
+)
+service plusins-api {
+    @handler Ping
+    get /ping returns (PingResp)
+}
