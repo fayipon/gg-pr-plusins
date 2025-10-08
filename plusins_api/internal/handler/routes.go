@@ -20,6 +20,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/init/database",
 				Handler: base.InitDatabaseHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/ping",
+				Handler: base.PingHandler(serverCtx),
+			},
 		},
 	)
 }
+
+
