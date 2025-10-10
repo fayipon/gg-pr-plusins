@@ -1,3 +1,5 @@
+package config
+
 import (
     "github.com/suyuan32/simple-admin-common/config"
     "github.com/suyuan32/simple-admin-common/plugins/casbin"
