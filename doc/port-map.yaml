@@ -1,0 +1,115 @@
+# ============================================
+# 📘 Plusins Port Mapping Specification v1.0
+# ============================================
+# 维护者: 架构组 / DevOps
+# 位置: gg-pr-plusins/docs/port-map.yaml
+# 说明:
+#   所有 Plusins 微服务的端口分配与命名规范。
+#   每个端口唯一，不得重复。
+#   新模块创建时，请登记在此文件。
+# ============================================
+
+version: 1.0
+
+layers:
+  api: 8080-8099        # 外部 API 层（Frontend / B2B）
+  business: 8100-8199   # 中台业务逻辑聚合层
+  rpc: 8200-8299        # 内部通信 / RPC 层
+  job: 8400-8499        # 异步任务 / 消息处理层
+  integration: 8500-8599  # 外部适配 / 支付 / SDK 层
+  analytics: 8600-8699  # 报表 / 实时流处理层
+  ai: 8700-8799         # AI / OCR / 模型层
+  gateway: 8800-8899    # 反向代理 / API Gateway 层
+  core: 9300-9399       # Simple-Admin Core / 后台管理层
+
+# ======================
+# ✅ 当前生效端口表
+# ======================
+services:
+  # ---- API 层 ----
+  plusins_api:
+    port: 8081
+    desc: 前台主 API 服务 (User-facing API)
+    status: active
+  plusins_merchant:
+    port: 8082
+    desc: 商户 / 租户 API (B2B Entry)
+    status: active
+
+  # ---- Business 层 ----
+  plusins_business:
+    port: 8120
+    desc: 中台业务调度层
+    status: active
+  plusins_wallet:
+    port: 8131
+    desc: 钱包业务中台
+    status: reserved
+  plusins_promotion:
+    port: 8141
+    desc: 活动 / 优惠券中台
+    status: reserved
+  plusins_vip:
+    port: 8151
+    desc: VIP 权益中台
+    status: reserved
+
+  # ---- RPC 层 ----
+  plusins_rpc:
+    port: 8203
+    desc: 主 RPC 服务
+    status: active
+  plusins_wallet_rpc:
+    port: 8231
+    desc: 钱包子服务 RPC
+    status: reserved
+
+  # ---- Job 层 ----
+  plusins_job:
+    port: 8401
+    desc: 异步任务 / 定时任务调度器
+    status: reserved
+
+  # ---- Integration 层 ----
+  plusins_pay:
+    port: 8501
+    desc: 第三方支付整合 (Maya / GCash / PayMongo)
+    status: reserved
+  plusins_sms_adapter:
+    port: 8502
+    desc: 短信发送服务 (M360 / DITO)
+    status: reserved
+
+  # ---- Analytics 层 ----
+  plusins_analytics:
+    port: 8621
+    desc: 报表与实时统计服务
+    status: reserved
+
+  # ---- AI 层 ----
+  plusins_ai_audit:
+    port: 8721
+    desc: OCR / 文本审查 / 模型分析服务
+    status: reserved
+
+  # ---- Core 层 ----
+  core_api:
+    port: 9301
+    desc: Simple-Admin 核心服务
+    status: active
+
+# ======================
+# 🧭 命名约定
+# ======================
+# 1. 所有服务命名必须使用下划线: plusins_xxx
+# 2. 端口命名与 service_name 必须一致
+# 3. 新建服务请按层级段分配:
+#      80xx = API
+#      81xx = Business
+#      82xx = RPC
+#      84xx = Job
+#      85xx = Integration
+#      86xx = Analytics
+#      87xx = AI
+#      93xx = Core
+# 4. 每次新增微服务请提交 MR 更新此文件。
