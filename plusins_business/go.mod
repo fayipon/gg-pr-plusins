@@ -4,7 +4,6 @@ go 1.25.0
 
 require (
 	github.com/casbin/casbin/v2 v2.127.0
-	github.com/redis/go-redis/v9 v9.14.0
 	github.com/suyuan32/simple-admin-common v1.7.2
 	github.com/zeromicro/go-zero v1.9.1
 )
@@ -63,6 +62,7 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.66.1 // indirect
 	github.com/prometheus/procfs v0.17.0 // indirect
+	github.com/redis/go-redis/v9 v9.14.0 // indirect
 	github.com/shirou/gopsutil/v3 v3.24.5 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.15 // indirect
