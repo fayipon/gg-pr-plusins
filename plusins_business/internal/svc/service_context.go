@@ -15,7 +15,15 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	rds := redis.MustNewRedis(c.RedisConf) // ✅ 使用 go-zero Redis
+	// ✅ 手动转换 RedisConf
+	redisConf := redis.RedisConf{
+		Host: c.RedisConf.Host,
+		Type: c.RedisConf.Type,
+		Pass: c.RedisConf.Pass,
+	}
+
+	rds := redis.MustNewRedis(redisConf)
+
 	cbn := c.CasbinConf.MustNewCasbinWithOriginalRedisWatcher(
 		c.CasbinDatabaseConf.Type,
 		c.CasbinDatabaseConf.GetDSN(),
@@ -24,6 +32,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	return &ServiceContext{
 		Config:    c,
-		Authority: middleware.NewModuleMeterMiddleware(cbn, rds).Handle,
+		Casbin:    cbn,
+		Authority: middleware.NewModuleMeterMiddleware(rds).Handle, // ✅ 只传 rds
 	}
 }
