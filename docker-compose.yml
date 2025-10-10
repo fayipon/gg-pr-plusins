@@ -46,14 +46,12 @@ services:
     container_name: plusins-api
     ports:
       - "8081:8081"
-      - "9010:8081"  # ✅ 可兼容旧路径
     restart: always
     environment:
       TZ: Asia/Manila
       GOMODCACHE: /go/pkg/mod
     depends_on:
       - plusins-rpc
-      - redis
     volumes:
       - /home/a/gg-pr-plusins/plusins_api/etc:/app/etc
       - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
@@ -76,7 +74,6 @@ services:
       GOMODCACHE: /go/pkg/mod
     depends_on:
       - plusins-rpc
-      - redis
     volumes:
       - /home/a/gg-pr-plusins/plusins_business/etc:/app/etc
       - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
