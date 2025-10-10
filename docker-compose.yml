@@ -38,8 +38,6 @@ services:
       GOMODCACHE: /go/pkg/mod
     depends_on:
       - plusins-rpc
-      - redis
-      - postgresql
     volumes:
       - /home/a/gg-pr-plusins/plusins_business/etc:/app/etc
       - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
