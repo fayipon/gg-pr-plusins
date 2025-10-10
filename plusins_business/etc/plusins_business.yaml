@@ -71,18 +71,6 @@ CasbinConf:
     m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
 
 # ------------------------
-# Logging Configuration
-# ------------------------
-Log:
-  ServiceName: PlusinsBusinessLogger
-  Mode: file
-  Path: /home/data/logs/plusins_business
-  Level: info
-  Encoding: json
-  KeepDays: 7
-  StackCoolDownMillis: 100
-
-# ------------------------
 # I18n 多语配置
 # ------------------------
 I18nConf:

@@ -11,3 +11,4 @@ require (
 
 
 replace github.com/fayipon/gg-pr-plusins => ../
+replace github.com/suyuan32/simple-admin-common => ../simple-admin-common
