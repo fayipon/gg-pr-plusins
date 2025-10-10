@@ -11,7 +11,6 @@ type Config struct {
 	rest.RestConf
 	Auth               rest.AuthConf
 	CROSConf           config.CROSConf
-	CasbinDatabaseConf config.DatabaseConf
 	RedisConf          config.RedisConf
 	CasbinConf         casbin.CasbinConf
 	I18nConf           i18n.Conf
