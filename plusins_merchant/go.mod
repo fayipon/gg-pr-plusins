@@ -98,4 +98,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
+replace github.com/fayipon/gg-pr-plusins/plusins_merchant => ../plusins_merchant
 replace github.com/zeromicro/go-zero v1.9.1 => github.com/suyuan32/simple-admin-tools v1.9.1
