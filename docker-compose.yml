@@ -61,7 +61,7 @@ services:
       - /home/a/gg-pr-plusins/plusins_rpc/etc:/app/etc
       - /home/a/.cache/go-mod:/go/pkg/mod   # ✅ 模組快取持久化
     networks:
-      - plusins-net
+      - postgresql_simple-admin
 
 networks:
   postgresql_simple-admin:
