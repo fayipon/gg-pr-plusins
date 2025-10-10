@@ -1,31 +1,30 @@
 package svc
 
 import (
-	"github.com/fayipon/gg-pr-plusins/plusins_business/internal/config"
-	"github.com/fayipon/gg-pr-plusins/plusins_business/internal/middleware"
-	"github.com/casbin/casbin/v2"
-	"github.com/zeromicro/go-zero/rest"
+    "context"
+
+    "github.com/fayipon/gg-pr-plusins/merchant-service/internal/config"
+    "github.com/fayipon/gg-pr-plusins/merchant-service/internal/ent"
 )
 
 type ServiceContext struct {
-	Config      config.Config
-	Casbin      *casbin.Enforcer
-	ModuleMeter rest.Middleware
+    Config config.Config
+    DB     *ent.Client
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+    client, err := ent.Open("postgres", c.CasbinDatabaseConf.GetDSN())
+    if err != nil {
+        panic(err)
+    }
 
-	rds := c.RedisConf.MustNewUniversalRedis()
+    // ✅ 自动创建 schema（如 Merchant 表）
+    if err := client.Schema.Create(context.Background()); err != nil {
+        panic(err)
+    }
 
-	cbn := c.CasbinConf.MustNewCasbinWithOriginalRedisWatcher(
-		c.DatabaseConf.Type,
-		c.DatabaseConf.GetDSN(),
-		c.RedisConf,
-	)
-
-	return &ServiceContext{
-		Config:      c,
-		Casbin:      cbn,
-		ModuleMeter: middleware.NewModuleMeterMiddleware(cbn, rds).Handle,
-	}
+    return &ServiceContext{
+        Config: c,
+        DB:     client,
+    }
 }

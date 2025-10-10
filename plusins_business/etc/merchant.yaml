@@ -49,6 +49,11 @@ CasbinConf:
     [matchers]
     m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
 
+RestConf:
+  Timeout: 6000
+  MaxConns: 5000
+  Cors: true
+  
 Log:
   ServiceName: PlusinsBusinessLogger
   Mode: file
