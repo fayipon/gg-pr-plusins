@@ -1,0 +1,62 @@
+# ========================
+# Plusins Business API Config (Docker)
+# ========================
+
+Name: plusins-business-api
+Host: 0.0.0.0
+Port: 8082
+Timeout: 2000
+
+CoreAPI:
+  Host: core-api:9100      # ✅ 容器內呼叫 core-api
+  JwtSecret: your-jwt-secret
+
+Rpc:
+  Endpoint: plusins-rpc:9103
+
+Auth:
+  AccessSecret: your-jwt-secret
+  AccessExpire: 259200
+
+CROSConf:
+  Address: '*'
+
+RedisConf:
+  Host: redis:6379         # ✅ 容器內 Redis
+  Type: node
+
+DatabaseConf:
+  Type: postgres
+  Host: postgresql         # ✅ 容器內 Postgres
+  Port: 5432
+  DBName: plusins_business
+  Username: postgres
+  Password: simple-admin.
+  SSLMode: disable
+  MaxOpenConn: 100
+  CacheTime: 5
+
+CasbinConf:
+  ModelText: |
+    [request_definition]
+    r = sub, obj, act
+    [policy_definition]
+    p = sub, obj, act
+    [role_definition]
+    g = _, _
+    [policy_effect]
+    e = some(where (p.eft == allow))
+    [matchers]
+    m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
+
+Log:
+  ServiceName: PlusinsBusinessLogger
+  Mode: file
+  Path: /home/data/logs/plusins_business
+  Level: info
+  Encoding: json
+  KeepDays: 7
+  StackCoolDownMillis: 100
+
+I18nConf:
+  Dir: /app/resource/i18n
