@@ -1,35 +1,27 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
-	"time"
 
-	"github.com/zeromicro/go-zero/core/stores/redis"
+	"github.com/casbin/casbin/v2"
+	"github.com/redis/go-redis/v9"
 )
 
 type ModuleMeterMiddleware struct {
-	redis *redis.Redis
+	cbn *casbin.Enforcer
+	rds redis.UniversalClient
 }
 
-func NewModuleMeterMiddleware(rds *redis.Redis) *ModuleMeterMiddleware {
-	return &ModuleMeterMiddleware{redis: rds}
+func NewModuleMeterMiddleware(cbn *casbin.Enforcer, rds redis.UniversalClient) *ModuleMeterMiddleware {
+	return &ModuleMeterMiddleware{
+		cbn: cbn,
+		rds: rds,
+	}
 }
 
 func (m *ModuleMeterMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
-
+		// ✅ 这里可以加模块计费或 API 统计逻辑
 		next(w, r)
-
-		duration := time.Since(start)
-		key := "module:usage:" + r.URL.Path
-
-		_, err := m.redis.Incr(key)
-		if err != nil {
-			log.Printf("[Meter] Redis incr failed: %v", err)
-		}
-
-		log.Printf("[Meter] %s %.2fms", r.URL.Path, float64(duration.Milliseconds()))
 	}
 }
