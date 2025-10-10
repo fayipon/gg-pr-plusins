@@ -15,10 +15,9 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	// ✅ 手动转换 RedisConf
+	// ✅ 手动构建 go-zero RedisConf
 	redisConf := redis.RedisConf{
 		Host: c.RedisConf.Host,
-		Type: c.RedisConf.Type,
 		Pass: c.RedisConf.Pass,
 	}
 
