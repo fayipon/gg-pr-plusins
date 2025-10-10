@@ -24,8 +24,8 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	rds := redis.MustNewRedis(redisConf)
 
 	cbn := c.CasbinConf.MustNewCasbinWithOriginalRedisWatcher(
-		c.CasbinDatabaseConf.Type,
-		c.CasbinDatabaseConf.GetDSN(),
+		c.DatabaseConf.Type,
+		c.DatabaseConf.GetDSN(),
 		c.RedisConf,
 	)
 
