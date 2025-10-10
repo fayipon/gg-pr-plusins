@@ -1,68 +1,102 @@
 version: "3.8"
 
 services:
-  # ✅ plusins - api
+  # =========================
+  # 🧱 Redis
+  # =========================
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - /home/a/data/redis:/data
+    networks:
+      - postgresql_simple-admin
+
+  # =========================
+  # 🐘 PostgreSQL
+  # =========================
+  postgresql:
+    image: postgres:15-alpine
+    container_name: postgresql
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: simple-admin.
+    ports:
+      - "5432:5432"
+    volumes:
+      - /home/a/data/postgres:/var/lib/postgresql/data
+    networks:
+      - postgresql_simple-admin
+
+  # =========================
+  # ⚙️ Plusins RPC Service
+  # =========================
+  plusins-rpc:
+    build:
+      context: ./plusins_rpc
+    container_name: plusins-rpc
+    restart: always
+    ports:
+      - "9103:9103"
+    environment:
+      TZ: Asia/Manila
+    depends_on:
+      - redis
+      - postgresql
+    networks:
+      - postgresql_simple-admin
+
+  # =========================
+  # 🌐 Plusins API Service
+  # =========================
   plusins-api:
     build:
       context: ./plusins_api
-      args:
-        PROJECT: plusins
     container_name: plusins-api
     ports:
       - "8081:8081"
-    restart: always
-    environment:
-      TZ: Asia/Manila
-      GOMODCACHE: /go/pkg/mod         # ✅ Go module 快取
-    depends_on:
-      - plusins-rpc
-    volumes:
-      - /home/a/gg-pr-plusins/plusins_api/etc:/app/etc
-      - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
-      - /home/a/.cache/go-mod:/go/pkg/mod   # ✅ 模組快取持久化
-    networks:
-      - plusins-net
-
-  # ✅ plusins - business
-  plusins-business:
-    build:
-      context: ./plusins_business
-      args:
-        PROJECT: plusins
-    container_name: plusins-business
-    ports:
-      - "8082:8082"       
+      - "9010:8081"  # ✅ 可兼容旧路径
     restart: always
     environment:
       TZ: Asia/Manila
       GOMODCACHE: /go/pkg/mod
     depends_on:
       - plusins-rpc
+      - redis
+    volumes:
+      - /home/a/gg-pr-plusins/plusins_api/etc:/app/etc
+      - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
+      - /home/a/.cache/go-mod:/go/pkg/mod
+    networks:
+      - postgresql_simple-admin
+
+  # =========================
+  # 🧩 Plusins Business API
+  # =========================
+  plusins-business:
+    build:
+      context: ./plusins_business
+    container_name: plusins-business
+    ports:
+      - "8082:8082"
+    restart: always
+    environment:
+      TZ: Asia/Manila
+      GOMODCACHE: /go/pkg/mod
+    depends_on:
+      - plusins-rpc
+      - redis
     volumes:
       - /home/a/gg-pr-plusins/plusins_business/etc:/app/etc
       - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
       - /home/a/.cache/go-mod:/go/pkg/mod
-      - /home/data/logs/plusins_business:/home/data/logs/plusins_business
     networks:
-      - plusins-net
-
-  # ✅ plusins - rpc
-  plusins-rpc:
-    build:
-      context: ./plusins_rpc
-      args:
-        PROJECT: plusins
-    container_name: plusins-rpc
-    restart: always
-    environment:
-      TZ: Asia/Manila
-      GOMODCACHE: /go/pkg/mod
-    volumes:
-      - /home/a/gg-pr-plusins/plusins_rpc/etc:/app/etc
-      - /home/a/.cache/go-mod:/go/pkg/mod   # ✅ 模組快取持久化
-    networks:
-      - plusins-net
+      - postgresql_simple-admin
 
 networks:
-  plusins-net:
-    driver: bridge
+  postgresql_simple-admin:
+    external: true
