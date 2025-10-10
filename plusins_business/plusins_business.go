@@ -24,8 +24,9 @@ func main() {
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
 
+	// ✅ 从 handler/routes.go 注册所有路由
 	handler.RegisterHandlers(server, ctx)
 
-	fmt.Printf("Starting plusins-business-api at %s:%d...\n", c.Host, c.Port)
+	fmt.Printf("Starting plusins-business service at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }
