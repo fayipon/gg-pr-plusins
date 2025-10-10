@@ -99,4 +99,3 @@ require (
 )
 
 replace github.com/zeromicro/go-zero v1.9.1 => github.com/suyuan32/simple-admin-tools v1.9.1
-replace github.com/suyuan32/simple-admin-common => ../simple-admin-common
