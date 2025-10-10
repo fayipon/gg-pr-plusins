@@ -1,0 +1,89 @@
+# ========================
+# Plusins Business API Config
+# ========================
+
+Name: plusins-business-api
+Host: 0.0.0.0
+Port: 8082                   # ⚙️ 建议与 plusins-api 不同端口（8082）
+Timeout: 2000
+
+# ------------------------
+# Core & JWT Settings
+# ------------------------
+CoreAPI:
+  Host: 172.17.0.1:9101      # ✅ 与 core-api 同网段通信
+  JwtSecret: your-jwt-secret
+
+# ------------------------
+# RPC Dependencies
+# ------------------------
+Rpc:
+  Endpoint: plusins-rpc:9103
+
+# ------------------------
+# Auth Configuration
+# ------------------------
+Auth:
+  AccessSecret: your-jwt-secret
+  AccessExpire: 259200        # 3 天
+
+# ------------------------
+# CORS Configuration
+# ------------------------
+CROSConf:
+  Address: '*'                # 🌍 跨域允许所有（可改成具体域名）
+
+# ------------------------
+# Redis Configuration
+# ------------------------
+RedisConf:
+  Host: 172.17.0.1:6379       # ✅ 与 Core 共用 Redis
+  Type: node
+
+# ------------------------
+# Database Configuration
+# ------------------------
+DatabaseConf:
+  Type: postgres
+  Host: 172.17.0.1            # ✅ Core PostgreSQL 宿主机 IP
+  Port: 5432
+  DBName: plusins_business    # ⚙️ 独立数据库或 schema
+  Username: postgres
+  Password: simple-admin.     # ⚠️ 建议改为 Core 实际密码
+  SSLMode: disable
+  MaxOpenConn: 100
+  CacheTime: 5
+
+# ------------------------
+# Casbin 权限配置
+# ------------------------
+CasbinConf:
+  ModelText: |
+    [request_definition]
+    r = sub, obj, act
+    [policy_definition]
+    p = sub, obj, act
+    [role_definition]
+    g = _, _
+    [policy_effect]
+    e = some(where (p.eft == allow))
+    [matchers]
+    m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
+
+# ------------------------
+# Logging Configuration
+# ------------------------
+Log:
+  ServiceName: PlusinsBusinessLogger
+  Mode: file
+  Path: /home/data/logs/plusins_business
+  Level: info
+  Encoding: json
+  KeepDays: 7
+  StackCoolDownMillis: 100
+
+# ------------------------
+# I18n 多语配置
+# ------------------------
+I18nConf:
+  Dir: /app/resource/i18n

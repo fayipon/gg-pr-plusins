@@ -1,0 +1,46 @@
+syntax = "v1"
+
+info(
+  title: "Plusins Business API"
+  desc: "商务点管理与模块授权服务"
+)
+
+type (
+  RegisterBusinessReq {
+    name: string
+    region: string
+    currency: string
+    locale: string
+  }
+
+  RegisterBusinessResp {
+    id: int64
+    name: string
+    token: string
+    region: string
+    currency: string
+    locale: string
+    status: string
+  }
+
+  InstallModuleReq {
+    moduleCode: string
+  }
+
+  InstallModuleResp {
+    moduleCode: string
+    licenseKey: string
+    status: string
+  }
+)
+
+@server(
+  prefix: /api/business
+)
+service plusins-business-api {
+  @handler registerBusiness
+  post /register (RegisterBusinessReq) returns (RegisterBusinessResp)
+
+  @handler installModule
+  post /install (InstallModuleReq) returns (InstallModuleResp)
+}
