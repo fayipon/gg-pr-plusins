@@ -1,28 +1,23 @@
 package svc
 
 import (
+	"github.com/casbin/casbin/v2"
 	"github.com/fayipon/gg-pr-plusins/plusins_business/internal/config"
 	"github.com/fayipon/gg-pr-plusins/plusins_business/internal/middleware"
-	"github.com/casbin/casbin/v2"
-	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest"
 )
 
 type ServiceContext struct {
-	Config    config.Config
-	Casbin    *casbin.Enforcer
-	Authority rest.Middleware
+	Config      config.Config
+	Casbin      *casbin.Enforcer
+	ModuleMeter rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	// ✅ 手动构建 go-zero RedisConf
-	redisConf := redis.RedisConf{
-		Host: c.RedisConf.Host,
-		Pass: c.RedisConf.Pass,
-	}
+	// ✅ 使用 simple-admin-common 提供的方法初始化 Redis
+	rds := c.RedisConf.MustNewUniversalRedis()
 
-	rds := c.RedisConf.MustNewRedis()
-
+	// ✅ 初始化 Casbin 权限系统（带 Redis Watcher）
 	cbn := c.CasbinConf.MustNewCasbinWithOriginalRedisWatcher(
 		c.DatabaseConf.Type,
 		c.DatabaseConf.GetDSN(),
@@ -30,8 +25,8 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	)
 
 	return &ServiceContext{
-		Config:    c,
-		Casbin:    cbn,
-		Authority: middleware.NewModuleMeterMiddleware(rds).Handle, // ✅ 只传 rds
+		Config:      c,
+		Casbin:      cbn,
+		ModuleMeter: middleware.NewModuleMeterMiddleware(rds).Handle,
 	}
 }
