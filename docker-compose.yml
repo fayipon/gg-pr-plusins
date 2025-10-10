@@ -23,6 +23,31 @@ services:
     networks:
       - plusins-net
 
+  plusins-business:
+    build:
+      context: ./plusins_business
+      args:
+        PROJECT: plusins
+    container_name: plusins-business
+    ports:
+      - "8082:8082"        # ✅ Business API 主埠
+      - "9012:8082"        # ✅ 額外對外訪問用（可選）
+    restart: always
+    environment:
+      TZ: Asia/Manila
+      GOMODCACHE: /go/pkg/mod
+    depends_on:
+      - plusins-rpc
+      - redis
+      - postgresql
+    volumes:
+      - /home/a/gg-pr-plusins/plusins_business/etc:/app/etc
+      - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
+      - /home/a/.cache/go-mod:/go/pkg/mod
+      - /home/data/logs/plusins_business:/home/data/logs/plusins_business
+    networks:
+      - plusins-net
+
   plusins-rpc:
     build:
       context: ./plusins_rpc
