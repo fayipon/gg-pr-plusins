@@ -21,7 +21,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Pass: c.RedisConf.Pass,
 	}
 
-	rds := redis.MustNewRedis(redisConf)
+	rds := c.RedisConf.MustNewRedis()
 
 	cbn := c.CasbinConf.MustNewCasbinWithOriginalRedisWatcher(
 		c.DatabaseConf.Type,
