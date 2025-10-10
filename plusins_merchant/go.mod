@@ -8,4 +8,4 @@ require (
 	github.com/casbin/casbin/v2 v2.84.0
 )
 
-replace github.com/fayipon/gg-pr-plusins/plusins_business => ../plusins_business
+replace github.com/fayipon/gg-pr-plusins/plusins_merchant => ../plusins_merchant
