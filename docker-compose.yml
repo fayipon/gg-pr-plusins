@@ -1,19 +1,6 @@
 version: "3.8"
 
 services:
-  # =========================
-  # 🧱 Redis
-  # =========================
-  redis:
-    image: redis:7.2-alpine
-    container_name: redis
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - /home/a/data/redis:/data
-    networks:
-      - postgresql_simple-admin
 
   # =========================
   # 🐘 PostgreSQL
