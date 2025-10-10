@@ -7,16 +7,21 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
+// ✅ 自定义 AuthConf，等同 go-zero 的旧版配置结构
+type AuthConf struct {
+	AccessSecret string
+	AccessExpire int64
+}
+
 // ✅ Plusins Business Service Config
 type Config struct {
 	rest.RestConf
-	Auth               rest.AuthConf
+	Auth               AuthConf               // ✅ 改成自定义结构
 	CROSConf           sacfg.CROSConf
 	CasbinDatabaseConf sacfg.DatabaseConf
 	RedisConf          sacfg.RedisConf
 	CasbinConf         casbin.CasbinConf
-	I18nConf           sacfg.I18nConf // ⚠️ 若 i18n 报错，可改为删除此行
-	Log                logx.LogConf
+	Log                logx.LogConf           // ✅ 保留日志设置
 
 	CoreAPI struct {
 		Host      string
