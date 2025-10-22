@@ -46,6 +46,29 @@ services:
     networks:
       - postgresql_simple-admin
 
+  # ✅ plusins - merchant
+  plusins-merchant:
+    build:
+      context: ./plusins_merchant
+      args:
+        PROJECT: plusins
+    container_name: plusins-merchant
+    ports:
+      - "8083:8083"             # ✅ 保留对外端口
+    restart: always
+    environment:
+      TZ: Asia/Manila
+      GOMODCACHE: /go/pkg/mod
+    depends_on:
+      - plusins-rpc
+    volumes:
+      - /home/a/gg-pr-plusins/plusins_merchant/etc:/app/etc
+      - /home/a/simple-admin-core/resource/i18n:/app/resource/i18n
+      - /home/a/.cache/go-mod:/go/pkg/mod
+      - /home/data/logs/plusins_merchant:/home/data/logs/plusins_merchant
+    networks:
+      - postgresql_simple-admin
+
   # ✅ plusins - rpc
   plusins-rpc:
     build:
