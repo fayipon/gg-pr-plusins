@@ -3,9 +3,10 @@ package logic
 import (
 	"context"
 
-	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
-	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
+	"common_api/internal/svc"
+	"common_api/internal/types"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
 )
 
 type GetUserLogic struct {
@@ -22,17 +23,18 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLo
 	}
 }
 
-func (l *GetUserLogic) GetUser(req *users.GetUserReq) (*users.GetUserResp, error) {
-	user, err := l.svcCtx.UsersModel.FindOne(int64(req.Id))
+func (l *GetUserLogic) GetUser(req *types.GetUserReq) (*types.GetUserResp, error) {
+
+	rpcResp, err := l.svcCtx.UsersRpc.GetUser(l.ctx, &users.GetUserReq{
+		Id: req.Id,
+	})
+
 	if err != nil {
 		return nil, err
 	}
-	if user == nil {
-		return nil, nil
-	}
 
-	return &users.GetUserResp{
-		Id:      uint64(user.Id),
-		Account: user.Account,
+	return &types.GetUserResp{
+		Id:      rpcResp.Id,
+		Account: rpcResp.Account,
 	}, nil
 }

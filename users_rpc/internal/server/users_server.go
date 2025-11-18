@@ -1,32 +1,35 @@
-package svc
+package server
 
 import (
-	"fmt"   // ← 你漏掉了这个
-	"users_rpc/internal/config"
-	"users_rpc/internal/model"
+	"context"
 
-	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic"
+	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
+	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
 )
 
-type ServiceContext struct {
-	Config     config.Config
-	UsersModel model.UsersModel
+type UsersServer struct {
+	users.UnimplementedUsersServer
+	ctx *svc.ServiceContext
 }
 
-func NewServiceContext(c config.Config) *ServiceContext {
-
-	dataSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=true",
-		c.Database.Username,
-		c.Database.Password,
-		c.Database.Host,
-		c.Database.Port,
-		c.Database.DBName,
-	)
-
-	conn := sqlx.NewMysql(dataSource)
-
-	return &ServiceContext{
-		Config:     c,
-		UsersModel: model.NewUsersModel(conn),
+func NewUsersServer(ctx *svc.ServiceContext) *UsersServer {
+	return &UsersServer{
+		ctx: ctx,
 	}
+}
+
+func (s *UsersServer) CreateUser(ctx context.Context, req *users.CreateUserReq) (*users.CreateUserResp, error) {
+	l := logic.NewCreateUserLogic(ctx, s.ctx)
+	return l.CreateUser(req)
+}
+
+func (s *UsersServer) GetUser(ctx context.Context, req *users.GetUserReq) (*users.GetUserResp, error) {
+	l := logic.NewGetUserLogic(ctx, s.ctx)
+	return l.GetUser(req)
+}
+
+func (s *UsersServer) GetUserList(ctx context.Context, req *users.GetUserListReq) (*users.GetUserListResp, error) {
+	l := logic.NewGetUserListLogic(ctx, s.ctx)
+	return l.GetUserList(req)
 }

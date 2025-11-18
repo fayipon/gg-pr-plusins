@@ -1,10 +1,5 @@
-Name: users-rpc
-ListenOn: 0.0.0.0:9107
+Name: users.rpc
+ListenOn: 0.0.0.0:8081
 
-Database:
-  Driver: mysql
-  Host: 172.17.0.1
-  Port: 3306
-  DBName: simple_admin
-  Username: root
-  Password: your_password
+Mysql:
+  DataSource: aqua:123456@tcp(127.0.0.1:3306)/aqua?charset=utf8mb4&parseTime=True&loc=Local

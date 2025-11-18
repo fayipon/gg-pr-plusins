@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package users;
+
+option go_package = "./users";
+
+service Users {
+    rpc CreateUser (CreateUserReq) returns (CreateUserResp);
+    rpc GetUser (GetUserReq) returns (GetUserResp);
+    rpc GetUserList (GetUserListReq) returns (GetUserListResp);
+}
+
+message CreateUserReq {
+    string account = 1;
+    string password = 2;
+}
+
+message CreateUserResp {
+    uint64 id = 1;
+    string account = 2;
+}
+
+message GetUserReq {
+    uint64 id = 1;
+}
+
+message GetUserResp {
+    uint64 id = 1;
+    string account = 2;
+}
+
+message GetUserListReq {
+    int32 page = 1;
+    int32 page_size = 2;
+    string keyword = 3; // 搜索账号
+}
+
+message UserItem {
+    uint64 id = 1;
+    string account = 2;
+}
+
+message GetUserListResp {
+    repeated UserItem list = 1;
+    int64 total = 2;
+}
