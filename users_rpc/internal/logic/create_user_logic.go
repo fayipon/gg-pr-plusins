@@ -1,41 +1,43 @@
 package logic
 
 import (
-    "context"
-
-    "users_rpc/internal/svc"
-    "users_rpc/internal/model"
-
-    "github.com/zeromicro/go-zero/core/logx"
+	"context"
+	"users_rpc/internal/model"
+	"users_rpc/internal/svc"
 )
 
+type CreateUserRequest struct {
+	Account  string `json:"account"`
+	Password string `json:"password"`
+}
+
+type CreateUserResponse struct {
+	Id int64 `json:"id"`
+}
+
 type CreateUserLogic struct {
-    logx.Logger
-    ctx    context.Context
-    svcCtx *svc.ServiceContext
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
 }
 
 func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateUserLogic {
-    return &CreateUserLogic{
-        Logger: logx.WithContext(ctx),
-        ctx:    ctx,
-        svcCtx: svcCtx,
-    }
+	return &CreateUserLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
 }
 
-func (l *CreateUserLogic) CreateUser(in *users.CreateUserReq) (*users.CreateUserResp, error) {
+func (l *CreateUserLogic) CreateUser(req *CreateUserRequest) (*CreateUserResponse, error) {
 
-    data := &model.Users{
-        Account:  in.Account,
-        Password: in.Password,
-    }
+	u := &model.Users{
+		Account:  req.Account,
+		Password: req.Password,
+	}
 
-    id, err := l.svcCtx.UsersModel.Insert(l.ctx, data)
-    if err != nil {
-        return nil, err
-    }
+	id, err := l.svcCtx.UsersModel.Insert(l.ctx, u)
+	if err != nil {
+		return nil, err
+	}
 
-    return &users.CreateUserResp{
-        Id: id,
-    }, nil
+	return &CreateUserResponse{Id: id}, nil
 }

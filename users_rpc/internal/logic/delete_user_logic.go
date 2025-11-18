@@ -1,29 +1,36 @@
 package logic
 
 import (
-    "context"
-
-    "users_rpc/internal/svc"
-
-    "github.com/zeromicro/go-zero/core/logx"
+	"context"
+	"users_rpc/internal/svc"
 )
 
+type DeleteUserRequest struct {
+	Id int64 `json:"id"`
+}
+
+type DeleteUserResponse struct {
+	Deleted bool `json:"deleted"`
+}
+
 type DeleteUserLogic struct {
-    logx.Logger
-    ctx    context.Context
-    svcCtx *svc.ServiceContext
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
 }
 
 func NewDeleteUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteUserLogic {
-    return &DeleteUserLogic{
-        Logger: logx.WithContext(ctx),
-        ctx:    ctx,
-        svcCtx: svcCtx,
-    }
+	return &DeleteUserLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
 }
 
-func (l *DeleteUserLogic) DeleteUser(in *users.DeleteUserReq) (*users.DeleteUserResp, error) {
+func (l *DeleteUserLogic) DeleteUser(req *DeleteUserRequest) (*DeleteUserResponse, error) {
 
-    err := l.svcCtx.UsersModel.Delete(l.ctx, in.Id)
-    if err != nil {
-        r
+	err := l.svcCtx.UsersModel.Delete(l.ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &DeleteUserResponse{Deleted: true}, nil
+}

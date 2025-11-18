@@ -1,26 +1,31 @@
 package model
 
 import (
-	"github.com/zeromicro/go-zero/core/stores/cache"
+	"context"
+	"time"
+
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
-var _ UsersModel = (*customUsersModel)(nil)
+type Users struct {
+	Id        int64     `db:"id"`
+	Account   string    `db:"account"`
+	Password  string    `db:"password"`
+	CreatedAt time.Time `db:"created_at"`
+}
 
-type (
-	// UsersModel 自定义接口（你可以在这里扩展更多方法）
-	UsersModel interface {
-		usersModel                 // 自动生成的方法（在 users_model_gen.go）
-	}
+type UsersModel interface {
+	Insert(ctx context.Context, data *Users) (int64, error)
+	FindOne(ctx context.Context, id int64) (*Users, error)
+	Update(ctx context.Context, data *Users) error
+	Delete(ctx context.Context, id int64) error
+	List(ctx context.Context) ([]Users, error)
+}
 
-	customUsersModel struct {
-		*defaultUsersModel        // 自动生成的 struct
-	}
-)
+type defaultUsersModel struct {
+	conn sqlx.SqlConn
+}
 
-// NewUsersModel 创建模型实例
-func NewUsersModel(conn sqlx.SqlConn, c cache.CacheConf) UsersModel {
-	return &customUsersModel{
-		defaultUsersModel: newUsersModel(conn, c),
-	}
+func NewUsersModel(conn sqlx.SqlConn) UsersModel {
+	return &defaultUsersModel{conn: conn}
 }

@@ -1,45 +1,42 @@
 package server
 
 import (
-	"context"
-
 	"users_rpc/internal/logic"
 	"users_rpc/internal/svc"
-	"users_rpc/users"
+
+	"github.com/zeromicro/go-zero/core/service"
 )
 
 type UsersServer struct {
-	svcCtx *svc.ServiceContext
-	users.UnimplementedUsersServer
+	ctx *svc.ServiceContext
 }
 
-func NewUsersServer(ctx *svc.ServiceContext) *UsersServer {
-	return &UsersServer{
-		svcCtx: ctx,
-	}
+func RegisterUsersServer(group *service.ServiceGroup, ctx *svc.ServiceContext) {
+	s := &UsersServer{ctx: ctx}
+
+	group.Add("CreateUser", s.CreateUser)
+	group.Add("GetUser", s.GetUser)
+	group.Add("UpdateUser", s.UpdateUser)
+	group.Add("DeleteUser", s.DeleteUser)
+	group.Add("ListUsers", s.ListUsers)
 }
 
-func (s *UsersServer) CreateUser(ctx context.Context, in *users.CreateUserReq) (*users.CreateUserResp, error) {
-	l := logic.NewCreateUserLogic(ctx, s.svcCtx)
-	return l.CreateUser(in)
+func (s *UsersServer) CreateUser(req *logic.CreateUserRequest) (*logic.CreateUserResponse, error) {
+	return logic.NewCreateUserLogic(s.ctx).CreateUser(req)
 }
 
-func (s *UsersServer) GetUser(ctx context.Context, in *users.GetUserReq) (*users.GetUserResp, error) {
-	l := logic.NewGetUserLogic(ctx, s.svcCtx)
-	return l.GetUser(in)
+func (s *UsersServer) GetUser(req *logic.GetUserRequest) (*logic.GetUserResponse, error) {
+	return logic.NewGetUserLogic(s.ctx).GetUser(req)
 }
 
-func (s *UsersServer) UpdateUser(ctx context.Context, in *users.UpdateUserReq) (*users.UpdateUserResp, error) {
-	l := logic.NewUpdateUserLogic(ctx, s.svcCtx)
-	return l.UpdateUser(in)
+func (s *UsersServer) UpdateUser(req *logic.UpdateUserRequest) (*logic.UpdateUserResponse, error) {
+	return logic.NewUpdateUserLogic(s.ctx).UpdateUser(req)
 }
 
-func (s *UsersServer) DeleteUser(ctx context.Context, in *users.DeleteUserReq) (*users.DeleteUserResp, error) {
-	l := logic.NewDeleteUserLogic(ctx, s.svcCtx)
-	return l.DeleteUser(in)
+func (s *UsersServer) DeleteUser(req *logic.DeleteUserRequest) (*logic.DeleteUserResponse, error) {
+	return logic.NewDeleteUserLogic(s.ctx).DeleteUser(req)
 }
 
-func (s *UsersServer) ListUser(ctx context.Context, in *users.ListUserReq) (*users.ListUserResp, error) {
-	l := logic.NewListUserLogic(ctx, s.svcCtx)
-	return l.ListUser(in)
+func (s *UsersServer) ListUsers(req *logic.ListUsersRequest) (*logic.ListUsersResponse, error) {
+	return logic.NewListUsersLogic(s.ctx).ListUsers(req)
 }

@@ -1,12 +1,16 @@
 package config
 
-import (
-	"github.com/zeromicro/go-zero/core/stores/cache"
-)
+import "github.com/zeromicro/go-zero/zrpc"
 
 type Config struct {
+	zrpc.RpcServerConf
+
 	Database struct {
-		DataSource string
+		Driver   string
+		Host     string
+		Port     int
+		DBName   string
+		Username string
+		Password string
 	}
-	Cache cache.CacheConf
 }

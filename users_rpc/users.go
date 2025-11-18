@@ -4,12 +4,13 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/service"
+	"github.com/zeromicro/go-zero/zrpc"
+
 	"users_rpc/internal/config"
 	"users_rpc/internal/server"
 	"users_rpc/internal/svc"
-
-	"github.com/zeromicro/go-zero/core/conf"
-	"github.com/zeromicro/go-zero/core/service"
 )
 
 var configFile = flag.String("f", "etc/users.yaml", "the config file")
@@ -19,15 +20,13 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+
 	ctx := svc.NewServiceContext(c)
+	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *service.ServiceGroup) {
+		server.RegisterUsersServer(grpcServer, ctx)
+	})
+	defer s.Stop()
 
-	s := service.NewService(
-		service.WithName(c.Name),
-		service.WithListenOn(c.ListenOn),
-	)
-
-	users.RegisterUsersServer(s.Server(), server.NewUsersServer(ctx))
-
-	fmt.Printf("Starting RPC server at %s...\n", c.ListenOn)
+	fmt.Printf("Starting Users RPC Server at %s...\n", c.ListenOn)
 	s.Start()
 }

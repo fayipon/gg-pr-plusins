@@ -1,43 +1,49 @@
 package logic
 
 import (
-    "context"
-
-    "users_rpc/internal/svc"
-
-    "github.com/zeromicro/go-zero/core/logx"
+	"context"
+	"users_rpc/internal/svc"
 )
 
-type ListUserLogic struct {
-    logx.Logger
-    ctx    context.Context
-    svcCtx *svc.ServiceContext
+type ListUsersRequest struct{}
+
+type ListUsersResponse struct {
+	List []UserItem `json:"list"`
 }
 
-func NewListUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListUserLogic {
-    return &ListUserLogic{
-        Logger: logx.WithContext(ctx),
-        ctx:    ctx,
-        svcCtx: svcCtx,
-    }
+type UserItem struct {
+	Id       int64  `json:"id"`
+	Account  string `json:"account"`
+	Password string `json:"password"`
 }
 
-func (l *ListUserLogic) ListUser(in *users.ListUserReq) (*users.ListUserResp, error) {
+type ListUsersLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+}
 
-    list, err := l.svcCtx.UsersModel.List(l.ctx)
-    if err != nil {
-        return nil, err
-    }
+func NewListUsersLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListUsersLogic {
+	return &ListUsersLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
+}
 
-    resp := &users.ListUserResp{}
+func (l *ListUsersLogic) ListUsers(req *ListUsersRequest) (*ListUsersResponse, error) {
 
-    for _, u := range list {
-        resp.List = append(resp.List, &users.UserInfo{
-            Id:       u.Id,
-            Account:  u.Account,
-            Password: u.Password,
-        })
-    }
+	users, err := l.svcCtx.UsersModel.List(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 
-    return resp, nil
+	var resp []UserItem
+	for _, u := range users {
+		resp = append(resp, UserItem{
+			Id:       u.Id,
+			Account:  u.Account,
+			Password: u.Password,
+		})
+	}
+
+	return &ListUsersResponse{List: resp}, nil
 }
