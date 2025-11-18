@@ -1,42 +1,32 @@
-package server
+package svc
 
 import (
-	"users_rpc/internal/logic"
-	"users_rpc/internal/svc"
+	"fmt"   // ← 你漏掉了这个
+	"users_rpc/internal/config"
+	"users_rpc/internal/model"
 
-	"github.com/zeromicro/go-zero/core/service"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
-type UsersServer struct {
-	ctx *svc.ServiceContext
+type ServiceContext struct {
+	Config     config.Config
+	UsersModel model.UsersModel
 }
 
-func RegisterUsersServer(group *service.ServiceGroup, ctx *svc.ServiceContext) {
-	s := &UsersServer{ctx: ctx}
+func NewServiceContext(c config.Config) *ServiceContext {
 
-	group.Add("CreateUser", s.CreateUser)
-	group.Add("GetUser", s.GetUser)
-	group.Add("UpdateUser", s.UpdateUser)
-	group.Add("DeleteUser", s.DeleteUser)
-	group.Add("ListUsers", s.ListUsers)
-}
+	dataSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=true",
+		c.Database.Username,
+		c.Database.Password,
+		c.Database.Host,
+		c.Database.Port,
+		c.Database.DBName,
+	)
 
-func (s *UsersServer) CreateUser(req *logic.CreateUserRequest) (*logic.CreateUserResponse, error) {
-	return logic.NewCreateUserLogic(s.ctx).CreateUser(req)
-}
+	conn := sqlx.NewMysql(dataSource)
 
-func (s *UsersServer) GetUser(req *logic.GetUserRequest) (*logic.GetUserResponse, error) {
-	return logic.NewGetUserLogic(s.ctx).GetUser(req)
-}
-
-func (s *UsersServer) UpdateUser(req *logic.UpdateUserRequest) (*logic.UpdateUserResponse, error) {
-	return logic.NewUpdateUserLogic(s.ctx).UpdateUser(req)
-}
-
-func (s *UsersServer) DeleteUser(req *logic.DeleteUserRequest) (*logic.DeleteUserResponse, error) {
-	return logic.NewDeleteUserLogic(s.ctx).DeleteUser(req)
-}
-
-func (s *UsersServer) ListUsers(req *logic.ListUsersRequest) (*logic.ListUsersResponse, error) {
-	return logic.NewListUsersLogic(s.ctx).ListUsers(req)
+	return &ServiceContext{
+		Config:     c,
+		UsersModel: model.NewUsersModel(conn),
+	}
 }
