@@ -3,9 +3,9 @@ package server
 import (
 	"context"
 
-	"users-rpc/internal/logic"
-	"users-rpc/internal/svc"
-	"users-rpc/users"
+	"users_rpc/internal/logic"
+	"users_rpc/internal/svc"
+	"users_rpc/users"
 )
 
 type UsersServer struct {

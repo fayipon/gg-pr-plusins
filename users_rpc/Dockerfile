@@ -20,7 +20,7 @@ RUN go mod download
 # 🧩 再複製源碼
 COPY . .
 
-# 🧱 建構 users-rpc 二進位檔
+# 🧱 建構 users_rpc 二進位檔
 RUN go build -ldflags="-s -w" -o users_rpc users.go
 
 

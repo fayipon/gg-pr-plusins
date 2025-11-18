@@ -2,8 +2,8 @@
 # Users RPC Config (Final)
 # ========================
 
-Name: users-rpc
-ListenOn: 0.0.0.0:9107       # 🚀 建议给 users-rpc 用一个新端口
+Name: users_rpc
+ListenOn: 0.0.0.0:9107       # 🚀 建议给 users_rpc 用一个新端口
 
 Timeout: 2000
 
