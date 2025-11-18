@@ -1,0 +1,156 @@
+[0;1;32m●[0m instance-20251002-232028
+    State: [0;1;32mrunning[0m
+    Units: 323 loaded (incl. loaded aliases)
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Thu 2025-10-02 23:21:57 UTC; 1 month 14 days ago
+  systemd: 252.39-1~deb12u1
+   CGroup: /
+           ├─init.scope
+           │ └─[0;38;5;245m1 /sbin/init[0m
+           ├─system.slice
+           │ ├─containerd.service
+           │ │ ├─[0;38;5;245m  92044 /usr/bin/containerd[0m
+           │ │ ├─[0;38;5;245m 188266 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 5826aa76ab06b8ab5bf200e456f7282250f7f0bfa3cec18392c3c15a6ceddc55 -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 188487 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 6a1acbabc43355dda37c32ea85c6fea20867fb5b56039df0c7d77d9ca78304fd -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 188494 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 071a50181fb26973e05698d7991db898823c42cd2bc59c618397c30d27faa863 -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 188500 /usr/bin/containerd-shim-runc-v2 -namespace moby -id a0fd6d94f8ec04777682c9bf5fbad2269c505b710f3bf5cac69ad31188b067a4 -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 188502 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3e05b0be90319f51a7617a58555ad71bf3cd274d68f81f406efaac0c8f961c32 -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 188879 /usr/bin/containerd-shim-runc-v2 -namespace moby -id f667da80484ae69bfab1204f4d0137af89c1503ee4835e622b26a549cb8519d8 -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 229804 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 63cc8372ce36516d9f6e1f6f057cbac6d5172b1f2a440ef39d82acb9d1d8ce1e -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 410488 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 97173c7da44bf952194bf8427741e456342b0ec1ed71ea91b0955fd6726743a4 -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m1093387 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 10c4a4614315b63a1672a882b678131f83ebebd1f41ce6e3f1fe2641e49029ac -address /run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m1093452 /usr/bin/containerd-shim-runc-v2 -namespace moby -id cae7fe65d7362ea49a4cf46d9c690f749846379d8557aa7b566fea1821026b68 -address /run/containerd/containerd.sock[0m
+           │ │ └─[0;38;5;245m1099418 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 31e04e980b77458c78480aa0ef4379057d1dae296235cc031a043bbaa249f54b -address /run/containerd/containerd.sock[0m
+           │ ├─cron.service
+           │ │ └─[0;38;5;245m1315 /usr/sbin/cron -f[0m
+           │ ├─dbus.service
+           │ │ └─[0;38;5;245m402 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only[0m
+           │ ├─docker-071a50181fb26973e05698d7991db898823c42cd2bc59c618397c30d27faa863.scope
+           │ │ └─[0;38;5;245m188617 ./core_rpc -f etc/core.yaml[0m
+           │ ├─docker-10c4a4614315b63a1672a882b678131f83ebebd1f41ce6e3f1fe2641e49029ac.scope
+           │ │ └─[0;38;5;245m1093411 ./plusins_rpc -f etc/plusins.yaml[0m
+           │ ├─docker-31e04e980b77458c78480aa0ef4379057d1dae296235cc031a043bbaa249f54b.scope
+           │ │ └─[0;38;5;245m1099442 ./plusins_api -f etc/plusins-api.yaml[0m
+           │ ├─docker-3e05b0be90319f51a7617a58555ad71bf3cd274d68f81f406efaac0c8f961c32.scope
+           │ │ └─[0;38;5;245m188603 ./mcms_rpc -f etc/mcms.yaml[0m
+           │ ├─docker-5826aa76ab06b8ab5bf200e456f7282250f7f0bfa3cec18392c3c15a6ceddc55.scope
+           │ │ └─[0;38;5;245m188310 "redis-server *:6379"[0m
+           │ ├─docker-63cc8372ce36516d9f6e1f6f057cbac6d5172b1f2a440ef39d82acb9d1d8ce1e.scope
+           │ │ ├─[0;38;5;245m 229827 postgres[0m
+           │ │ ├─[0;38;5;245m 229898 "postgres: checkpointer "[0m
+           │ │ ├─[0;38;5;245m 229899 "postgres: background writer "[0m
+           │ │ ├─[0;38;5;245m 229901 "postgres: walwriter "[0m
+           │ │ ├─[0;38;5;245m 229902 "postgres: autovacuum launcher "[0m
+           │ │ ├─[0;38;5;245m 229903 "postgres: logical replication launcher "[0m
+           │ │ ├─[0;38;5;245m 229904 "postgres: postgres simple_admin 172.18.0.5(39474) idle"[0m
+           │ │ ├─[0;38;5;245m 235660 "postgres: postgres simple_admin 172.18.0.7(47252) idle"[0m
+           │ │ ├─[0;38;5;245m 239361 "postgres: postgres simple_admin 172.18.0.7(51202) idle"[0m
+           │ │ ├─[0;38;5;245m 239969 "postgres: postgres simple_admin 172.18.0.4(50812) idle"[0m
+           │ │ ├─[0;38;5;245m 239971 "postgres: postgres simple_admin 172.18.0.4(50822) idle"[0m
+           │ │ ├─[0;38;5;245m 410568 "postgres: postgres simple_admin 172.18.0.8(37436) idle"[0m
+           │ │ ├─[0;38;5;245m 471901 "postgres: postgres simple_admin 172.18.0.8(60996) idle"[0m
+           │ │ ├─[0;38;5;245m 471902 "postgres: postgres simple_admin 172.18.0.4(56586) idle"[0m
+           │ │ ├─[0;38;5;245m 471915 "postgres: postgres simple_admin 172.18.0.6(47522) idle"[0m
+           │ │ ├─[0;38;5;245m1093534 "postgres: postgres plusins_business 172.18.0.11(35506) idle"[0m
+           │ │ ├─[0;38;5;245m1099502 "postgres: postgres simple_admin 172.18.0.1(34746) idle"[0m
+           │ │ ├─[0;38;5;245m2942267 "postgres: postgres simple_admin 172.18.0.7(55046) idle"[0m
+           │ │ └─[0;38;5;245m2942270 "postgres: postgres simple_admin 172.18.0.7(46022) idle"[0m
+           │ ├─docker-6a1acbabc43355dda37c32ea85c6fea20867fb5b56039df0c7d77d9ca78304fd.scope
+           │ │ ├─[0;38;5;245m188574 /bin/sh /docker-entrypoint.sh nginx -g "daemon off;"[0m
+           │ │ ├─[0;38;5;245m188715 /bin/sh /docker-entrypoint.sh nginx -g "daemon off;"[0m
+           │ │ ├─[0;38;5;245m188734 /bin/sh /docker-entrypoint.d/entrypoint.sh[0m
+           │ │ ├─[0;38;5;245m188736 /app/fms_api -f /app/etc/fms.yaml[0m
+           │ │ ├─[0;38;5;245m188763 "nginx: master process nginx -c /etc/nginx/nginx.conf"[0m
+           │ │ ├─[0;38;5;245m188764 "nginx: worker process"[0m
+           │ │ └─[0;38;5;245m188768 "nginx: worker process"[0m
+           │ ├─docker-97173c7da44bf952194bf8427741e456342b0ec1ed71ea91b0955fd6726743a4.scope
+           │ │ └─[0;38;5;245m410511 ./core_api -f etc/core.yaml[0m
+           │ ├─docker-a0fd6d94f8ec04777682c9bf5fbad2269c505b710f3bf5cac69ad31188b067a4.scope
+           │ │ └─[0;38;5;245m188602 ./job_rpc -f etc/job.yaml[0m
+           │ ├─docker-cae7fe65d7362ea49a4cf46d9c690f749846379d8557aa7b566fea1821026b68.scope
+           │ │ └─[0;38;5;245m1093477 ./plusins_business -f etc/plusins_business.yaml[0m
+           │ ├─docker-f667da80484ae69bfab1204f4d0137af89c1503ee4835e622b26a549cb8519d8.scope
+           │ │ ├─[0;38;5;245m188905 "nginx: master process nginx -g daemon off;"[0m
+           │ │ └─[0;38;5;245m188977 "nginx: worker process"[0m
+           │ ├─docker.service
+           │ │ ├─[0;38;5;245m  92123 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock[0m
+           │ │ ├─[0;38;5;245m 188365 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 6379 -container-ip 172.18.0.2 -container-port 6379 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 188372 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 6379 -container-ip 172.18.0.2 -container-port 6379 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 188674 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 81 -container-ip 172.18.0.4 -container-port 80 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 188680 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 81 -container-ip 172.18.0.4 -container-port 80 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 188933 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8088 -container-ip 172.18.0.9 -container-port 80 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 188939 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8088 -container-ip 172.18.0.9 -container-port 80 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 229858 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5432 -container-ip 172.18.0.3 -container-port 5432 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 229864 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5432 -container-ip 172.18.0.3 -container-port 5432 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 410542 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 9100 -container-ip 172.18.0.8 -container-port 9100 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m 410548 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 9100 -container-ip 172.18.0.8 -container-port 9100 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m1093506 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8082 -container-ip 172.18.0.11 -container-port 8082 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m1093512 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8082 -container-ip 172.18.0.11 -container-port 8082 -use-listen-fd[0m
+           │ │ ├─[0;38;5;245m1099474 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8081 -container-ip 172.18.0.12 -container-port 8081 -use-listen-fd[0m
+           │ │ └─[0;38;5;245m1099480 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8081 -container-ip 172.18.0.12 -container-port 8081 -use-listen-fd[0m
+           │ ├─exim4.service
+           │ │ └─[0;38;5;245m885 /usr/sbin/exim4 -bd -q30m[0m
+           │ ├─google-cloud-ops-agent-fluent-bit.service
+           │ │ ├─[0;38;5;245m1457 /opt/google-cloud-ops-agent/libexec/google_cloud_ops_agent_wrapper -config_path /etc/google-cloud-ops-agent/config.yaml -log_path /var/log/google-cloud-ops-agent/subagents/logging-module.log /opt/google-cloud-ops-agent/subagents/fluent-bit/bin/fluent-bit --config /run/google-cloud-ops-agent-fluent-bit/fluent_bit_main.conf --parser /run/google-cloud-ops-agent-fluent-bit/fluent_bit_parser.conf --storage_path /var/lib/google-cloud-ops-agent/fluent-bit/buffers[0m
+           │ │ └─[0;38;5;245m1488 /opt/google-cloud-ops-agent/subagents/fluent-bit/bin/fluent-bit --config /run/google-cloud-ops-agent-fluent-bit/fluent_bit_main.conf --parser /run/google-cloud-ops-agent-fluent-bit/fluent_bit_parser.conf --storage_path /var/lib/google-cloud-ops-agent/fluent-bit/buffers[0m
+           │ ├─google-cloud-ops-agent-opentelemetry-collector.service
+           │ │ └─[0;38;5;245m1458 /opt/google-cloud-ops-agent/subagents/opentelemetry-collector/otelopscol --config=/run/google-cloud-ops-agent-opentelemetry-collector/otel.yaml[0m
+           │ ├─google-guest-agent-manager.service
+           │ │ ├─[0;38;5;245m 77004 /usr/bin/google_guest_agent_manager[0m
+           │ │ └─[0;38;5;245m528636 /usr/lib/google/guest_agent/core_plugin --protocol=unix --address=/run/google-guest-agent/plugin-connections/GuestAgentCorePlugin_20250930.01.sock --errorlogfile=/var/lib/google-guest-agent/1802760444783539728/agent_state/plugins/GuestAgentCorePlugin/plugin.log[0m
+           │ ├─google-guest-compat-manager.service
+           │ │ └─[0;38;5;245m76970 /usr/bin/google_guest_compat_manager[0m
+           │ ├─google-osconfig-agent.service
+           │ │ └─[0;38;5;245m469 /usr/bin/google_osconfig_agent[0m
+           │ ├─haveged.service
+           │ │ └─[0;38;5;245m395 /usr/sbin/haveged --Foreground --verbose=1[0m
+           │ ├─networkd-dispatcher.service
+           │ │ └─[0;38;5;245m406 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers[0m
+           │ ├─nginx.service
+           │ │ ├─[0;38;5;245m 926373 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[0m
+           │ │ ├─[0;38;5;245m1094099 "nginx: worker process"[0m
+           │ │ └─[0;38;5;245m1094100 "nginx: worker process"[0m
+           │ ├─polkit.service
+           │ │ └─[0;38;5;245m680 /usr/lib/polkit-1/polkitd --no-debug[0m
+           │ ├─rsyslog.service
+           │ │ └─[0;38;5;245m872 /usr/sbin/rsyslogd -n -iNONE[0m
+           │ ├─ssh.service
+           │ │ ├─[0;38;5;245m  1282 "sshd: /usr/sbin/sshd -D [listener] 4 of 10-100 startups"[0m
+           │ │ ├─[0;38;5;245m405302 "sshd: [accepted]"[0m
+           │ │ ├─[0;38;5;245m405308 "sshd: [accepted]"[0m
+           │ │ ├─[0;38;5;245m405321 "sshd: [accepted]"[0m
+           │ │ └─[0;38;5;245m405777 "sshd: [accepted]"[0m
+           │ ├─system-getty.slice
+           │ │ └─getty@tty1.service
+           │ │   └─[0;38;5;245m436 /sbin/agetty -o "-p -- \\u" --noclear - linux[0m
+           │ ├─system-serial\x2dgetty.slice
+           │ │ └─serial-getty@ttyS0.service
+           │ │   └─[0;38;5;245m594 /sbin/agetty -o "-p -- \\u" --keep-baud 115200,57600,38400,9600 - vt220[0m
+           │ ├─systemd-journald.service
+           │ │ └─[0;38;5;245m242 /lib/systemd/systemd-journald[0m
+           │ ├─systemd-logind.service
+           │ │ └─[0;38;5;245m1312 /lib/systemd/systemd-logind[0m
+           │ ├─systemd-networkd.service
+           │ │ └─[0;38;5;245m275 /lib/systemd/systemd-networkd[0m
+           │ ├─systemd-resolved.service
+           │ │ └─[0;38;5;245m387 /lib/systemd/systemd-resolved[0m
+           │ ├─systemd-timesyncd.service
+           │ │ └─[0;38;5;245m388 /lib/systemd/systemd-timesyncd[0m
+           │ ├─systemd-udevd.service
+           │ │ └─udev
+           │ │   └─[0;38;5;245m266 /lib/systemd/systemd-udevd[0m
+           │ └─unattended-upgrades.service
+           │   └─[0;38;5;245m597 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal[0m
+           └─user.slice
+             └─user-1001.slice
+               ├─session-1253.scope
+               │ ├─[0;38;5;245m402094 "sshd: a [priv]"[0m
+               │ ├─[0;38;5;245m402118 "sshd: a@pts/0"[0m
+               │ ├─[0;38;5;245m402119 -bash[0m
+               │ ├─[0;38;5;245m405787 systemctl status[0m
+               │ └─[0;38;5;245m405788 pager[0m
+               └─user@1001.service
+                 └─init.scope
+                   ├─[0;38;5;245m402097 /lib/systemd/systemd --user[0m
+                   └─[0;38;5;245m402098 "(sd-pam)"[0m
