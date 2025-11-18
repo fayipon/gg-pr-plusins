@@ -1,4 +1,4 @@
-module users-rpc
+module users_rpc
 
 go 1.22
 
