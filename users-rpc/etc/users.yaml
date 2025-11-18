@@ -1,0 +1,38 @@
+# ========================
+# Users RPC Config (Final)
+# ========================
+
+Name: users-rpc
+ListenOn: 0.0.0.0:9107       # 🚀 建议给 users-rpc 用一个新端口
+
+Timeout: 2000
+
+# ========================
+# Database (使用 core 的 PostgreSQL)
+# ========================
+DatabaseConf:
+  Type: postgres
+  Host: 172.17.0.1           # 宿主机 Postgres
+  Port: 5432
+  DBName: simple_admin
+  Username: postgres
+  Password: simple-admin.    # ⚠ 请改成你 core-compose 里的密码
+  SSLMode: disable
+  MaxOpenConn: 100
+  CacheTime: 5
+
+# ========================
+# Redis (使用 core 的 Redis)
+# ========================
+RedisConf:
+  Host: 172.17.0.1:6379
+  Type: node
+
+# ========================
+# RPC 服务发现 (如你要给其他服务调用)
+# ========================
+RPCServerConf:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: users.rpc
