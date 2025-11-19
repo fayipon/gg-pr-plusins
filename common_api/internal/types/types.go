@@ -33,3 +33,12 @@ type UserListItem struct {
 	Id      uint64 `json:"id"`
 	Account string `json:"account"`
 }
+
+type LoginReq struct {
+    Account  string `json:"account"`
+    Password string `json:"password"`
+}
+
+type LoginResp struct {
+    Token string `json:"token"`
+}

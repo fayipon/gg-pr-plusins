@@ -8,22 +8,29 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, ctx *svc.ServiceContext) {
+	
 	server.AddRoute(rest.Route{
 		Method:  http.MethodGet,
 		Path:    "/user",
-		Handler: GetUserHandler(ctx),
+		Handler: ctx.JwtMiddleware(GetUserHandler(ctx)),
 	})
 
 	server.AddRoute(rest.Route{
 		Method:  http.MethodPost,
 		Path:    "/user",
-		Handler: CreateUserHandler(ctx),
+		Handler: ctx.JwtMiddleware(CreateUserHandler(ctx)),
 	})
 
 	server.AddRoute(rest.Route{
 		Method:  http.MethodPost,
 		Path:    "/user/list",
-		Handler: GetUserListHandler(ctx),
+		Handler: ctx.JwtMiddleware(GetUserListHandler(ctx)),
+	})
+
+	server.AddRoute(rest.Route{
+		Method:  http.MethodPost,
+		Path:    "/login",
+		Handler: LoginHandler(ctx),
 	})
 
 }
