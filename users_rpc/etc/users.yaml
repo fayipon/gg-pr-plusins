@@ -1,5 +1,4 @@
 Name: users.rpc
-ListenOn: 0.0.0.0:8081
+ListenOn: 127.0.0.1:8081
 
-Mysql:
-  DataSource: aqua:123456@tcp(127.0.0.1:3306)/aqua?charset=utf8mb4&parseTime=True&loc=Local
+DataSource: "aqua:123456@tcp(127.0.0.1:3306)/aqua?charset=utf8mb4&parseTime=true"

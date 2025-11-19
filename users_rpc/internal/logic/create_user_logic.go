@@ -2,11 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"time"
 
-	"golang.org/x/crypto/bcrypt"
-
-	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/model"
+	"github.com/Masterminds/squirrel"
 	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
 	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -28,31 +26,17 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 
 func (l *CreateUserLogic) CreateUser(req *users.CreateUserReq) (*users.CreateUserResp, error) {
 
-	exist, err := l.svcCtx.UsersModel.FindByAccount(req.Account)
-	if err != nil {
-		return nil, err
-	}
-	if exist != nil {
-		return nil, fmt.Errorf("account already exists")
-	}
+	qb := squirrel.Insert("users").
+		Columns("account", "password", "status", "level_id", "created_at").
+		Values(req.Account, req.Password, 1, 1, time.Now())
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
-	if err != nil {
-		return nil, err
-	}
-
-	data := &model.Users{
-		Account:  req.Account,
-		Password: string(hash),
-	}
-
-	id, err := l.svcCtx.UsersModel.Insert(data)
+	sqlStr, args, _ := qb.ToSql()
+	_, err := l.svcCtx.DB.ExecCtx(l.ctx, sqlStr, args...)
 	if err != nil {
 		return nil, err
 	}
 
 	return &users.CreateUserResp{
-		Id:      uint64(id),
-		Account: req.Account,
+		Success: true,
 	}, nil
 }

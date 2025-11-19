@@ -4,6 +4,7 @@ package errorx
 const (
     ErrAccountNotFound = 10001
     ErrPasswordWrong   = 10002
+    ErrUserNotFound    = 10003
 )
 
 // Token / Auth 20000 - 29999

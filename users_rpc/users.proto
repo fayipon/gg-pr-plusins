@@ -1,46 +1,75 @@
 syntax = "proto3";
 
 package users;
-
 option go_package = "./users";
 
-service Users {
-    rpc CreateUser (CreateUserReq) returns (CreateUserResp);
-    rpc GetUser (GetUserReq) returns (GetUserResp);
-    rpc GetUserList (GetUserListReq) returns (GetUserListResp);
+message Value {
+  oneof value {
+    string strVal = 1;
+    double numVal = 2;
+    StringArray strArray = 3;
+  }
 }
 
-message CreateUserReq {
-    string account = 1;
-    string password = 2;
+message StringArray {
+  repeated string values = 1;
 }
 
-message CreateUserResp {
-    uint64 id = 1;
-    string account = 2;
-}
-
-message GetUserReq {
-    uint64 id = 1;
-}
-
-message GetUserResp {
-    uint64 id = 1;
-    string account = 2;
+message FilterItem {
+  string field = 1;
+  string op = 2;
+  Value value = 3;
 }
 
 message GetUserListReq {
-    int32 page = 1;
-    int32 page_size = 2;
-    string keyword = 3; // 搜索账号
+  int32 page = 1;
+  int32 page_size = 2;
+  string keyword = 3;
+
+  string sort_field = 4;
+  string sort_order = 5;
+
+  repeated FilterItem filters = 6;
 }
 
 message UserItem {
     uint64 id = 1;
     string account = 2;
+    int64 status = 3;
+    int64 level_id = 4;
+    uint64 parent_id = 5;
+    int64 group_id = 6;
+    int64 created_at = 7;
 }
 
 message GetUserListResp {
-    repeated UserItem list = 1;
-    int64 total = 2;
+  int64 total = 1;
+  repeated UserItem list = 2;
+}
+
+message GetUserReq {
+  uint64 id = 1;
+}
+
+message GetUserResp {
+  uint64 id = 1;
+  string account = 2;
+  int64 status = 3;
+  int64 level_id = 4;
+  int64 created_at = 5;
+}
+
+message CreateUserReq {
+  string account = 1;
+  string password = 2;
+}
+
+message CreateUserResp {
+  bool success = 1;
+}
+
+service Users {
+  rpc GetUserList(GetUserListReq) returns (GetUserListResp);
+  rpc GetUser(GetUserReq) returns (GetUserResp);
+  rpc CreateUser(CreateUserReq) returns (CreateUserResp);
 }
