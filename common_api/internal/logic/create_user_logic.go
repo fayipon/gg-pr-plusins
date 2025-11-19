@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-
 	"common_api/internal/svc"
 	"common_api/internal/types"
 	"github.com/fayipon/gg-pr-plusins/users_rpc/users"

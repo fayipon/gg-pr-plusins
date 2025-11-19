@@ -25,7 +25,7 @@ func GetUserListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		// ✔ 新版 go-zero：不传 err
+		
 		httpx.OkJsonCtx(r.Context(), w, resp)
 	}
 }

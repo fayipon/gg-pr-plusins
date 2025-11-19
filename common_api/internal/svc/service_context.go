@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"common_api/internal/config"
-	"github.com/zeromicro/go-zero/zrpc"
 	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
+	"github.com/zeromicro/go-zero/zrpc"
+	"common_api/internal/config"
 )
 
 type ServiceContext struct {
@@ -14,6 +14,6 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:   c,
-		UsersRpc: users.NewUsersClient(zrpc.MustNewClient(c.UsersRpc).Conn()),
+		UsersRpc: users.NewUsersClient(zrpc.MustNewClient(c.UsersRpc)),
 	}
 }
