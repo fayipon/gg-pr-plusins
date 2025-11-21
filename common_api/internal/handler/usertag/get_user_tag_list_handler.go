@@ -1,20 +1,19 @@
-package usergroup
+package usertag
 
 import (
     "net/http"
     "strconv"
 
-    "common_api/internal/logic/usergroup"
+    "common_api/internal/logic/usertag"
     "common_api/internal/response"
     "common_api/internal/svc"
     "common_api/internal/types"
     "common_api/internal/utils/errorx"
 )
 
-func GetUserGroupListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func GetUserTagListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
 
-        // --- 解析 Query 参数 ---
         pageStr := r.URL.Query().Get("page")
         pageSizeStr := r.URL.Query().Get("page_size")
 
@@ -24,20 +23,17 @@ func GetUserGroupListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
         if v, err := strconv.ParseUint(pageStr, 10, 64); err == nil {
             page = v
         }
-
         if v, err := strconv.ParseUint(pageSizeStr, 10, 64); err == nil {
             pageSize = v
         }
 
-        // ⭐ 你的 RPC 需要 int32
-        req := types.GetUserGroupListReq{
+        req := types.GetUserTagListReq{
             Page:     int32(page),
             PageSize: int32(pageSize),
         }
 
-        // --- Logic ---
-        l := usergroup.NewGetUserGroupListLogic(r.Context(), ctx)
-        resp, codeErr := l.GetUserGroupList(&req)
+        l := usertag.NewGetUserTagListLogic(r.Context(), ctx)
+        resp, codeErr := l.GetUserTagList(&req)
         if codeErr != nil {
             response.JsonError(w, r, codeErr.(*errorx.CodeError))
             return

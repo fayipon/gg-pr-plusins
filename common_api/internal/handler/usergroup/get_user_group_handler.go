@@ -1,45 +1,46 @@
 package usergroup
 
 import (
-    "errors"
     "net/http"
-    "strconv"
 
     "common_api/internal/logic/usergroup"
+    "common_api/internal/response"
     "common_api/internal/svc"
     "common_api/internal/types"
+    "common_api/internal/utils/errorx"
     "github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func GetUserGroupHandler(ctx *svc.ServiceContext) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-        var req types.GetUserGroupReq
 
-        // 支援 GET Query ?id=xxx
-        if r.Method == http.MethodGet {
-            idStr := r.URL.Query().Get("id")
-            if idStr != "" {
-                if id, err := strconv.ParseUint(idStr, 10, 64); err == nil {
-                    req.Id = id
-                }
-            }
+        var params types.GetUserGroupParam
+
+        if err := httpx.Parse(r, &params); err != nil {
+            response.JsonError(w, r,
+                errorx.NewCodeError(r.Context(), errorx.ErrInvalidParams, err.Error()),
+            )
+            return
         }
 
-        // 支援 POST JSON body
-        _ = httpx.Parse(r, &req)
-
-        if req.Id == 0 {
-            httpx.ErrorCtx(r.Context(), w, errors.New("id is required"))
+        if params.Id == 0 {
+            response.JsonError(w, r,
+                errorx.NewCodeError(r.Context(), errorx.ErrInvalidParams, "invalid id"),
+            )
             return
+        }
+
+        req := types.GetUserGroupReq{
+            Id: params.Id,
         }
 
         l := usergroup.NewGetUserGroupLogic(r.Context(), ctx)
-        resp, err := l.GetUserGroup(&req)
-        if err != nil {
-            httpx.ErrorCtx(r.Context(), w, err)
+        resp, codeErr := l.GetUserGroup(&req)
+        if codeErr != nil {
+            response.JsonError(w, r, codeErr.(*errorx.CodeError))
             return
         }
 
-        httpx.OkJsonCtx(r.Context(), w, resp)
+        response.OkJson(w, r, resp)
     }
 }

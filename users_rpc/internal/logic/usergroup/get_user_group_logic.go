@@ -33,7 +33,6 @@ func (l *GetUserGroupLogic) GetUserGroup(in *users.GetUserGroupReq) (*users.GetU
         Id:          g.Id,
         Name:        g.Name,
         DisplayName: g.DisplayName,
-        Setting:     g.Setting,
         CreatedAt:   g.CreatedAt,
         UpdatedAt:   g.UpdatedAt,
     }, nil

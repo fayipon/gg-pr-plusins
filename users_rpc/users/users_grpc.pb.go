@@ -27,32 +27,49 @@ const (
 	Users_UpdateUserLevel_FullMethodName  = "/users.Users/UpdateUserLevel"
 	Users_DeleteUserLevel_FullMethodName  = "/users.Users/DeleteUserLevel"
 	Users_GetUserLevelList_FullMethodName = "/users.Users/GetUserLevelList"
+	Users_GetLevelsBatch_FullMethodName   = "/users.Users/GetLevelsBatch"
 	Users_CreateUserGroup_FullMethodName  = "/users.Users/CreateUserGroup"
 	Users_GetUserGroup_FullMethodName     = "/users.Users/GetUserGroup"
 	Users_UpdateUserGroup_FullMethodName  = "/users.Users/UpdateUserGroup"
 	Users_DeleteUserGroup_FullMethodName  = "/users.Users/DeleteUserGroup"
 	Users_GetUserGroupList_FullMethodName = "/users.Users/GetUserGroupList"
-	Users_GetLevelsBatch_FullMethodName   = "/users.Users/GetLevelsBatch"
+	Users_CreateUserTag_FullMethodName    = "/users.Users/CreateUserTag"
+	Users_GetUserTag_FullMethodName       = "/users.Users/GetUserTag"
+	Users_UpdateUserTag_FullMethodName    = "/users.Users/UpdateUserTag"
+	Users_DeleteUserTag_FullMethodName    = "/users.Users/DeleteUserTag"
+	Users_GetUserTagList_FullMethodName   = "/users.Users/GetUserTagList"
 )
 
 // UsersClient is the client API for Users service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// =============================
+// Service
+// =============================
 type UsersClient interface {
 	GetUserList(ctx context.Context, in *GetUserListReq, opts ...grpc.CallOption) (*GetUserListResp, error)
 	GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 	CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserResp, error)
+	// UserLevel
 	CreateUserLevel(ctx context.Context, in *CreateUserLevelReq, opts ...grpc.CallOption) (*CreateUserLevelResp, error)
 	GetUserLevel(ctx context.Context, in *GetUserLevelReq, opts ...grpc.CallOption) (*GetUserLevelResp, error)
 	UpdateUserLevel(ctx context.Context, in *UpdateUserLevelReq, opts ...grpc.CallOption) (*UpdateUserLevelResp, error)
 	DeleteUserLevel(ctx context.Context, in *DeleteUserLevelReq, opts ...grpc.CallOption) (*DeleteUserLevelResp, error)
 	GetUserLevelList(ctx context.Context, in *GetUserLevelListReq, opts ...grpc.CallOption) (*GetUserLevelListResp, error)
+	GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
+	// UserGroup
 	CreateUserGroup(ctx context.Context, in *CreateUserGroupReq, opts ...grpc.CallOption) (*CreateUserGroupResp, error)
 	GetUserGroup(ctx context.Context, in *GetUserGroupReq, opts ...grpc.CallOption) (*GetUserGroupResp, error)
 	UpdateUserGroup(ctx context.Context, in *UpdateUserGroupReq, opts ...grpc.CallOption) (*UpdateUserGroupResp, error)
 	DeleteUserGroup(ctx context.Context, in *DeleteUserGroupReq, opts ...grpc.CallOption) (*DeleteUserGroupResp, error)
 	GetUserGroupList(ctx context.Context, in *GetUserGroupListReq, opts ...grpc.CallOption) (*GetUserGroupListResp, error)
-	GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
+	// UserTag
+	CreateUserTag(ctx context.Context, in *CreateUserTagReq, opts ...grpc.CallOption) (*CreateUserTagResp, error)
+	GetUserTag(ctx context.Context, in *GetUserTagReq, opts ...grpc.CallOption) (*GetUserTagResp, error)
+	UpdateUserTag(ctx context.Context, in *UpdateUserTagReq, opts ...grpc.CallOption) (*UpdateUserTagResp, error)
+	DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, opts ...grpc.CallOption) (*DeleteUserTagResp, error)
+	GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error)
 }
 
 type usersClient struct {
@@ -143,6 +160,16 @@ func (c *usersClient) GetUserLevelList(ctx context.Context, in *GetUserLevelList
 	return out, nil
 }
 
+func (c *usersClient) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LevelBatchResp)
+	err := c.cc.Invoke(ctx, Users_GetLevelsBatch_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *usersClient) CreateUserGroup(ctx context.Context, in *CreateUserGroupReq, opts ...grpc.CallOption) (*CreateUserGroupResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateUserGroupResp)
@@ -193,10 +220,50 @@ func (c *usersClient) GetUserGroupList(ctx context.Context, in *GetUserGroupList
 	return out, nil
 }
 
-func (c *usersClient) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
+func (c *usersClient) CreateUserTag(ctx context.Context, in *CreateUserTagReq, opts ...grpc.CallOption) (*CreateUserTagResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LevelBatchResp)
-	err := c.cc.Invoke(ctx, Users_GetLevelsBatch_FullMethodName, in, out, cOpts...)
+	out := new(CreateUserTagResp)
+	err := c.cc.Invoke(ctx, Users_CreateUserTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) GetUserTag(ctx context.Context, in *GetUserTagReq, opts ...grpc.CallOption) (*GetUserTagResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserTagResp)
+	err := c.cc.Invoke(ctx, Users_GetUserTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) UpdateUserTag(ctx context.Context, in *UpdateUserTagReq, opts ...grpc.CallOption) (*UpdateUserTagResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserTagResp)
+	err := c.cc.Invoke(ctx, Users_UpdateUserTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, opts ...grpc.CallOption) (*DeleteUserTagResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserTagResp)
+	err := c.cc.Invoke(ctx, Users_DeleteUserTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserTagListResp)
+	err := c.cc.Invoke(ctx, Users_GetUserTagList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -206,21 +273,33 @@ func (c *usersClient) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opt
 // UsersServer is the server API for Users service.
 // All implementations must embed UnimplementedUsersServer
 // for forward compatibility.
+//
+// =============================
+// Service
+// =============================
 type UsersServer interface {
 	GetUserList(context.Context, *GetUserListReq) (*GetUserListResp, error)
 	GetUser(context.Context, *GetUserReq) (*GetUserResp, error)
 	CreateUser(context.Context, *CreateUserReq) (*CreateUserResp, error)
+	// UserLevel
 	CreateUserLevel(context.Context, *CreateUserLevelReq) (*CreateUserLevelResp, error)
 	GetUserLevel(context.Context, *GetUserLevelReq) (*GetUserLevelResp, error)
 	UpdateUserLevel(context.Context, *UpdateUserLevelReq) (*UpdateUserLevelResp, error)
 	DeleteUserLevel(context.Context, *DeleteUserLevelReq) (*DeleteUserLevelResp, error)
 	GetUserLevelList(context.Context, *GetUserLevelListReq) (*GetUserLevelListResp, error)
+	GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error)
+	// UserGroup
 	CreateUserGroup(context.Context, *CreateUserGroupReq) (*CreateUserGroupResp, error)
 	GetUserGroup(context.Context, *GetUserGroupReq) (*GetUserGroupResp, error)
 	UpdateUserGroup(context.Context, *UpdateUserGroupReq) (*UpdateUserGroupResp, error)
 	DeleteUserGroup(context.Context, *DeleteUserGroupReq) (*DeleteUserGroupResp, error)
 	GetUserGroupList(context.Context, *GetUserGroupListReq) (*GetUserGroupListResp, error)
-	GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error)
+	// UserTag
+	CreateUserTag(context.Context, *CreateUserTagReq) (*CreateUserTagResp, error)
+	GetUserTag(context.Context, *GetUserTagReq) (*GetUserTagResp, error)
+	UpdateUserTag(context.Context, *UpdateUserTagReq) (*UpdateUserTagResp, error)
+	DeleteUserTag(context.Context, *DeleteUserTagReq) (*DeleteUserTagResp, error)
+	GetUserTagList(context.Context, *GetUserTagListReq) (*GetUserTagListResp, error)
 	mustEmbedUnimplementedUsersServer()
 }
 
@@ -255,6 +334,9 @@ func (UnimplementedUsersServer) DeleteUserLevel(context.Context, *DeleteUserLeve
 func (UnimplementedUsersServer) GetUserLevelList(context.Context, *GetUserLevelListReq) (*GetUserLevelListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserLevelList not implemented")
 }
+func (UnimplementedUsersServer) GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLevelsBatch not implemented")
+}
 func (UnimplementedUsersServer) CreateUserGroup(context.Context, *CreateUserGroupReq) (*CreateUserGroupResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUserGroup not implemented")
 }
@@ -270,8 +352,20 @@ func (UnimplementedUsersServer) DeleteUserGroup(context.Context, *DeleteUserGrou
 func (UnimplementedUsersServer) GetUserGroupList(context.Context, *GetUserGroupListReq) (*GetUserGroupListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroupList not implemented")
 }
-func (UnimplementedUsersServer) GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetLevelsBatch not implemented")
+func (UnimplementedUsersServer) CreateUserTag(context.Context, *CreateUserTagReq) (*CreateUserTagResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserTag not implemented")
+}
+func (UnimplementedUsersServer) GetUserTag(context.Context, *GetUserTagReq) (*GetUserTagResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTag not implemented")
+}
+func (UnimplementedUsersServer) UpdateUserTag(context.Context, *UpdateUserTagReq) (*UpdateUserTagResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserTag not implemented")
+}
+func (UnimplementedUsersServer) DeleteUserTag(context.Context, *DeleteUserTagReq) (*DeleteUserTagResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserTag not implemented")
+}
+func (UnimplementedUsersServer) GetUserTagList(context.Context, *GetUserTagListReq) (*GetUserTagListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTagList not implemented")
 }
 func (UnimplementedUsersServer) mustEmbedUnimplementedUsersServer() {}
 func (UnimplementedUsersServer) testEmbeddedByValue()               {}
@@ -438,6 +532,24 @@ func _Users_GetUserLevelList_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Users_GetLevelsBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LevelBatchReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GetLevelsBatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GetLevelsBatch_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GetLevelsBatch(ctx, req.(*LevelBatchReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Users_CreateUserGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUserGroupReq)
 	if err := dec(in); err != nil {
@@ -528,20 +640,92 @@ func _Users_GetUserGroupList_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Users_GetLevelsBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LevelBatchReq)
+func _Users_CreateUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserTagReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsersServer).GetLevelsBatch(ctx, in)
+		return srv.(UsersServer).CreateUserTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Users_GetLevelsBatch_FullMethodName,
+		FullMethod: Users_CreateUserTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersServer).GetLevelsBatch(ctx, req.(*LevelBatchReq))
+		return srv.(UsersServer).CreateUserTag(ctx, req.(*CreateUserTagReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_GetUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserTagReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GetUserTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GetUserTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GetUserTag(ctx, req.(*GetUserTagReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_UpdateUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserTagReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).UpdateUserTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_UpdateUserTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).UpdateUserTag(ctx, req.(*UpdateUserTagReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_DeleteUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserTagReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).DeleteUserTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_DeleteUserTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).DeleteUserTag(ctx, req.(*DeleteUserTagReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_GetUserTagList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserTagListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GetUserTagList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GetUserTagList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GetUserTagList(ctx, req.(*GetUserTagListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -586,6 +770,10 @@ var Users_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Users_GetUserLevelList_Handler,
 		},
 		{
+			MethodName: "GetLevelsBatch",
+			Handler:    _Users_GetLevelsBatch_Handler,
+		},
+		{
 			MethodName: "CreateUserGroup",
 			Handler:    _Users_CreateUserGroup_Handler,
 		},
@@ -606,8 +794,24 @@ var Users_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Users_GetUserGroupList_Handler,
 		},
 		{
-			MethodName: "GetLevelsBatch",
-			Handler:    _Users_GetLevelsBatch_Handler,
+			MethodName: "CreateUserTag",
+			Handler:    _Users_CreateUserTag_Handler,
+		},
+		{
+			MethodName: "GetUserTag",
+			Handler:    _Users_GetUserTag_Handler,
+		},
+		{
+			MethodName: "UpdateUserTag",
+			Handler:    _Users_UpdateUserTag_Handler,
+		},
+		{
+			MethodName: "DeleteUserTag",
+			Handler:    _Users_DeleteUserTag_Handler,
+		},
+		{
+			MethodName: "GetUserTagList",
+			Handler:    _Users_GetUserTagList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

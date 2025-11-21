@@ -6,6 +6,7 @@ import (
     logicUser "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/user"
     logicUserLevel "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/userlevel"
     logicUserGroup "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/usergroup"
+    logicUserTag "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/usertag"
     logicCommon "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/common"
     "github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
     "github.com/fayipon/gg-pr-plusins/users_rpc/users"
@@ -99,6 +100,35 @@ func (s *UsersServer) GetUserGroupList(ctx context.Context, req *users.GetUserGr
     return l.GetUserGroupList(req)
 }
 
+//
+// ----------------------
+// UserTags
+// ----------------------
+
+func (s *UsersServer) CreateUserTag(ctx context.Context, req *users.CreateUserTagReq) (*users.CreateUserTagResp, error) {
+    l := logicUserTag.NewCreateUserTagLogic(ctx, s.svcCtx)
+    return l.CreateUserTag(req)
+}
+
+func (s *UsersServer) GetUserTag(ctx context.Context, req *users.GetUserTagReq) (*users.GetUserTagResp, error) {
+    l := logicUserTag.NewGetUserTagLogic(ctx, s.svcCtx)
+    return l.GetUserTag(req)
+}
+
+func (s *UsersServer) UpdateUserTag(ctx context.Context, req *users.UpdateUserTagReq) (*users.UpdateUserTagResp, error) {
+    l := logicUserTag.NewUpdateUserTagLogic(ctx, s.svcCtx)
+    return l.UpdateUserTag(req)
+}
+
+func (s *UsersServer) DeleteUserTag(ctx context.Context, req *users.DeleteUserTagReq) (*users.DeleteUserTagResp, error) {
+    l := logicUserTag.NewDeleteUserTagLogic(ctx, s.svcCtx)
+    return l.DeleteUserTag(req)
+}
+
+func (s *UsersServer) GetUserTagList(ctx context.Context, req *users.GetUserTagListReq) (*users.GetUserTagListResp, error) {
+    l := logicUserTag.NewGetUserTagListLogic(ctx, s.svcCtx)
+    return l.GetUserTagList(req)
+}
 
 //
 // ----------------------

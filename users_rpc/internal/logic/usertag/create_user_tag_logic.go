@@ -1,4 +1,4 @@
-package usergroup
+package usertag
 
 import (
     "context"
@@ -10,42 +10,42 @@ import (
     "github.com/zeromicro/go-zero/core/logx"
 )
 
-type CreateUserGroupLogic struct {
+type CreateUserTagLogic struct {
     ctx    context.Context
     svcCtx *svc.ServiceContext
     logx.Logger
 }
 
-func NewCreateUserGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateUserGroupLogic {
-    return &CreateUserGroupLogic{
+func NewCreateUserTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateUserTagLogic {
+    return &CreateUserTagLogic{
         ctx:    ctx,
         svcCtx: svcCtx,
         Logger: logx.WithContext(ctx),
     }
 }
 
-func (l *CreateUserGroupLogic) CreateUserGroup(in *users.CreateUserGroupReq) (*users.CreateUserGroupResp, error) {
+func (l *CreateUserTagLogic) CreateUserTag(in *users.CreateUserTagReq) (*users.CreateUserTagResp, error) {
 
     now := time.Now().Unix()
 
-    data := &model.UserGroups{
+    tag := &model.UserTag{
         Name:        in.Name,
         DisplayName: in.DisplayName,
         CreatedAt:   now,
         UpdatedAt:   now,
     }
 
-    res, err := l.svcCtx.UserGroupModel.Insert(l.ctx, data)
+    ret, err := l.svcCtx.UserTagModel.Insert(l.ctx, tag)
     if err != nil {
         return nil, err
     }
 
-    id, err := res.LastInsertId()
+    id, err := ret.LastInsertId()
     if err != nil {
         return nil, err
     }
 
-    return &users.CreateUserGroupResp{
+    return &users.CreateUserTagResp{
         Id: uint64(id),
     }, nil
 }

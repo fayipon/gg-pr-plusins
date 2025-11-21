@@ -1,40 +1,43 @@
-package userlevel
+package usertag
 
 import (
     "net/http"
 
-    "common_api/internal/logic/userlevel"
+    "common_api/internal/logic/usertag"
     "common_api/internal/response"
     "common_api/internal/svc"
     "common_api/internal/types"
     "common_api/internal/utils/errorx"
 
+    "github.com/zeromicro/go-zero/core/logx"
     "github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func DeleteUserLevelHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func UpdateUserTagHandler(ctx *svc.ServiceContext) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
 
-        // ⭐ 使用 httpx.Parse 来解析 RESTful Path 参数
-        var params types.DeleteUserLevelParam
-        if err := httpx.Parse(r, &params); err != nil {
+        // ⭐ 一次 Parse：同時解析 PathParam + JSON Body
+        var req types.UpdateUserTagReq
+        if err := httpx.Parse(r, &req); err != nil {
+            logx.Errorf("Parse Error: %s", err.Error())
             response.JsonError(w, r,
                 errorx.NewCodeError(r.Context(), errorx.ErrInvalidParams, err.Error()))
             return
         }
 
-        if params.Id == 0 {
+        // ⭐ PathParam id 必須 > 0
+        if req.Id == 0 {
             response.JsonError(w, r,
                 errorx.NewCodeError(r.Context(), errorx.ErrInvalidParams, "invalid id"))
             return
         }
 
-        req := types.DeleteUserLevelReq{
-            Id: params.Id,
-        }
+        // ⭐ Debug（可留可去）
+        logx.Infof(">>> UpdateUserTag: id=%d name=%s display=%s",
+            req.Id, req.Name, req.DisplayName)
 
-        l := userlevel.NewDeleteUserLevelLogic(r.Context(), ctx)
-        resp, codeErr := l.DeleteUserLevel(&req)
+        l := usertag.NewUpdateUserTagLogic(r.Context(), ctx)
+        resp, codeErr := l.UpdateUserTag(&req)
         if codeErr != nil {
             response.JsonError(w, r, codeErr.(*errorx.CodeError))
             return

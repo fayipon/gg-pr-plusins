@@ -7,7 +7,7 @@ import (
 	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/config"
 	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/server"
 	"github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
-	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
+	"github.com/fayipon/gg-pr-plusins/users_rpc/users/users"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

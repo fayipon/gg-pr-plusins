@@ -20,12 +20,14 @@ type (
 	CreateUserLevelResp  = users.CreateUserLevelResp
 	CreateUserReq        = users.CreateUserReq
 	CreateUserResp       = users.CreateUserResp
+	CreateUserTagReq     = users.CreateUserTagReq
+	CreateUserTagResp    = users.CreateUserTagResp
 	DeleteUserGroupReq   = users.DeleteUserGroupReq
 	DeleteUserGroupResp  = users.DeleteUserGroupResp
 	DeleteUserLevelReq   = users.DeleteUserLevelReq
 	DeleteUserLevelResp  = users.DeleteUserLevelResp
-	GetLevelListReq      = users.GetLevelListReq
-	GetLevelListResp     = users.GetLevelListResp
+	DeleteUserTagReq     = users.DeleteUserTagReq
+	DeleteUserTagResp    = users.DeleteUserTagResp
 	GetUserGroupListReq  = users.GetUserGroupListReq
 	GetUserGroupListResp = users.GetUserGroupListResp
 	GetUserGroupReq      = users.GetUserGroupReq
@@ -38,31 +40,46 @@ type (
 	GetUserListResp      = users.GetUserListResp
 	GetUserReq           = users.GetUserReq
 	GetUserResp          = users.GetUserResp
+	GetUserTagListReq    = users.GetUserTagListReq
+	GetUserTagListResp   = users.GetUserTagListResp
+	GetUserTagReq        = users.GetUserTagReq
+	GetUserTagResp       = users.GetUserTagResp
 	LevelBatchReq        = users.LevelBatchReq
 	LevelBatchResp       = users.LevelBatchResp
 	UpdateUserGroupReq   = users.UpdateUserGroupReq
 	UpdateUserGroupResp  = users.UpdateUserGroupResp
 	UpdateUserLevelReq   = users.UpdateUserLevelReq
 	UpdateUserLevelResp  = users.UpdateUserLevelResp
+	UpdateUserTagReq     = users.UpdateUserTagReq
+	UpdateUserTagResp    = users.UpdateUserTagResp
 	UserGroupInfo        = users.UserGroupInfo
 	UserItem             = users.UserItem
 	UserLevelInfo        = users.UserLevelInfo
+	UserTagInfo          = users.UserTagInfo
 
 	Users interface {
 		GetUserList(ctx context.Context, in *GetUserListReq, opts ...grpc.CallOption) (*GetUserListResp, error)
 		GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 		CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserResp, error)
+		// UserLevel
 		CreateUserLevel(ctx context.Context, in *CreateUserLevelReq, opts ...grpc.CallOption) (*CreateUserLevelResp, error)
 		GetUserLevel(ctx context.Context, in *GetUserLevelReq, opts ...grpc.CallOption) (*GetUserLevelResp, error)
 		UpdateUserLevel(ctx context.Context, in *UpdateUserLevelReq, opts ...grpc.CallOption) (*UpdateUserLevelResp, error)
 		DeleteUserLevel(ctx context.Context, in *DeleteUserLevelReq, opts ...grpc.CallOption) (*DeleteUserLevelResp, error)
 		GetUserLevelList(ctx context.Context, in *GetUserLevelListReq, opts ...grpc.CallOption) (*GetUserLevelListResp, error)
+		GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
+		// UserGroup
 		CreateUserGroup(ctx context.Context, in *CreateUserGroupReq, opts ...grpc.CallOption) (*CreateUserGroupResp, error)
 		GetUserGroup(ctx context.Context, in *GetUserGroupReq, opts ...grpc.CallOption) (*GetUserGroupResp, error)
 		UpdateUserGroup(ctx context.Context, in *UpdateUserGroupReq, opts ...grpc.CallOption) (*UpdateUserGroupResp, error)
 		DeleteUserGroup(ctx context.Context, in *DeleteUserGroupReq, opts ...grpc.CallOption) (*DeleteUserGroupResp, error)
 		GetUserGroupList(ctx context.Context, in *GetUserGroupListReq, opts ...grpc.CallOption) (*GetUserGroupListResp, error)
-		GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
+		// UserTag
+		CreateUserTag(ctx context.Context, in *CreateUserTagReq, opts ...grpc.CallOption) (*CreateUserTagResp, error)
+		GetUserTag(ctx context.Context, in *GetUserTagReq, opts ...grpc.CallOption) (*GetUserTagResp, error)
+		UpdateUserTag(ctx context.Context, in *UpdateUserTagReq, opts ...grpc.CallOption) (*UpdateUserTagResp, error)
+		DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, opts ...grpc.CallOption) (*DeleteUserTagResp, error)
+		GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error)
 	}
 
 	defaultUsers struct {
@@ -91,6 +108,7 @@ func (m *defaultUsers) CreateUser(ctx context.Context, in *CreateUserReq, opts .
 	return client.CreateUser(ctx, in, opts...)
 }
 
+// UserLevel
 func (m *defaultUsers) CreateUserLevel(ctx context.Context, in *CreateUserLevelReq, opts ...grpc.CallOption) (*CreateUserLevelResp, error) {
 	client := users.NewUsersClient(m.cli.Conn())
 	return client.CreateUserLevel(ctx, in, opts...)
@@ -116,6 +134,12 @@ func (m *defaultUsers) GetUserLevelList(ctx context.Context, in *GetUserLevelLis
 	return client.GetUserLevelList(ctx, in, opts...)
 }
 
+func (m *defaultUsers) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GetLevelsBatch(ctx, in, opts...)
+}
+
+// UserGroup
 func (m *defaultUsers) CreateUserGroup(ctx context.Context, in *CreateUserGroupReq, opts ...grpc.CallOption) (*CreateUserGroupResp, error) {
 	client := users.NewUsersClient(m.cli.Conn())
 	return client.CreateUserGroup(ctx, in, opts...)
@@ -141,7 +165,28 @@ func (m *defaultUsers) GetUserGroupList(ctx context.Context, in *GetUserGroupLis
 	return client.GetUserGroupList(ctx, in, opts...)
 }
 
-func (m *defaultUsers) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
+// UserTag
+func (m *defaultUsers) CreateUserTag(ctx context.Context, in *CreateUserTagReq, opts ...grpc.CallOption) (*CreateUserTagResp, error) {
 	client := users.NewUsersClient(m.cli.Conn())
-	return client.GetLevelsBatch(ctx, in, opts...)
+	return client.CreateUserTag(ctx, in, opts...)
+}
+
+func (m *defaultUsers) GetUserTag(ctx context.Context, in *GetUserTagReq, opts ...grpc.CallOption) (*GetUserTagResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GetUserTag(ctx, in, opts...)
+}
+
+func (m *defaultUsers) UpdateUserTag(ctx context.Context, in *UpdateUserTagReq, opts ...grpc.CallOption) (*UpdateUserTagResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.UpdateUserTag(ctx, in, opts...)
+}
+
+func (m *defaultUsers) DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, opts ...grpc.CallOption) (*DeleteUserTagResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.DeleteUserTag(ctx, in, opts...)
+}
+
+func (m *defaultUsers) GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GetUserTagList(ctx, in, opts...)
 }

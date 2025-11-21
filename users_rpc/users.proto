@@ -1,0 +1,266 @@
+syntax = "proto3";
+
+package users;
+option go_package = "./users";
+
+// =============================
+// User 基本结构
+// =============================
+message GetUserListReq {
+  int32 page = 1;
+  int32 page_size = 2;
+  string keyword = 3;
+}
+
+message UserItem {
+  uint64 id = 1;
+  string account = 2;
+  int64 status = 3;
+  uint64 level_id = 4;
+  uint64 parent_id = 5;
+  uint64 group_id = 6;
+  int64 created_at = 7;
+}
+
+message GetUserListResp {
+  int64 total = 1;
+  repeated UserItem list = 2;
+}
+
+message GetUserReq {
+  uint64 id = 1;
+}
+
+message UserLevelInfo {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+}
+
+message GetUserResp {
+  uint64 id = 1;
+  string account = 2;
+  uint64 level_id = 3;
+  uint64 group_id = 4;
+  int64 email_verified_at = 5;
+  int64 mobile_verified_at = 6;
+  int64 kyc_verified_at = 7;
+  uint64 parent_id = 8;
+  string parent_tree = 9;
+  int64 depth = 10;
+  uint64 referer_id = 11;
+  int64 status = 12;
+  int64 created_at = 13;
+  int64 updated_at = 14;
+  UserLevelInfo user_level = 15;
+}
+
+message CreateUserReq {
+  string account = 1;
+  string password = 2;
+}
+
+message CreateUserResp {
+  uint64 id = 1;
+}
+
+// =============================
+// UserLevel
+// =============================
+message CreateUserLevelReq {
+  string name = 1;
+  string display_name = 2;
+  string setting = 3;
+}
+message CreateUserLevelResp {
+  uint64 id = 1;
+}
+
+message GetUserLevelReq {
+  uint64 id = 1;
+}
+message GetUserLevelResp {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  string setting = 4;
+  int64 created_at = 5;
+  int64 updated_at = 6;
+}
+
+message UpdateUserLevelReq {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  string setting = 4;
+}
+message UpdateUserLevelResp {
+  bool success = 1;
+}
+
+message DeleteUserLevelReq {
+  uint64 id = 1;
+}
+message DeleteUserLevelResp {
+  bool success = 1;
+}
+
+message GetUserLevelListReq {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+message GetUserLevelListResp {
+  int64 total = 1;
+  repeated UserLevelInfo list = 2;
+}
+
+message LevelBatchReq {
+  repeated uint64 ids = 1;
+}
+message LevelBatchResp {
+  repeated UserLevelInfo list = 1;
+}
+
+// =============================
+// UserGroup
+// =============================
+message UserGroupInfo {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message CreateUserGroupReq {
+  string name = 1;
+  string display_name = 2;
+}
+message CreateUserGroupResp {
+  uint64 id = 1;
+}
+
+message GetUserGroupReq {
+  uint64 id = 1;
+}
+message GetUserGroupResp {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message UpdateUserGroupReq {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+}
+message UpdateUserGroupResp {
+  bool success = 1;
+}
+
+message DeleteUserGroupReq {
+  uint64 id = 1;
+}
+message DeleteUserGroupResp {
+  bool success = 1;
+}
+
+message GetUserGroupListReq {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+message GetUserGroupListResp {
+  int64 total = 1;
+  repeated UserGroupInfo list = 2;
+}
+
+
+// =============================
+// UserTag
+// =============================
+message UserTagInfo {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message CreateUserTagReq {
+  string name = 1;
+  string display_name = 2;
+}
+message CreateUserTagResp {
+  uint64 id = 1;
+}
+
+message GetUserTagReq {
+  uint64 id = 1;
+}
+message GetUserTagResp {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message UpdateUserTagReq {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+}
+message UpdateUserTagResp {
+  bool success = 1;
+}
+
+message DeleteUserTagReq {
+  uint64 id = 1;
+}
+message DeleteUserTagResp {
+  bool success = 1;
+}
+
+message GetUserTagListReq {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+message GetUserTagListResp {
+  int64 total = 1;
+  repeated UserTagInfo list = 2;
+}
+
+
+// =============================
+// Service
+// =============================
+service Users {
+
+  rpc GetUserList(GetUserListReq) returns (GetUserListResp);
+  rpc GetUser(GetUserReq) returns (GetUserResp);
+  rpc CreateUser(CreateUserReq) returns (CreateUserResp);
+
+  // UserLevel
+  rpc CreateUserLevel(CreateUserLevelReq) returns (CreateUserLevelResp);
+  rpc GetUserLevel(GetUserLevelReq) returns (GetUserLevelResp);
+  rpc UpdateUserLevel(UpdateUserLevelReq) returns (UpdateUserLevelResp);
+  rpc DeleteUserLevel(DeleteUserLevelReq) returns (DeleteUserLevelResp);
+  rpc GetUserLevelList(GetUserLevelListReq) returns (GetUserLevelListResp);
+  rpc GetLevelsBatch(LevelBatchReq) returns (LevelBatchResp);
+
+  // UserGroup
+  rpc CreateUserGroup(CreateUserGroupReq) returns (CreateUserGroupResp);
+  rpc GetUserGroup(GetUserGroupReq) returns (GetUserGroupResp);
+  rpc UpdateUserGroup(UpdateUserGroupReq) returns (UpdateUserGroupResp);
+  rpc DeleteUserGroup(DeleteUserGroupReq) returns (DeleteUserGroupResp);
+  rpc GetUserGroupList(GetUserGroupListReq) returns (GetUserGroupListResp);
+
+  // UserTag
+  rpc CreateUserTag(CreateUserTagReq) returns (CreateUserTagResp);
+  rpc GetUserTag(GetUserTagReq) returns (GetUserTagResp);
+  rpc UpdateUserTag(UpdateUserTagReq) returns (UpdateUserTagResp);
+  rpc DeleteUserTag(DeleteUserTagReq) returns (DeleteUserTagResp);
+  rpc GetUserTagList(GetUserTagListReq) returns (GetUserTagListResp);
+}

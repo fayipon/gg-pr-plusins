@@ -1,4 +1,4 @@
-package usergroup
+package usertag
 
 import (
     "context"
@@ -10,37 +10,35 @@ import (
     "github.com/zeromicro/go-zero/core/logx"
 )
 
-type UpdateUserGroupLogic struct {
+type UpdateUserTagLogic struct {
     ctx    context.Context
     svcCtx *svc.ServiceContext
     logx.Logger
 }
 
-func NewUpdateUserGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateUserGroupLogic {
-    return &UpdateUserGroupLogic{
+func NewUpdateUserTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateUserTagLogic {
+    return &UpdateUserTagLogic{
         ctx:    ctx,
         svcCtx: svcCtx,
         Logger: logx.WithContext(ctx),
     }
 }
 
-func (l *UpdateUserGroupLogic) UpdateUserGroup(in *users.UpdateUserGroupReq) (*users.UpdateUserGroupResp, error) {
+func (l *UpdateUserTagLogic) UpdateUserTag(in *users.UpdateUserTagReq) (*users.UpdateUserTagResp, error) {
 
-    now := time.Now().Unix()
-
-    data := &model.UserGroups{
+    tag := &model.UserTag{
         Id:          in.Id,
         Name:        in.Name,
         DisplayName: in.DisplayName,
-        UpdatedAt:   now,
+        UpdatedAt:   time.Now().Unix(),
     }
 
-    err := l.svcCtx.UserGroupModel.Update(l.ctx, data)
+    err := l.svcCtx.UserTagModel.Update(l.ctx, tag)
     if err != nil {
         return nil, err
     }
 
-    return &users.UpdateUserGroupResp{
+    return &users.UpdateUserTagResp{
         Success: true,
     }, nil
 }

@@ -29,7 +29,6 @@ func (l *CreateUserGroupLogic) CreateUserGroup(req *types.CreateUserGroupReq) (*
     rpcResp, err := l.svcCtx.UsersRpc.CreateUserGroup(l.ctx, &users.CreateUserGroupReq{
         Name:        req.Name,
         DisplayName: req.DisplayName,
-        Setting:     req.Setting,
     })
 
     if err != nil {

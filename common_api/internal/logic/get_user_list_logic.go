@@ -38,8 +38,8 @@ func (l *GetUserListLogic) GetUserList(req *types.UserListReq) (*types.UserListR
         return nil, err
     }
 
-    // 缓存 user 列表
-    list := make([]types.UserListItem, 0, len(rpcResp.List))
+    // 🔥 修正成 []*types.UserListItem
+    list := make([]*types.UserListItem, 0, len(rpcResp.List))
 
     // 用来收集所有 level_id
     levelIds := make([]uint64, 0, len(rpcResp.List))
@@ -47,7 +47,7 @@ func (l *GetUserListLogic) GetUserList(req *types.UserListReq) (*types.UserListR
     // 先复制 user list
     for _, item := range rpcResp.List {
 
-        list = append(list, types.UserListItem{
+        list = append(list, &types.UserListItem{
             Id:        item.Id,
             Account:   item.Account,
             Status:    item.Status,
@@ -107,6 +107,6 @@ func (l *GetUserListLogic) GetUserList(req *types.UserListReq) (*types.UserListR
     // 返回
     return &types.UserListResp{
         Total: rpcResp.Total,
-        List:  list,
+        List:  list, // 🔥 类型完全正确：[]*UserListItem
     }, nil
 }

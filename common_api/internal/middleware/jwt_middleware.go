@@ -21,30 +21,33 @@ func (m *JwtMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
 
         authHeader := r.Header.Get("Authorization")
+
         if authHeader == "" {
-            http.Error(w, "missing Authorization header", http.StatusUnauthorized)
+            w.WriteHeader(http.StatusUnauthorized)
+            w.Write([]byte(`{"code":401, "message":"missing Authorization"}`))
             return
         }
 
-        // Bearer token
         parts := strings.Split(authHeader, " ")
         if len(parts) != 2 || strings.ToLower(parts[0]) != "bearer" {
-            http.Error(w, "invalid Authorization format", http.StatusUnauthorized)
+            w.WriteHeader(http.StatusUnauthorized)
+            w.Write([]byte(`{"code":401, "message":"invalid Authorization format"}`))
             return
         }
 
         tokenStr := parts[1]
 
-        // Parse JWT
         token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
             return []byte(m.Secret), nil
         })
 
         if err != nil || !token.Valid {
-            http.Error(w, "invalid token", http.StatusUnauthorized)
+            w.WriteHeader(http.StatusUnauthorized)
+            w.Write([]byte(`{"code":401, "message":"invalid token"}`))
             return
         }
 
+        // JWT OK → go to handler
         next(w, r)
     }
 }

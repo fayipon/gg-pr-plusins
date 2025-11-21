@@ -21,6 +21,9 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// =============================
+// User 基本结构
+// =============================
 type GetUserListReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
@@ -539,7 +542,7 @@ func (x *CreateUserReq) GetPassword() string {
 
 type CreateUserResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -574,101 +577,16 @@ func (*CreateUserResp) Descriptor() ([]byte, []int) {
 	return file_users_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CreateUserResp) GetSuccess() bool {
+func (x *CreateUserResp) GetId() uint64 {
 	if x != nil {
-		return x.Success
+		return x.Id
 	}
-	return false
+	return 0
 }
 
-type LevelBatchReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *LevelBatchReq) Reset() {
-	*x = LevelBatchReq{}
-	mi := &file_users_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *LevelBatchReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LevelBatchReq) ProtoMessage() {}
-
-func (x *LevelBatchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use LevelBatchReq.ProtoReflect.Descriptor instead.
-func (*LevelBatchReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *LevelBatchReq) GetIds() []uint64 {
-	if x != nil {
-		return x.Ids
-	}
-	return nil
-}
-
-type LevelBatchResp struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	List          []*UserLevelInfo       `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *LevelBatchResp) Reset() {
-	*x = LevelBatchResp{}
-	mi := &file_users_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *LevelBatchResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LevelBatchResp) ProtoMessage() {}
-
-func (x *LevelBatchResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use LevelBatchResp.ProtoReflect.Descriptor instead.
-func (*LevelBatchResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *LevelBatchResp) GetList() []*UserLevelInfo {
-	if x != nil {
-		return x.List
-	}
-	return nil
-}
-
+// =============================
+// UserLevel
+// =============================
 type CreateUserLevelReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -680,7 +598,7 @@ type CreateUserLevelReq struct {
 
 func (x *CreateUserLevelReq) Reset() {
 	*x = CreateUserLevelReq{}
-	mi := &file_users_proto_msgTypes[10]
+	mi := &file_users_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -692,7 +610,7 @@ func (x *CreateUserLevelReq) String() string {
 func (*CreateUserLevelReq) ProtoMessage() {}
 
 func (x *CreateUserLevelReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[10]
+	mi := &file_users_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -705,7 +623,7 @@ func (x *CreateUserLevelReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserLevelReq.ProtoReflect.Descriptor instead.
 func (*CreateUserLevelReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{10}
+	return file_users_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateUserLevelReq) GetName() string {
@@ -738,7 +656,7 @@ type CreateUserLevelResp struct {
 
 func (x *CreateUserLevelResp) Reset() {
 	*x = CreateUserLevelResp{}
-	mi := &file_users_proto_msgTypes[11]
+	mi := &file_users_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -750,7 +668,7 @@ func (x *CreateUserLevelResp) String() string {
 func (*CreateUserLevelResp) ProtoMessage() {}
 
 func (x *CreateUserLevelResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[11]
+	mi := &file_users_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -763,7 +681,7 @@ func (x *CreateUserLevelResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserLevelResp.ProtoReflect.Descriptor instead.
 func (*CreateUserLevelResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{11}
+	return file_users_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateUserLevelResp) GetId() uint64 {
@@ -782,7 +700,7 @@ type GetUserLevelReq struct {
 
 func (x *GetUserLevelReq) Reset() {
 	*x = GetUserLevelReq{}
-	mi := &file_users_proto_msgTypes[12]
+	mi := &file_users_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -794,7 +712,7 @@ func (x *GetUserLevelReq) String() string {
 func (*GetUserLevelReq) ProtoMessage() {}
 
 func (x *GetUserLevelReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[12]
+	mi := &file_users_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -807,7 +725,7 @@ func (x *GetUserLevelReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserLevelReq.ProtoReflect.Descriptor instead.
 func (*GetUserLevelReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{12}
+	return file_users_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetUserLevelReq) GetId() uint64 {
@@ -831,7 +749,7 @@ type GetUserLevelResp struct {
 
 func (x *GetUserLevelResp) Reset() {
 	*x = GetUserLevelResp{}
-	mi := &file_users_proto_msgTypes[13]
+	mi := &file_users_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -843,7 +761,7 @@ func (x *GetUserLevelResp) String() string {
 func (*GetUserLevelResp) ProtoMessage() {}
 
 func (x *GetUserLevelResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[13]
+	mi := &file_users_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -856,7 +774,7 @@ func (x *GetUserLevelResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserLevelResp.ProtoReflect.Descriptor instead.
 func (*GetUserLevelResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{13}
+	return file_users_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetUserLevelResp) GetId() uint64 {
@@ -913,7 +831,7 @@ type UpdateUserLevelReq struct {
 
 func (x *UpdateUserLevelReq) Reset() {
 	*x = UpdateUserLevelReq{}
-	mi := &file_users_proto_msgTypes[14]
+	mi := &file_users_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -925,7 +843,7 @@ func (x *UpdateUserLevelReq) String() string {
 func (*UpdateUserLevelReq) ProtoMessage() {}
 
 func (x *UpdateUserLevelReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[14]
+	mi := &file_users_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -938,7 +856,7 @@ func (x *UpdateUserLevelReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserLevelReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserLevelReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{14}
+	return file_users_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateUserLevelReq) GetId() uint64 {
@@ -978,7 +896,7 @@ type UpdateUserLevelResp struct {
 
 func (x *UpdateUserLevelResp) Reset() {
 	*x = UpdateUserLevelResp{}
-	mi := &file_users_proto_msgTypes[15]
+	mi := &file_users_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -990,7 +908,7 @@ func (x *UpdateUserLevelResp) String() string {
 func (*UpdateUserLevelResp) ProtoMessage() {}
 
 func (x *UpdateUserLevelResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[15]
+	mi := &file_users_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1003,7 +921,7 @@ func (x *UpdateUserLevelResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserLevelResp.ProtoReflect.Descriptor instead.
 func (*UpdateUserLevelResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{15}
+	return file_users_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UpdateUserLevelResp) GetSuccess() bool {
@@ -1022,7 +940,7 @@ type DeleteUserLevelReq struct {
 
 func (x *DeleteUserLevelReq) Reset() {
 	*x = DeleteUserLevelReq{}
-	mi := &file_users_proto_msgTypes[16]
+	mi := &file_users_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1034,7 +952,7 @@ func (x *DeleteUserLevelReq) String() string {
 func (*DeleteUserLevelReq) ProtoMessage() {}
 
 func (x *DeleteUserLevelReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[16]
+	mi := &file_users_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1047,7 +965,7 @@ func (x *DeleteUserLevelReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserLevelReq.ProtoReflect.Descriptor instead.
 func (*DeleteUserLevelReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{16}
+	return file_users_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DeleteUserLevelReq) GetId() uint64 {
@@ -1066,7 +984,7 @@ type DeleteUserLevelResp struct {
 
 func (x *DeleteUserLevelResp) Reset() {
 	*x = DeleteUserLevelResp{}
-	mi := &file_users_proto_msgTypes[17]
+	mi := &file_users_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1078,7 +996,7 @@ func (x *DeleteUserLevelResp) String() string {
 func (*DeleteUserLevelResp) ProtoMessage() {}
 
 func (x *DeleteUserLevelResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[17]
+	mi := &file_users_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1091,7 +1009,7 @@ func (x *DeleteUserLevelResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserLevelResp.ProtoReflect.Descriptor instead.
 func (*DeleteUserLevelResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{17}
+	return file_users_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DeleteUserLevelResp) GetSuccess() bool {
@@ -1111,7 +1029,7 @@ type GetUserLevelListReq struct {
 
 func (x *GetUserLevelListReq) Reset() {
 	*x = GetUserLevelListReq{}
-	mi := &file_users_proto_msgTypes[18]
+	mi := &file_users_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1123,7 +1041,7 @@ func (x *GetUserLevelListReq) String() string {
 func (*GetUserLevelListReq) ProtoMessage() {}
 
 func (x *GetUserLevelListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[18]
+	mi := &file_users_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1136,7 +1054,7 @@ func (x *GetUserLevelListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserLevelListReq.ProtoReflect.Descriptor instead.
 func (*GetUserLevelListReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{18}
+	return file_users_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetUserLevelListReq) GetPage() int32 {
@@ -1163,7 +1081,7 @@ type GetUserLevelListResp struct {
 
 func (x *GetUserLevelListResp) Reset() {
 	*x = GetUserLevelListResp{}
-	mi := &file_users_proto_msgTypes[19]
+	mi := &file_users_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1175,7 +1093,7 @@ func (x *GetUserLevelListResp) String() string {
 func (*GetUserLevelListResp) ProtoMessage() {}
 
 func (x *GetUserLevelListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[19]
+	mi := &file_users_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1188,7 +1106,7 @@ func (x *GetUserLevelListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserLevelListResp.ProtoReflect.Descriptor instead.
 func (*GetUserLevelListResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{19}
+	return file_users_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetUserLevelListResp) GetTotal() int64 {
@@ -1205,29 +1123,28 @@ func (x *GetUserLevelListResp) GetList() []*UserLevelInfo {
 	return nil
 }
 
-type GetLevelListReq struct {
+type LevelBatchReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetLevelListReq) Reset() {
-	*x = GetLevelListReq{}
-	mi := &file_users_proto_msgTypes[20]
+func (x *LevelBatchReq) Reset() {
+	*x = LevelBatchReq{}
+	mi := &file_users_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetLevelListReq) String() string {
+func (x *LevelBatchReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetLevelListReq) ProtoMessage() {}
+func (*LevelBatchReq) ProtoMessage() {}
 
-func (x *GetLevelListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[20]
+func (x *LevelBatchReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1238,48 +1155,40 @@ func (x *GetLevelListReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetLevelListReq.ProtoReflect.Descriptor instead.
-func (*GetLevelListReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{20}
+// Deprecated: Use LevelBatchReq.ProtoReflect.Descriptor instead.
+func (*LevelBatchReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetLevelListReq) GetPage() int32 {
+func (x *LevelBatchReq) GetIds() []uint64 {
 	if x != nil {
-		return x.Page
+		return x.Ids
 	}
-	return 0
+	return nil
 }
 
-func (x *GetLevelListReq) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-type GetLevelListResp struct {
+type LevelBatchResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Total         int64                  `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
-	List          []*UserLevelInfo       `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+	List          []*UserLevelInfo       `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetLevelListResp) Reset() {
-	*x = GetLevelListResp{}
-	mi := &file_users_proto_msgTypes[21]
+func (x *LevelBatchResp) Reset() {
+	*x = LevelBatchResp{}
+	mi := &file_users_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetLevelListResp) String() string {
+func (x *LevelBatchResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetLevelListResp) ProtoMessage() {}
+func (*LevelBatchResp) ProtoMessage() {}
 
-func (x *GetLevelListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[21]
+func (x *LevelBatchResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1290,38 +1199,35 @@ func (x *GetLevelListResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetLevelListResp.ProtoReflect.Descriptor instead.
-func (*GetLevelListResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{21}
+// Deprecated: Use LevelBatchResp.ProtoReflect.Descriptor instead.
+func (*LevelBatchResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *GetLevelListResp) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-func (x *GetLevelListResp) GetList() []*UserLevelInfo {
+func (x *LevelBatchResp) GetList() []*UserLevelInfo {
 	if x != nil {
 		return x.List
 	}
 	return nil
 }
 
-// User Group
+// =============================
+// UserGroup
+// =============================
 type UserGroupInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserGroupInfo) Reset() {
 	*x = UserGroupInfo{}
-	mi := &file_users_proto_msgTypes[22]
+	mi := &file_users_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1333,7 +1239,7 @@ func (x *UserGroupInfo) String() string {
 func (*UserGroupInfo) ProtoMessage() {}
 
 func (x *UserGroupInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[22]
+	mi := &file_users_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1346,7 +1252,7 @@ func (x *UserGroupInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserGroupInfo.ProtoReflect.Descriptor instead.
 func (*UserGroupInfo) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{22}
+	return file_users_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UserGroupInfo) GetId() uint64 {
@@ -1370,18 +1276,31 @@ func (x *UserGroupInfo) GetDisplayName() string {
 	return ""
 }
 
+func (x *UserGroupInfo) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *UserGroupInfo) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
 type CreateUserGroupReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Setting       string                 `protobuf:"bytes,3,opt,name=setting,proto3" json:"setting,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateUserGroupReq) Reset() {
 	*x = CreateUserGroupReq{}
-	mi := &file_users_proto_msgTypes[23]
+	mi := &file_users_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1393,7 +1312,7 @@ func (x *CreateUserGroupReq) String() string {
 func (*CreateUserGroupReq) ProtoMessage() {}
 
 func (x *CreateUserGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[23]
+	mi := &file_users_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1406,7 +1325,7 @@ func (x *CreateUserGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserGroupReq.ProtoReflect.Descriptor instead.
 func (*CreateUserGroupReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{23}
+	return file_users_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CreateUserGroupReq) GetName() string {
@@ -1423,13 +1342,6 @@ func (x *CreateUserGroupReq) GetDisplayName() string {
 	return ""
 }
 
-func (x *CreateUserGroupReq) GetSetting() string {
-	if x != nil {
-		return x.Setting
-	}
-	return ""
-}
-
 type CreateUserGroupResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1439,7 +1351,7 @@ type CreateUserGroupResp struct {
 
 func (x *CreateUserGroupResp) Reset() {
 	*x = CreateUserGroupResp{}
-	mi := &file_users_proto_msgTypes[24]
+	mi := &file_users_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1451,7 +1363,7 @@ func (x *CreateUserGroupResp) String() string {
 func (*CreateUserGroupResp) ProtoMessage() {}
 
 func (x *CreateUserGroupResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[24]
+	mi := &file_users_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1464,7 +1376,7 @@ func (x *CreateUserGroupResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserGroupResp.ProtoReflect.Descriptor instead.
 func (*CreateUserGroupResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{24}
+	return file_users_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CreateUserGroupResp) GetId() uint64 {
@@ -1483,7 +1395,7 @@ type GetUserGroupReq struct {
 
 func (x *GetUserGroupReq) Reset() {
 	*x = GetUserGroupReq{}
-	mi := &file_users_proto_msgTypes[25]
+	mi := &file_users_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1495,7 +1407,7 @@ func (x *GetUserGroupReq) String() string {
 func (*GetUserGroupReq) ProtoMessage() {}
 
 func (x *GetUserGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[25]
+	mi := &file_users_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1508,7 +1420,7 @@ func (x *GetUserGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserGroupReq.ProtoReflect.Descriptor instead.
 func (*GetUserGroupReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{25}
+	return file_users_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetUserGroupReq) GetId() uint64 {
@@ -1523,16 +1435,15 @@ type GetUserGroupResp struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Setting       string                 `protobuf:"bytes,4,opt,name=setting,proto3" json:"setting,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     int64                  `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserGroupResp) Reset() {
 	*x = GetUserGroupResp{}
-	mi := &file_users_proto_msgTypes[26]
+	mi := &file_users_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1544,7 +1455,7 @@ func (x *GetUserGroupResp) String() string {
 func (*GetUserGroupResp) ProtoMessage() {}
 
 func (x *GetUserGroupResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[26]
+	mi := &file_users_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1557,7 +1468,7 @@ func (x *GetUserGroupResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserGroupResp.ProtoReflect.Descriptor instead.
 func (*GetUserGroupResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{26}
+	return file_users_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetUserGroupResp) GetId() uint64 {
@@ -1581,13 +1492,6 @@ func (x *GetUserGroupResp) GetDisplayName() string {
 	return ""
 }
 
-func (x *GetUserGroupResp) GetSetting() string {
-	if x != nil {
-		return x.Setting
-	}
-	return ""
-}
-
 func (x *GetUserGroupResp) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
@@ -1607,14 +1511,13 @@ type UpdateUserGroupReq struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Setting       string                 `protobuf:"bytes,4,opt,name=setting,proto3" json:"setting,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateUserGroupReq) Reset() {
 	*x = UpdateUserGroupReq{}
-	mi := &file_users_proto_msgTypes[27]
+	mi := &file_users_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1626,7 +1529,7 @@ func (x *UpdateUserGroupReq) String() string {
 func (*UpdateUserGroupReq) ProtoMessage() {}
 
 func (x *UpdateUserGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[27]
+	mi := &file_users_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1639,7 +1542,7 @@ func (x *UpdateUserGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserGroupReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserGroupReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{27}
+	return file_users_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UpdateUserGroupReq) GetId() uint64 {
@@ -1663,13 +1566,6 @@ func (x *UpdateUserGroupReq) GetDisplayName() string {
 	return ""
 }
 
-func (x *UpdateUserGroupReq) GetSetting() string {
-	if x != nil {
-		return x.Setting
-	}
-	return ""
-}
-
 type UpdateUserGroupResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
@@ -1679,7 +1575,7 @@ type UpdateUserGroupResp struct {
 
 func (x *UpdateUserGroupResp) Reset() {
 	*x = UpdateUserGroupResp{}
-	mi := &file_users_proto_msgTypes[28]
+	mi := &file_users_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1691,7 +1587,7 @@ func (x *UpdateUserGroupResp) String() string {
 func (*UpdateUserGroupResp) ProtoMessage() {}
 
 func (x *UpdateUserGroupResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[28]
+	mi := &file_users_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1704,7 +1600,7 @@ func (x *UpdateUserGroupResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserGroupResp.ProtoReflect.Descriptor instead.
 func (*UpdateUserGroupResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{28}
+	return file_users_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdateUserGroupResp) GetSuccess() bool {
@@ -1723,7 +1619,7 @@ type DeleteUserGroupReq struct {
 
 func (x *DeleteUserGroupReq) Reset() {
 	*x = DeleteUserGroupReq{}
-	mi := &file_users_proto_msgTypes[29]
+	mi := &file_users_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1735,7 +1631,7 @@ func (x *DeleteUserGroupReq) String() string {
 func (*DeleteUserGroupReq) ProtoMessage() {}
 
 func (x *DeleteUserGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[29]
+	mi := &file_users_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1748,7 +1644,7 @@ func (x *DeleteUserGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserGroupReq.ProtoReflect.Descriptor instead.
 func (*DeleteUserGroupReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{29}
+	return file_users_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DeleteUserGroupReq) GetId() uint64 {
@@ -1767,7 +1663,7 @@ type DeleteUserGroupResp struct {
 
 func (x *DeleteUserGroupResp) Reset() {
 	*x = DeleteUserGroupResp{}
-	mi := &file_users_proto_msgTypes[30]
+	mi := &file_users_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1779,7 +1675,7 @@ func (x *DeleteUserGroupResp) String() string {
 func (*DeleteUserGroupResp) ProtoMessage() {}
 
 func (x *DeleteUserGroupResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[30]
+	mi := &file_users_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1792,7 +1688,7 @@ func (x *DeleteUserGroupResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserGroupResp.ProtoReflect.Descriptor instead.
 func (*DeleteUserGroupResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{30}
+	return file_users_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteUserGroupResp) GetSuccess() bool {
@@ -1812,7 +1708,7 @@ type GetUserGroupListReq struct {
 
 func (x *GetUserGroupListReq) Reset() {
 	*x = GetUserGroupListReq{}
-	mi := &file_users_proto_msgTypes[31]
+	mi := &file_users_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1824,7 +1720,7 @@ func (x *GetUserGroupListReq) String() string {
 func (*GetUserGroupListReq) ProtoMessage() {}
 
 func (x *GetUserGroupListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[31]
+	mi := &file_users_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1837,7 +1733,7 @@ func (x *GetUserGroupListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserGroupListReq.ProtoReflect.Descriptor instead.
 func (*GetUserGroupListReq) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{31}
+	return file_users_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetUserGroupListReq) GetPage() int32 {
@@ -1864,7 +1760,7 @@ type GetUserGroupListResp struct {
 
 func (x *GetUserGroupListResp) Reset() {
 	*x = GetUserGroupListResp{}
-	mi := &file_users_proto_msgTypes[32]
+	mi := &file_users_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1876,7 +1772,7 @@ func (x *GetUserGroupListResp) String() string {
 func (*GetUserGroupListResp) ProtoMessage() {}
 
 func (x *GetUserGroupListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_users_proto_msgTypes[32]
+	mi := &file_users_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1889,7 +1785,7 @@ func (x *GetUserGroupListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserGroupListResp.ProtoReflect.Descriptor instead.
 func (*GetUserGroupListResp) Descriptor() ([]byte, []int) {
-	return file_users_proto_rawDescGZIP(), []int{32}
+	return file_users_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetUserGroupListResp) GetTotal() int64 {
@@ -1900,6 +1796,597 @@ func (x *GetUserGroupListResp) GetTotal() int64 {
 }
 
 func (x *GetUserGroupListResp) GetList() []*UserGroupInfo {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+// =============================
+// UserTag
+// =============================
+type UserTagInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserTagInfo) Reset() {
+	*x = UserTagInfo{}
+	mi := &file_users_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserTagInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserTagInfo) ProtoMessage() {}
+
+func (x *UserTagInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserTagInfo.ProtoReflect.Descriptor instead.
+func (*UserTagInfo) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *UserTagInfo) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UserTagInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UserTagInfo) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *UserTagInfo) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *UserTagInfo) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+type CreateUserTagReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserTagReq) Reset() {
+	*x = CreateUserTagReq{}
+	mi := &file_users_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserTagReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserTagReq) ProtoMessage() {}
+
+func (x *CreateUserTagReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserTagReq.ProtoReflect.Descriptor instead.
+func (*CreateUserTagReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *CreateUserTagReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateUserTagReq) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+type CreateUserTagResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserTagResp) Reset() {
+	*x = CreateUserTagResp{}
+	mi := &file_users_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserTagResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserTagResp) ProtoMessage() {}
+
+func (x *CreateUserTagResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserTagResp.ProtoReflect.Descriptor instead.
+func (*CreateUserTagResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *CreateUserTagResp) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetUserTagReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserTagReq) Reset() {
+	*x = GetUserTagReq{}
+	mi := &file_users_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserTagReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserTagReq) ProtoMessage() {}
+
+func (x *GetUserTagReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserTagReq.ProtoReflect.Descriptor instead.
+func (*GetUserTagReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetUserTagReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetUserTagResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserTagResp) Reset() {
+	*x = GetUserTagResp{}
+	mi := &file_users_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserTagResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserTagResp) ProtoMessage() {}
+
+func (x *GetUserTagResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserTagResp.ProtoReflect.Descriptor instead.
+func (*GetUserTagResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetUserTagResp) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GetUserTagResp) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetUserTagResp) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *GetUserTagResp) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *GetUserTagResp) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+type UpdateUserTagReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserTagReq) Reset() {
+	*x = UpdateUserTagReq{}
+	mi := &file_users_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserTagReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserTagReq) ProtoMessage() {}
+
+func (x *UpdateUserTagReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserTagReq.ProtoReflect.Descriptor instead.
+func (*UpdateUserTagReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *UpdateUserTagReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateUserTagReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateUserTagReq) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+type UpdateUserTagResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserTagResp) Reset() {
+	*x = UpdateUserTagResp{}
+	mi := &file_users_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserTagResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserTagResp) ProtoMessage() {}
+
+func (x *UpdateUserTagResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserTagResp.ProtoReflect.Descriptor instead.
+func (*UpdateUserTagResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *UpdateUserTagResp) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type DeleteUserTagReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserTagReq) Reset() {
+	*x = DeleteUserTagReq{}
+	mi := &file_users_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserTagReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserTagReq) ProtoMessage() {}
+
+func (x *DeleteUserTagReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserTagReq.ProtoReflect.Descriptor instead.
+func (*DeleteUserTagReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *DeleteUserTagReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteUserTagResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserTagResp) Reset() {
+	*x = DeleteUserTagResp{}
+	mi := &file_users_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserTagResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserTagResp) ProtoMessage() {}
+
+func (x *DeleteUserTagResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserTagResp.ProtoReflect.Descriptor instead.
+func (*DeleteUserTagResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *DeleteUserTagResp) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type GetUserTagListReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserTagListReq) Reset() {
+	*x = GetUserTagListReq{}
+	mi := &file_users_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserTagListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserTagListReq) ProtoMessage() {}
+
+func (x *GetUserTagListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserTagListReq.ProtoReflect.Descriptor instead.
+func (*GetUserTagListReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *GetUserTagListReq) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetUserTagListReq) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type GetUserTagListResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Total         int64                  `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	List          []*UserTagInfo         `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserTagListResp) Reset() {
+	*x = GetUserTagListResp{}
+	mi := &file_users_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserTagListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserTagListResp) ProtoMessage() {}
+
+func (x *GetUserTagListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserTagListResp.ProtoReflect.Descriptor instead.
+func (*GetUserTagListResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetUserTagListResp) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *GetUserTagListResp) GetList() []*UserTagInfo {
 	if x != nil {
 		return x.List
 	}
@@ -1958,13 +2445,9 @@ const file_users_proto_rawDesc = "" +
 	"user_level\x18\x0f \x01(\v2\x14.users.UserLevelInfoR\tuserLevel\"E\n" +
 	"\rCreateUserReq\x12\x18\n" +
 	"\aaccount\x18\x01 \x01(\tR\aaccount\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"*\n" +
-	"\x0eCreateUserResp\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"!\n" +
-	"\rLevelBatchReq\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\":\n" +
-	"\x0eLevelBatchResp\x12(\n" +
-	"\x04list\x18\x01 \x03(\v2\x14.users.UserLevelInfoR\x04list\"e\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\" \n" +
+	"\x0eCreateUserResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"e\n" +
 	"\x12CreateUserLevelReq\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x18\n" +
@@ -1998,39 +2481,38 @@ const file_users_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"V\n" +
 	"\x14GetUserLevelListResp\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12(\n" +
-	"\x04list\x18\x02 \x03(\v2\x14.users.UserLevelInfoR\x04list\"B\n" +
-	"\x0fGetLevelListReq\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"R\n" +
-	"\x10GetLevelListResp\x12\x14\n" +
-	"\x05total\x18\x01 \x01(\x03R\x05total\x12(\n" +
-	"\x04list\x18\x02 \x03(\v2\x14.users.UserLevelInfoR\x04list\"V\n" +
+	"\x04list\x18\x02 \x03(\v2\x14.users.UserLevelInfoR\x04list\"!\n" +
+	"\rLevelBatchReq\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\":\n" +
+	"\x0eLevelBatchResp\x12(\n" +
+	"\x04list\x18\x01 \x03(\v2\x14.users.UserLevelInfoR\x04list\"\x94\x01\n" +
 	"\rUserGroupInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\"e\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x05 \x01(\x03R\tupdatedAt\"K\n" +
 	"\x12CreateUserGroupReq\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x18\n" +
-	"\asetting\x18\x03 \x01(\tR\asetting\"%\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\"%\n" +
 	"\x13CreateUserGroupResp\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"!\n" +
 	"\x0fGetUserGroupReq\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"\xb1\x01\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x97\x01\n" +
 	"\x10GetUserGroupResp\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x18\n" +
-	"\asetting\x18\x04 \x01(\tR\asetting\x12\x1d\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x04 \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"u\n" +
+	"updated_at\x18\x05 \x01(\x03R\tupdatedAt\"[\n" +
 	"\x12UpdateUserGroupReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x18\n" +
-	"\asetting\x18\x04 \x01(\tR\asetting\"/\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\"/\n" +
 	"\x13UpdateUserGroupResp\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"$\n" +
 	"\x12DeleteUserGroupReq\x12\x0e\n" +
@@ -2042,7 +2524,47 @@ const file_users_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"V\n" +
 	"\x14GetUserGroupListResp\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12(\n" +
-	"\x04list\x18\x02 \x03(\v2\x14.users.UserGroupInfoR\x04list2\xc9\a\n" +
+	"\x04list\x18\x02 \x03(\v2\x14.users.UserGroupInfoR\x04list\"\x92\x01\n" +
+	"\vUserTagInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x05 \x01(\x03R\tupdatedAt\"I\n" +
+	"\x10CreateUserTagReq\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\"#\n" +
+	"\x11CreateUserTagResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x1f\n" +
+	"\rGetUserTagReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x95\x01\n" +
+	"\x0eGetUserTagResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x05 \x01(\x03R\tupdatedAt\"Y\n" +
+	"\x10UpdateUserTagReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\"-\n" +
+	"\x11UpdateUserTagResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\"\n" +
+	"\x10DeleteUserTagReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"-\n" +
+	"\x11DeleteUserTagResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"D\n" +
+	"\x11GetUserTagListReq\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"R\n" +
+	"\x12GetUserTagListResp\x12\x14\n" +
+	"\x05total\x18\x01 \x01(\x03R\x05total\x12&\n" +
+	"\x04list\x18\x02 \x03(\v2\x12.users.UserTagInfoR\x04list2\x97\n" +
+	"\n" +
 	"\x05Users\x12<\n" +
 	"\vGetUserList\x12\x15.users.GetUserListReq\x1a\x16.users.GetUserListResp\x120\n" +
 	"\aGetUser\x12\x11.users.GetUserReq\x1a\x12.users.GetUserResp\x129\n" +
@@ -2052,13 +2574,19 @@ const file_users_proto_rawDesc = "" +
 	"\fGetUserLevel\x12\x16.users.GetUserLevelReq\x1a\x17.users.GetUserLevelResp\x12H\n" +
 	"\x0fUpdateUserLevel\x12\x19.users.UpdateUserLevelReq\x1a\x1a.users.UpdateUserLevelResp\x12H\n" +
 	"\x0fDeleteUserLevel\x12\x19.users.DeleteUserLevelReq\x1a\x1a.users.DeleteUserLevelResp\x12K\n" +
-	"\x10GetUserLevelList\x12\x1a.users.GetUserLevelListReq\x1a\x1b.users.GetUserLevelListResp\x12H\n" +
+	"\x10GetUserLevelList\x12\x1a.users.GetUserLevelListReq\x1a\x1b.users.GetUserLevelListResp\x12=\n" +
+	"\x0eGetLevelsBatch\x12\x14.users.LevelBatchReq\x1a\x15.users.LevelBatchResp\x12H\n" +
 	"\x0fCreateUserGroup\x12\x19.users.CreateUserGroupReq\x1a\x1a.users.CreateUserGroupResp\x12?\n" +
 	"\fGetUserGroup\x12\x16.users.GetUserGroupReq\x1a\x17.users.GetUserGroupResp\x12H\n" +
 	"\x0fUpdateUserGroup\x12\x19.users.UpdateUserGroupReq\x1a\x1a.users.UpdateUserGroupResp\x12H\n" +
 	"\x0fDeleteUserGroup\x12\x19.users.DeleteUserGroupReq\x1a\x1a.users.DeleteUserGroupResp\x12K\n" +
-	"\x10GetUserGroupList\x12\x1a.users.GetUserGroupListReq\x1a\x1b.users.GetUserGroupListResp\x12=\n" +
-	"\x0eGetLevelsBatch\x12\x14.users.LevelBatchReq\x1a\x15.users.LevelBatchRespB\tZ\a./usersb\x06proto3"
+	"\x10GetUserGroupList\x12\x1a.users.GetUserGroupListReq\x1a\x1b.users.GetUserGroupListResp\x12B\n" +
+	"\rCreateUserTag\x12\x17.users.CreateUserTagReq\x1a\x18.users.CreateUserTagResp\x129\n" +
+	"\n" +
+	"GetUserTag\x12\x14.users.GetUserTagReq\x1a\x15.users.GetUserTagResp\x12B\n" +
+	"\rUpdateUserTag\x12\x17.users.UpdateUserTagReq\x1a\x18.users.UpdateUserTagResp\x12B\n" +
+	"\rDeleteUserTag\x12\x17.users.DeleteUserTagReq\x1a\x18.users.DeleteUserTagResp\x12E\n" +
+	"\x0eGetUserTagList\x12\x18.users.GetUserTagListReq\x1a\x19.users.GetUserTagListRespB\tZ\a./usersb\x06proto3"
 
 var (
 	file_users_proto_rawDescOnce sync.Once
@@ -2072,7 +2600,7 @@ func file_users_proto_rawDescGZIP() []byte {
 	return file_users_proto_rawDescData
 }
 
-var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_users_proto_goTypes = []any{
 	(*GetUserListReq)(nil),       // 0: users.GetUserListReq
 	(*UserItem)(nil),             // 1: users.UserItem
@@ -2082,69 +2610,88 @@ var file_users_proto_goTypes = []any{
 	(*GetUserResp)(nil),          // 5: users.GetUserResp
 	(*CreateUserReq)(nil),        // 6: users.CreateUserReq
 	(*CreateUserResp)(nil),       // 7: users.CreateUserResp
-	(*LevelBatchReq)(nil),        // 8: users.LevelBatchReq
-	(*LevelBatchResp)(nil),       // 9: users.LevelBatchResp
-	(*CreateUserLevelReq)(nil),   // 10: users.CreateUserLevelReq
-	(*CreateUserLevelResp)(nil),  // 11: users.CreateUserLevelResp
-	(*GetUserLevelReq)(nil),      // 12: users.GetUserLevelReq
-	(*GetUserLevelResp)(nil),     // 13: users.GetUserLevelResp
-	(*UpdateUserLevelReq)(nil),   // 14: users.UpdateUserLevelReq
-	(*UpdateUserLevelResp)(nil),  // 15: users.UpdateUserLevelResp
-	(*DeleteUserLevelReq)(nil),   // 16: users.DeleteUserLevelReq
-	(*DeleteUserLevelResp)(nil),  // 17: users.DeleteUserLevelResp
-	(*GetUserLevelListReq)(nil),  // 18: users.GetUserLevelListReq
-	(*GetUserLevelListResp)(nil), // 19: users.GetUserLevelListResp
-	(*GetLevelListReq)(nil),      // 20: users.GetLevelListReq
-	(*GetLevelListResp)(nil),     // 21: users.GetLevelListResp
-	(*UserGroupInfo)(nil),        // 22: users.UserGroupInfo
-	(*CreateUserGroupReq)(nil),   // 23: users.CreateUserGroupReq
-	(*CreateUserGroupResp)(nil),  // 24: users.CreateUserGroupResp
-	(*GetUserGroupReq)(nil),      // 25: users.GetUserGroupReq
-	(*GetUserGroupResp)(nil),     // 26: users.GetUserGroupResp
-	(*UpdateUserGroupReq)(nil),   // 27: users.UpdateUserGroupReq
-	(*UpdateUserGroupResp)(nil),  // 28: users.UpdateUserGroupResp
-	(*DeleteUserGroupReq)(nil),   // 29: users.DeleteUserGroupReq
-	(*DeleteUserGroupResp)(nil),  // 30: users.DeleteUserGroupResp
-	(*GetUserGroupListReq)(nil),  // 31: users.GetUserGroupListReq
-	(*GetUserGroupListResp)(nil), // 32: users.GetUserGroupListResp
+	(*CreateUserLevelReq)(nil),   // 8: users.CreateUserLevelReq
+	(*CreateUserLevelResp)(nil),  // 9: users.CreateUserLevelResp
+	(*GetUserLevelReq)(nil),      // 10: users.GetUserLevelReq
+	(*GetUserLevelResp)(nil),     // 11: users.GetUserLevelResp
+	(*UpdateUserLevelReq)(nil),   // 12: users.UpdateUserLevelReq
+	(*UpdateUserLevelResp)(nil),  // 13: users.UpdateUserLevelResp
+	(*DeleteUserLevelReq)(nil),   // 14: users.DeleteUserLevelReq
+	(*DeleteUserLevelResp)(nil),  // 15: users.DeleteUserLevelResp
+	(*GetUserLevelListReq)(nil),  // 16: users.GetUserLevelListReq
+	(*GetUserLevelListResp)(nil), // 17: users.GetUserLevelListResp
+	(*LevelBatchReq)(nil),        // 18: users.LevelBatchReq
+	(*LevelBatchResp)(nil),       // 19: users.LevelBatchResp
+	(*UserGroupInfo)(nil),        // 20: users.UserGroupInfo
+	(*CreateUserGroupReq)(nil),   // 21: users.CreateUserGroupReq
+	(*CreateUserGroupResp)(nil),  // 22: users.CreateUserGroupResp
+	(*GetUserGroupReq)(nil),      // 23: users.GetUserGroupReq
+	(*GetUserGroupResp)(nil),     // 24: users.GetUserGroupResp
+	(*UpdateUserGroupReq)(nil),   // 25: users.UpdateUserGroupReq
+	(*UpdateUserGroupResp)(nil),  // 26: users.UpdateUserGroupResp
+	(*DeleteUserGroupReq)(nil),   // 27: users.DeleteUserGroupReq
+	(*DeleteUserGroupResp)(nil),  // 28: users.DeleteUserGroupResp
+	(*GetUserGroupListReq)(nil),  // 29: users.GetUserGroupListReq
+	(*GetUserGroupListResp)(nil), // 30: users.GetUserGroupListResp
+	(*UserTagInfo)(nil),          // 31: users.UserTagInfo
+	(*CreateUserTagReq)(nil),     // 32: users.CreateUserTagReq
+	(*CreateUserTagResp)(nil),    // 33: users.CreateUserTagResp
+	(*GetUserTagReq)(nil),        // 34: users.GetUserTagReq
+	(*GetUserTagResp)(nil),       // 35: users.GetUserTagResp
+	(*UpdateUserTagReq)(nil),     // 36: users.UpdateUserTagReq
+	(*UpdateUserTagResp)(nil),    // 37: users.UpdateUserTagResp
+	(*DeleteUserTagReq)(nil),     // 38: users.DeleteUserTagReq
+	(*DeleteUserTagResp)(nil),    // 39: users.DeleteUserTagResp
+	(*GetUserTagListReq)(nil),    // 40: users.GetUserTagListReq
+	(*GetUserTagListResp)(nil),   // 41: users.GetUserTagListResp
 }
 var file_users_proto_depIdxs = []int32{
 	1,  // 0: users.GetUserListResp.list:type_name -> users.UserItem
 	4,  // 1: users.GetUserResp.user_level:type_name -> users.UserLevelInfo
-	4,  // 2: users.LevelBatchResp.list:type_name -> users.UserLevelInfo
-	4,  // 3: users.GetUserLevelListResp.list:type_name -> users.UserLevelInfo
-	4,  // 4: users.GetLevelListResp.list:type_name -> users.UserLevelInfo
-	22, // 5: users.GetUserGroupListResp.list:type_name -> users.UserGroupInfo
+	4,  // 2: users.GetUserLevelListResp.list:type_name -> users.UserLevelInfo
+	4,  // 3: users.LevelBatchResp.list:type_name -> users.UserLevelInfo
+	20, // 4: users.GetUserGroupListResp.list:type_name -> users.UserGroupInfo
+	31, // 5: users.GetUserTagListResp.list:type_name -> users.UserTagInfo
 	0,  // 6: users.Users.GetUserList:input_type -> users.GetUserListReq
 	3,  // 7: users.Users.GetUser:input_type -> users.GetUserReq
 	6,  // 8: users.Users.CreateUser:input_type -> users.CreateUserReq
-	10, // 9: users.Users.CreateUserLevel:input_type -> users.CreateUserLevelReq
-	12, // 10: users.Users.GetUserLevel:input_type -> users.GetUserLevelReq
-	14, // 11: users.Users.UpdateUserLevel:input_type -> users.UpdateUserLevelReq
-	16, // 12: users.Users.DeleteUserLevel:input_type -> users.DeleteUserLevelReq
-	18, // 13: users.Users.GetUserLevelList:input_type -> users.GetUserLevelListReq
-	23, // 14: users.Users.CreateUserGroup:input_type -> users.CreateUserGroupReq
-	25, // 15: users.Users.GetUserGroup:input_type -> users.GetUserGroupReq
-	27, // 16: users.Users.UpdateUserGroup:input_type -> users.UpdateUserGroupReq
-	29, // 17: users.Users.DeleteUserGroup:input_type -> users.DeleteUserGroupReq
-	31, // 18: users.Users.GetUserGroupList:input_type -> users.GetUserGroupListReq
-	8,  // 19: users.Users.GetLevelsBatch:input_type -> users.LevelBatchReq
-	2,  // 20: users.Users.GetUserList:output_type -> users.GetUserListResp
-	5,  // 21: users.Users.GetUser:output_type -> users.GetUserResp
-	7,  // 22: users.Users.CreateUser:output_type -> users.CreateUserResp
-	11, // 23: users.Users.CreateUserLevel:output_type -> users.CreateUserLevelResp
-	13, // 24: users.Users.GetUserLevel:output_type -> users.GetUserLevelResp
-	15, // 25: users.Users.UpdateUserLevel:output_type -> users.UpdateUserLevelResp
-	17, // 26: users.Users.DeleteUserLevel:output_type -> users.DeleteUserLevelResp
-	19, // 27: users.Users.GetUserLevelList:output_type -> users.GetUserLevelListResp
-	24, // 28: users.Users.CreateUserGroup:output_type -> users.CreateUserGroupResp
-	26, // 29: users.Users.GetUserGroup:output_type -> users.GetUserGroupResp
-	28, // 30: users.Users.UpdateUserGroup:output_type -> users.UpdateUserGroupResp
-	30, // 31: users.Users.DeleteUserGroup:output_type -> users.DeleteUserGroupResp
-	32, // 32: users.Users.GetUserGroupList:output_type -> users.GetUserGroupListResp
-	9,  // 33: users.Users.GetLevelsBatch:output_type -> users.LevelBatchResp
-	20, // [20:34] is the sub-list for method output_type
-	6,  // [6:20] is the sub-list for method input_type
+	8,  // 9: users.Users.CreateUserLevel:input_type -> users.CreateUserLevelReq
+	10, // 10: users.Users.GetUserLevel:input_type -> users.GetUserLevelReq
+	12, // 11: users.Users.UpdateUserLevel:input_type -> users.UpdateUserLevelReq
+	14, // 12: users.Users.DeleteUserLevel:input_type -> users.DeleteUserLevelReq
+	16, // 13: users.Users.GetUserLevelList:input_type -> users.GetUserLevelListReq
+	18, // 14: users.Users.GetLevelsBatch:input_type -> users.LevelBatchReq
+	21, // 15: users.Users.CreateUserGroup:input_type -> users.CreateUserGroupReq
+	23, // 16: users.Users.GetUserGroup:input_type -> users.GetUserGroupReq
+	25, // 17: users.Users.UpdateUserGroup:input_type -> users.UpdateUserGroupReq
+	27, // 18: users.Users.DeleteUserGroup:input_type -> users.DeleteUserGroupReq
+	29, // 19: users.Users.GetUserGroupList:input_type -> users.GetUserGroupListReq
+	32, // 20: users.Users.CreateUserTag:input_type -> users.CreateUserTagReq
+	34, // 21: users.Users.GetUserTag:input_type -> users.GetUserTagReq
+	36, // 22: users.Users.UpdateUserTag:input_type -> users.UpdateUserTagReq
+	38, // 23: users.Users.DeleteUserTag:input_type -> users.DeleteUserTagReq
+	40, // 24: users.Users.GetUserTagList:input_type -> users.GetUserTagListReq
+	2,  // 25: users.Users.GetUserList:output_type -> users.GetUserListResp
+	5,  // 26: users.Users.GetUser:output_type -> users.GetUserResp
+	7,  // 27: users.Users.CreateUser:output_type -> users.CreateUserResp
+	9,  // 28: users.Users.CreateUserLevel:output_type -> users.CreateUserLevelResp
+	11, // 29: users.Users.GetUserLevel:output_type -> users.GetUserLevelResp
+	13, // 30: users.Users.UpdateUserLevel:output_type -> users.UpdateUserLevelResp
+	15, // 31: users.Users.DeleteUserLevel:output_type -> users.DeleteUserLevelResp
+	17, // 32: users.Users.GetUserLevelList:output_type -> users.GetUserLevelListResp
+	19, // 33: users.Users.GetLevelsBatch:output_type -> users.LevelBatchResp
+	22, // 34: users.Users.CreateUserGroup:output_type -> users.CreateUserGroupResp
+	24, // 35: users.Users.GetUserGroup:output_type -> users.GetUserGroupResp
+	26, // 36: users.Users.UpdateUserGroup:output_type -> users.UpdateUserGroupResp
+	28, // 37: users.Users.DeleteUserGroup:output_type -> users.DeleteUserGroupResp
+	30, // 38: users.Users.GetUserGroupList:output_type -> users.GetUserGroupListResp
+	33, // 39: users.Users.CreateUserTag:output_type -> users.CreateUserTagResp
+	35, // 40: users.Users.GetUserTag:output_type -> users.GetUserTagResp
+	37, // 41: users.Users.UpdateUserTag:output_type -> users.UpdateUserTagResp
+	39, // 42: users.Users.DeleteUserTag:output_type -> users.DeleteUserTagResp
+	41, // 43: users.Users.GetUserTagList:output_type -> users.GetUserTagListResp
+	25, // [25:44] is the sub-list for method output_type
+	6,  // [6:25] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
 	6,  // [6:6] is the sub-list for extension extendee
 	0,  // [0:6] is the sub-list for field type_name
@@ -2161,7 +2708,7 @@ func file_users_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_users_proto_rawDesc), len(file_users_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

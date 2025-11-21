@@ -36,12 +36,18 @@ func (l *CreateUserLogic) CreateUser(in *users.CreateUserReq) (*users.CreateUser
         UpdatedAt: now,
     }
 
-    _, err := l.svcCtx.UserModel.Insert(l.ctx, u)
+    res, err := l.svcCtx.UserModel.Insert(l.ctx, u)
     if err != nil {
         return nil, err
     }
 
+    id, err := res.LastInsertId()
+    if err != nil {
+        return nil, err
+    }
+
+
     return &users.CreateUserResp{
-        Success: true,
+        Id: uint64(id),
     }, nil
 }

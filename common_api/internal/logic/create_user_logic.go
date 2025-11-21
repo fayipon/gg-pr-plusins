@@ -35,6 +35,7 @@ func (l *CreateUserLogic) CreateUser(req *types.CreateUserReq) (*types.CreateUse
     }
 
     return &types.CreateUserResp{
-        Success: rpcResp.Success,
+        Id: rpcResp.Id, 
     }, nil
+
 }

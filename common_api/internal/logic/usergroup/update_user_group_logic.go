@@ -30,7 +30,6 @@ func (l *UpdateUserGroupLogic) UpdateUserGroup(req *types.UpdateUserGroupReq) (*
         Id:          req.Id,
         Name:        req.Name,
         DisplayName: req.DisplayName,
-        Setting:     req.Setting,
     })
 
     if err != nil {

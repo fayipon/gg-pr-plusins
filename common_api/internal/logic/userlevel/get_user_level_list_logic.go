@@ -10,39 +10,41 @@ import (
 )
 
 type GetUserLevelListLogic struct {
+    logx.Logger
     ctx    context.Context
     svcCtx *svc.ServiceContext
-    logx.Logger
 }
 
 func NewGetUserLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLevelListLogic {
     return &GetUserLevelListLogic{
+        Logger: logx.WithContext(ctx),
         ctx:    ctx,
         svcCtx: svcCtx,
-        Logger: logx.WithContext(ctx),
     }
 }
 
 func (l *GetUserLevelListLogic) GetUserLevelList(req *types.GetUserLevelListReq) (*types.GetUserLevelListResp, error) {
 
-    rpcResp, err := l.svcCtx.UsersRpc.GetUserLevelList(l.ctx, &users.GetUserLevelListReq{
+    rpcReq := &users.GetUserLevelListReq{
         Page:     req.Page,
         PageSize: req.PageSize,
-    })
+    }
+
+    rpcResp, err := l.svcCtx.UsersRpc.GetUserLevelList(l.ctx, rpcReq)
     if err != nil {
         return nil, err
     }
 
     resp := &types.GetUserLevelListResp{
         Total: rpcResp.Total,
-        List:  []types.UserLevelListItem{},
+        List:  make([]*types.UserLevelListItem, 0),
     }
 
-    for _, item := range rpcResp.List {
-        resp.List = append(resp.List, types.UserLevelListItem{
-            Id:          item.Id,
-            Name:        item.Name,
-            DisplayName: item.DisplayName,
+    for _, g := range rpcResp.List {
+        resp.List = append(resp.List, &types.UserLevelListItem{
+            Id:          g.Id,
+            Name:        g.Name,
+            DisplayName: g.DisplayName,
         })
     }
 
