@@ -84,3 +84,128 @@ type UserListResp struct {
     Total int64          `json:"total"`
     List  []UserListItem `json:"list"`
 }
+
+
+// ----------------------
+// User Level
+// ----------------------
+type CreateUserLevelReq struct {
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+    Setting     string `json:"setting"`
+}
+
+type CreateUserLevelResp struct {
+    Id uint64 `json:"id"`
+}
+
+type GetUserLevelReq struct {
+    Id uint64 `json:"id" form:"id"`
+}
+
+type GetUserLevelResp struct {
+    Id          uint64 `json:"id"`
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+    Setting     string `json:"setting"`
+    CreatedAt   int64  `json:"created_at"`
+    UpdatedAt   int64  `json:"updated_at"`
+}
+
+type UpdateUserLevelReq struct {
+    Id          uint64 `json:"id"`
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+    Setting     string `json:"setting"`
+}
+
+type UpdateUserLevelResp struct {
+    Success bool `json:"success"`
+}
+
+type DeleteUserLevelReq struct {
+    Id uint64 `json:"id"`
+}
+
+type DeleteUserLevelResp struct {
+    Success bool `json:"success"`
+}
+
+type GetUserLevelListReq struct {
+    Page     int32 `json:"page"`
+    PageSize int32 `json:"page_size"`
+}
+
+type UserLevelListItem struct {
+    Id          uint64 `json:"id"`
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+}
+
+type GetUserLevelListResp struct {
+    Total int64               `json:"total"`
+    List  []UserLevelListItem `json:"list"`
+}
+
+//
+// ----------------------
+// User Group
+// ----------------------
+
+type CreateUserGroupReq struct {
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+    Setting     string `json:"setting"`
+}
+
+type CreateUserGroupResp struct {
+    Id uint64 `json:"id"`
+}
+
+type GetUserGroupReq struct {
+    Id uint64 `json:"id" form:"id"`
+}
+
+type GetUserGroupResp struct {
+    Id          uint64 `json:"id"`
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+    Setting     string `json:"setting"`
+    CreatedAt   int64  `json:"created_at"`
+    UpdatedAt   int64  `json:"updated_at"`
+}
+
+type UpdateUserGroupReq struct {
+    Id          uint64 `json:"id"`
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+    Setting     string `json:"setting"`
+}
+
+type UpdateUserGroupResp struct {
+    Success bool `json:"success"`
+}
+
+type DeleteUserGroupReq struct {
+    Id uint64 `json:"id" form:"id"`
+}
+
+type DeleteUserGroupResp struct {
+    Success bool `json:"success"`
+}
+
+type UserGroupListItem struct {
+    Id          uint64 `json:"id"`
+    Name        string `json:"name"`
+    DisplayName string `json:"display_name"`
+}
+
+type GetUserGroupListReq struct {
+    Page     int32 `json:"page"`
+    PageSize int32 `json:"page_size"`
+}
+
+type GetUserGroupListResp struct {
+    Total int64               `json:"total"`
+    List  []UserGroupListItem `json:"list"`
+}

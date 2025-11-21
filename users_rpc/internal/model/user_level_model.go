@@ -39,6 +39,9 @@ type (
         Update(ctx context.Context, data *UserLevels) error
         Delete(ctx context.Context, id uint64) error
         FindByIds(ctx context.Context, ids []uint64) ([]*UserLevels, error)
+        
+        List(ctx context.Context, page, pageSize int32) ([]*UserLevels, error)
+        Count(ctx context.Context) (int64, error)
     }
 
     defaultUserLevelsModel struct {
@@ -146,3 +149,33 @@ func (m *defaultUserLevelsModel) FindByIds(ctx context.Context, ids []uint64) ([
 
     return resp, nil
 }
+
+func (m *defaultUserLevelsModel) List(ctx context.Context, offset, limit int32) ([]*UserLevels, error) {
+    query := fmt.Sprintf(
+        "SELECT %s FROM %s ORDER BY id DESC LIMIT ?, ?",
+        userLevelsRows,
+        m.table,
+    )
+
+    var list []*UserLevels
+    err := m.QueryRowsNoCacheCtx(ctx, &list, query, offset, limit)
+    if err != nil {
+        return nil, err
+    }
+
+    return list, nil
+}
+
+
+func (m *defaultUserLevelsModel) Count(ctx context.Context) (int64, error) {
+    query := fmt.Sprintf("SELECT COUNT(*) FROM %s", m.table)
+
+    var total int64
+    err := m.QueryRowNoCacheCtx(ctx, &total, query)
+    if err != nil {
+        return 0, err
+    }
+
+    return total, nil
+}
+

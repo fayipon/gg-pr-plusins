@@ -27,11 +27,6 @@ const (
 	Users_UpdateUserLevel_FullMethodName  = "/users.Users/UpdateUserLevel"
 	Users_DeleteUserLevel_FullMethodName  = "/users.Users/DeleteUserLevel"
 	Users_GetUserLevelList_FullMethodName = "/users.Users/GetUserLevelList"
-	Users_CreateUserGroup_FullMethodName  = "/users.Users/CreateUserGroup"
-	Users_GetUserGroup_FullMethodName     = "/users.Users/GetUserGroup"
-	Users_UpdateUserGroup_FullMethodName  = "/users.Users/UpdateUserGroup"
-	Users_DeleteUserGroup_FullMethodName  = "/users.Users/DeleteUserGroup"
-	Users_GetUserGroupList_FullMethodName = "/users.Users/GetUserGroupList"
 	Users_GetLevelsBatch_FullMethodName   = "/users.Users/GetLevelsBatch"
 )
 
@@ -47,11 +42,6 @@ type UsersClient interface {
 	UpdateUserLevel(ctx context.Context, in *UpdateUserLevelReq, opts ...grpc.CallOption) (*UpdateUserLevelResp, error)
 	DeleteUserLevel(ctx context.Context, in *DeleteUserLevelReq, opts ...grpc.CallOption) (*DeleteUserLevelResp, error)
 	GetUserLevelList(ctx context.Context, in *GetUserLevelListReq, opts ...grpc.CallOption) (*GetUserLevelListResp, error)
-	CreateUserGroup(ctx context.Context, in *CreateUserGroupReq, opts ...grpc.CallOption) (*CreateUserGroupResp, error)
-	GetUserGroup(ctx context.Context, in *GetUserGroupReq, opts ...grpc.CallOption) (*GetUserGroupResp, error)
-	UpdateUserGroup(ctx context.Context, in *UpdateUserGroupReq, opts ...grpc.CallOption) (*UpdateUserGroupResp, error)
-	DeleteUserGroup(ctx context.Context, in *DeleteUserGroupReq, opts ...grpc.CallOption) (*DeleteUserGroupResp, error)
-	GetUserGroupList(ctx context.Context, in *GetUserGroupListReq, opts ...grpc.CallOption) (*GetUserGroupListResp, error)
 	GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
 }
 
@@ -143,56 +133,6 @@ func (c *usersClient) GetUserLevelList(ctx context.Context, in *GetUserLevelList
 	return out, nil
 }
 
-func (c *usersClient) CreateUserGroup(ctx context.Context, in *CreateUserGroupReq, opts ...grpc.CallOption) (*CreateUserGroupResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateUserGroupResp)
-	err := c.cc.Invoke(ctx, Users_CreateUserGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *usersClient) GetUserGroup(ctx context.Context, in *GetUserGroupReq, opts ...grpc.CallOption) (*GetUserGroupResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserGroupResp)
-	err := c.cc.Invoke(ctx, Users_GetUserGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *usersClient) UpdateUserGroup(ctx context.Context, in *UpdateUserGroupReq, opts ...grpc.CallOption) (*UpdateUserGroupResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateUserGroupResp)
-	err := c.cc.Invoke(ctx, Users_UpdateUserGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *usersClient) DeleteUserGroup(ctx context.Context, in *DeleteUserGroupReq, opts ...grpc.CallOption) (*DeleteUserGroupResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteUserGroupResp)
-	err := c.cc.Invoke(ctx, Users_DeleteUserGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *usersClient) GetUserGroupList(ctx context.Context, in *GetUserGroupListReq, opts ...grpc.CallOption) (*GetUserGroupListResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserGroupListResp)
-	err := c.cc.Invoke(ctx, Users_GetUserGroupList_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *usersClient) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LevelBatchResp)
@@ -215,11 +155,6 @@ type UsersServer interface {
 	UpdateUserLevel(context.Context, *UpdateUserLevelReq) (*UpdateUserLevelResp, error)
 	DeleteUserLevel(context.Context, *DeleteUserLevelReq) (*DeleteUserLevelResp, error)
 	GetUserLevelList(context.Context, *GetUserLevelListReq) (*GetUserLevelListResp, error)
-	CreateUserGroup(context.Context, *CreateUserGroupReq) (*CreateUserGroupResp, error)
-	GetUserGroup(context.Context, *GetUserGroupReq) (*GetUserGroupResp, error)
-	UpdateUserGroup(context.Context, *UpdateUserGroupReq) (*UpdateUserGroupResp, error)
-	DeleteUserGroup(context.Context, *DeleteUserGroupReq) (*DeleteUserGroupResp, error)
-	GetUserGroupList(context.Context, *GetUserGroupListReq) (*GetUserGroupListResp, error)
 	GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error)
 	mustEmbedUnimplementedUsersServer()
 }
@@ -254,21 +189,6 @@ func (UnimplementedUsersServer) DeleteUserLevel(context.Context, *DeleteUserLeve
 }
 func (UnimplementedUsersServer) GetUserLevelList(context.Context, *GetUserLevelListReq) (*GetUserLevelListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserLevelList not implemented")
-}
-func (UnimplementedUsersServer) CreateUserGroup(context.Context, *CreateUserGroupReq) (*CreateUserGroupResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUserGroup not implemented")
-}
-func (UnimplementedUsersServer) GetUserGroup(context.Context, *GetUserGroupReq) (*GetUserGroupResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroup not implemented")
-}
-func (UnimplementedUsersServer) UpdateUserGroup(context.Context, *UpdateUserGroupReq) (*UpdateUserGroupResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserGroup not implemented")
-}
-func (UnimplementedUsersServer) DeleteUserGroup(context.Context, *DeleteUserGroupReq) (*DeleteUserGroupResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserGroup not implemented")
-}
-func (UnimplementedUsersServer) GetUserGroupList(context.Context, *GetUserGroupListReq) (*GetUserGroupListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroupList not implemented")
 }
 func (UnimplementedUsersServer) GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLevelsBatch not implemented")
@@ -438,96 +358,6 @@ func _Users_GetUserLevelList_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Users_CreateUserGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUserGroupReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UsersServer).CreateUserGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Users_CreateUserGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersServer).CreateUserGroup(ctx, req.(*CreateUserGroupReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Users_GetUserGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserGroupReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UsersServer).GetUserGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Users_GetUserGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersServer).GetUserGroup(ctx, req.(*GetUserGroupReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Users_UpdateUserGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateUserGroupReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UsersServer).UpdateUserGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Users_UpdateUserGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersServer).UpdateUserGroup(ctx, req.(*UpdateUserGroupReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Users_DeleteUserGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteUserGroupReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UsersServer).DeleteUserGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Users_DeleteUserGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersServer).DeleteUserGroup(ctx, req.(*DeleteUserGroupReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Users_GetUserGroupList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserGroupListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UsersServer).GetUserGroupList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Users_GetUserGroupList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersServer).GetUserGroupList(ctx, req.(*GetUserGroupListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Users_GetLevelsBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LevelBatchReq)
 	if err := dec(in); err != nil {
@@ -584,26 +414,6 @@ var Users_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserLevelList",
 			Handler:    _Users_GetUserLevelList_Handler,
-		},
-		{
-			MethodName: "CreateUserGroup",
-			Handler:    _Users_CreateUserGroup_Handler,
-		},
-		{
-			MethodName: "GetUserGroup",
-			Handler:    _Users_GetUserGroup_Handler,
-		},
-		{
-			MethodName: "UpdateUserGroup",
-			Handler:    _Users_UpdateUserGroup_Handler,
-		},
-		{
-			MethodName: "DeleteUserGroup",
-			Handler:    _Users_DeleteUserGroup_Handler,
-		},
-		{
-			MethodName: "GetUserGroupList",
-			Handler:    _Users_GetUserGroupList_Handler,
 		},
 		{
 			MethodName: "GetLevelsBatch",
