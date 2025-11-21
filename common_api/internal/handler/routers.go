@@ -8,7 +8,7 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, ctx *svc.ServiceContext) {
-	
+
 	server.AddRoute(rest.Route{
 		Method:  http.MethodGet,
 		Path:    "/user",

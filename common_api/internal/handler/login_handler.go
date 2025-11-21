@@ -3,12 +3,11 @@ package handler
 import (
     "net/http"
 
-    "common_api/internal/errorx"
+    "common_api/internal/utils/errorx"
     "common_api/internal/logic"
     "common_api/internal/response"
     "common_api/internal/svc"
     "common_api/internal/types"
-
     "github.com/zeromicro/go-zero/rest/httpx"
 )
 
@@ -18,8 +17,7 @@ func LoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
         // 解析请求
         var req types.LoginReq
         if err := httpx.Parse(r, &req); err != nil {
-            response.JsonError(w, r,
-                errorx.NewCodeError(r.Context(), errorx.ErrInvalidParams, "en"))
+            response.JsonError(w, r, errorx.NewCodeError(r.Context(), errorx.ErrInvalidParams, "en"))
             return
         }
 
@@ -33,5 +31,7 @@ func LoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
         // 成功响应
         response.OkJson(w, r, resp)
+
+        /* 這邊抛错有包装过，后续以这为准 */
     }
 }

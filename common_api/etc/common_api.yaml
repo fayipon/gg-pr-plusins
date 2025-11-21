@@ -2,6 +2,10 @@ Name: common.api
 Host: 0.0.0.0
 Port: 8080
 
+Log:
+  Level: debug
+  Encoding: plain
+
 JwtAuth:
   AccessSecret: "yourSecretKey"
   AccessExpire: 86400

@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Users_GetUserList_FullMethodName = "/users.Users/GetUserList"
-	Users_GetUser_FullMethodName     = "/users.Users/GetUser"
-	Users_CreateUser_FullMethodName  = "/users.Users/CreateUser"
+	Users_GetUserList_FullMethodName    = "/users.Users/GetUserList"
+	Users_GetUser_FullMethodName        = "/users.Users/GetUser"
+	Users_CreateUser_FullMethodName     = "/users.Users/CreateUser"
+	Users_GetLevelsBatch_FullMethodName = "/users.Users/GetLevelsBatch"
 )
 
 // UsersClient is the client API for Users service.
@@ -31,6 +32,7 @@ type UsersClient interface {
 	GetUserList(ctx context.Context, in *GetUserListReq, opts ...grpc.CallOption) (*GetUserListResp, error)
 	GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 	CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserResp, error)
+	GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
 }
 
 type usersClient struct {
@@ -71,6 +73,16 @@ func (c *usersClient) CreateUser(ctx context.Context, in *CreateUserReq, opts ..
 	return out, nil
 }
 
+func (c *usersClient) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LevelBatchResp)
+	err := c.cc.Invoke(ctx, Users_GetLevelsBatch_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsersServer is the server API for Users service.
 // All implementations must embed UnimplementedUsersServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type UsersServer interface {
 	GetUserList(context.Context, *GetUserListReq) (*GetUserListResp, error)
 	GetUser(context.Context, *GetUserReq) (*GetUserResp, error)
 	CreateUser(context.Context, *CreateUserReq) (*CreateUserResp, error)
+	GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error)
 	mustEmbedUnimplementedUsersServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedUsersServer) GetUser(context.Context, *GetUserReq) (*GetUserR
 }
 func (UnimplementedUsersServer) CreateUser(context.Context, *CreateUserReq) (*CreateUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedUsersServer) GetLevelsBatch(context.Context, *LevelBatchReq) (*LevelBatchResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLevelsBatch not implemented")
 }
 func (UnimplementedUsersServer) mustEmbedUnimplementedUsersServer() {}
 func (UnimplementedUsersServer) testEmbeddedByValue()               {}
@@ -172,6 +188,24 @@ func _Users_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Users_GetLevelsBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LevelBatchReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GetLevelsBatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GetLevelsBatch_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GetLevelsBatch(ctx, req.(*LevelBatchReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Users_ServiceDesc is the grpc.ServiceDesc for Users service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var Users_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateUser",
 			Handler:    _Users_CreateUser_Handler,
+		},
+		{
+			MethodName: "GetLevelsBatch",
+			Handler:    _Users_GetLevelsBatch_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

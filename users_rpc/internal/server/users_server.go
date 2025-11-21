@@ -31,3 +31,8 @@ func (s *UsersServer) CreateUser(ctx context.Context, req *users.CreateUserReq) 
 	l := logic.NewCreateUserLogic(ctx, s.svcCtx)
 	return l.CreateUser(req)
 }
+
+func (s *UsersServer) GetLevelsBatch(ctx context.Context, in *users.LevelBatchReq) (*users.LevelBatchResp, error) {
+    l := logic.NewGetLevelsBatchLogic(ctx, s.svcCtx)
+    return l.GetLevelsBatch(in)
+}

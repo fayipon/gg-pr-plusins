@@ -1,103 +1,112 @@
 package logic
 
 import (
-	"context"
+    "context"
 
-	"common_api/internal/svc"
-	"common_api/internal/types"
-	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
-	"github.com/zeromicro/go-zero/core/logx"
+    "common_api/internal/svc"
+    "common_api/internal/types"
+    "github.com/fayipon/gg-pr-plusins/users_rpc/users"
+
+    "github.com/zeromicro/go-zero/core/logx"
 )
 
 type GetUserListLogic struct {
-	logx.Logger
-	ctx    context.Context
-	svcCtx *svc.ServiceContext
+    ctx    context.Context
+    svcCtx *svc.ServiceContext
+    logx.Logger
 }
 
 func NewGetUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserListLogic {
-	return &GetUserListLogic{
-		Logger: logx.WithContext(ctx),
-		ctx:    ctx,
-		svcCtx: svcCtx,
-	}
+    return &GetUserListLogic{
+        ctx:    ctx,
+        svcCtx: svcCtx,
+        Logger: logx.WithContext(ctx),
+    }
 }
 
 func (l *GetUserListLogic) GetUserList(req *types.UserListReq) (*types.UserListResp, error) {
 
-	// ------------------------------------------------------
-	// Step 1: 准备 RPC 查询参数
-	// ------------------------------------------------------
-	rpcReq := &users.GetUserListReq{
-		Page:      int32(req.Page),
-		PageSize:  int32(req.PageSize),
-		Keyword:   req.Keyword,
-		SortField: req.SortField,
-		SortOrder: req.SortOrder,
-	}
+    rpcReq := &users.GetUserListReq{
+        Page:     int32(req.Page),
+        PageSize: int32(req.PageSize),
+        Keyword:  req.Keyword,
+    }
 
-	// 转换 Filter 到 RPC 所需格式
-	if len(req.Filters) > 0 {
-		rpcReq.Filters = make([]*users.FilterItem, 0, len(req.Filters))
-		for _, f := range req.Filters {
-			rpcReq.Filters = append(rpcReq.Filters, &users.FilterItem{
-				Field: f.Field,
-				Op:    f.Op,
-				Value: toRpcValue(f.Value),
-			})
-		}
-	}
+    rpcResp, err := l.svcCtx.UsersRpc.GetUserList(l.ctx, rpcReq)
+    if err != nil {
+        logx.Errorf("UsersRpc.GetUserList error: %+v", err)
+        return nil, err
+    }
 
-	// ------------------------------------------------------
-	// Step 2: 调用 RPC
-	// ------------------------------------------------------
-	rpcResp, err := l.svcCtx.UsersRpc.GetUserList(l.ctx, rpcReq)
-	if err != nil {
-		return nil, err
-	}
+    // 缓存 user 列表
+    list := make([]types.UserListItem, 0, len(rpcResp.List))
 
-	// ------------------------------------------------------
-	// Step 3: 组装 API Response
-	// ------------------------------------------------------
-	resp := &types.UserListResp{
-		Total: rpcResp.Total,
-		List:  make([]types.UserListItem, 0, len(rpcResp.List)),
-	}
+    // 用来收集所有 level_id
+    levelIds := make([]uint64, 0, len(rpcResp.List))
 
-	for _, item := range rpcResp.List {
-		resp.List = append(resp.List, types.UserListItem{
-			Id:      item.Id,
-			Account: item.Account,
-			Status:    item.Status,
-			LevelId:   item.LevelId,
-			CreatedAt: item.CreatedAt,
-		})
-	}
+    // 先复制 user list
+    for _, item := range rpcResp.List {
 
-	return resp, nil
-}
+        list = append(list, types.UserListItem{
+            Id:        item.Id,
+            Account:   item.Account,
+            Status:    item.Status,
+            LevelId:   item.LevelId,
+            CreatedAt: item.CreatedAt,
+        })
 
-// Value 转换助手（interface{} → RPC 可接受类型）
-func toRpcValue(v interface{}) *users.Value {
-	switch val := v.(type) {
+        if item.LevelId > 0 {
+            levelIds = append(levelIds, item.LevelId)
+        }
+    }
 
-	case string:
-		return &users.Value{Value: &users.Value_StrVal{StrVal: val}}
+    //
+    // 去重 level_id
+    //
+    uniq := make(map[uint64]struct{}, len(levelIds))
+    finalLevelIDs := make([]uint64, 0, len(levelIds))
+    for _, id := range levelIds {
+        if _, exists := uniq[id]; !exists {
+            uniq[id] = struct{}{}
+            finalLevelIDs = append(finalLevelIDs, id)
+        }
+    }
 
-	case float64:
-		return &users.Value{Value: &users.Value_NumVal{NumVal: val}}
+    //
+    // 批次从 users_rpc 取等级资料
+    //
+    levelMap := make(map[uint64]*users.UserLevelInfo)
 
-	case int:
-		return &users.Value{Value: &users.Value_NumVal{NumVal: float64(val)}}
+    if len(finalLevelIDs) > 0 {
+        lvResp, err := l.svcCtx.UsersRpc.GetLevelsBatch(
+            l.ctx,
+            &users.LevelBatchReq{Ids: finalLevelIDs},
+        )
+        if err != nil {
+            logx.Errorf("UsersRpc.GetLevelsBatch error: %+v", err)
+        } else {
+            for _, lv := range lvResp.List {
+                levelMap[lv.Id] = lv
+            }
+        }
+    }
 
-	case []interface{}:
-		arr := make([]string, 0)
-		for _, x := range val {
-			arr = append(arr, x.(string))
-		}
-		return &users.Value{Value: &users.Value_StrArray{StrArray: &users.StringArray{Values: arr}}}
+    //
+    // 把等级补进 UserListItem
+    //
+    for i := range list {
+        if info, ok := levelMap[list[i].LevelId]; ok && info != nil {
+            list[i].UserLevel = &types.UserLevelInfo{
+                Id:          info.Id,
+                Name:        info.Name,
+                DisplayName: info.DisplayName,
+            }
+        }
+    }
 
-	default:
-		return &users.Value{Value: &users.Value_StrVal{StrVal: ""}}
-	}
+    // 返回
+    return &types.UserListResp{
+        Total: rpcResp.Total,
+        List:  list,
+    }, nil
 }

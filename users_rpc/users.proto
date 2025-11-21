@@ -3,43 +3,20 @@ syntax = "proto3";
 package users;
 option go_package = "./users";
 
-message Value {
-  oneof value {
-    string strVal = 1;
-    double numVal = 2;
-    StringArray strArray = 3;
-  }
-}
-
-message StringArray {
-  repeated string values = 1;
-}
-
-message FilterItem {
-  string field = 1;
-  string op = 2;
-  Value value = 3;
-}
-
 message GetUserListReq {
   int32 page = 1;
   int32 page_size = 2;
   string keyword = 3;
-
-  string sort_field = 4;
-  string sort_order = 5;
-
-  repeated FilterItem filters = 6;
 }
 
 message UserItem {
-    uint64 id = 1;
-    string account = 2;
-    int64 status = 3;
-    int64 level_id = 4;
-    uint64 parent_id = 5;
-    int64 group_id = 6;
-    int64 created_at = 7;
+  uint64 id = 1;
+  string account = 2;
+  int64 status = 3;
+  uint64 level_id = 4;
+  uint64 parent_id = 5;
+  uint64 group_id = 6;
+  int64 created_at = 7;
 }
 
 message GetUserListResp {
@@ -51,12 +28,28 @@ message GetUserReq {
   uint64 id = 1;
 }
 
+message UserLevelInfo {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+}
+
 message GetUserResp {
   uint64 id = 1;
   string account = 2;
-  int64 status = 3;
-  int64 level_id = 4;
-  int64 created_at = 5;
+  uint64 level_id = 3;
+  uint64 group_id = 4;
+  int64 email_verified_at = 5;
+  int64 mobile_verified_at = 6;
+  int64 kyc_verified_at = 7;
+  uint64 parent_id = 8;
+  string parent_tree = 9;
+  int64 depth = 10;
+  uint64 referer_id = 11;
+  int64 status = 12;
+  int64 created_at = 13;
+  int64 updated_at = 14;
+  UserLevelInfo user_level = 15;
 }
 
 message CreateUserReq {
@@ -68,8 +61,18 @@ message CreateUserResp {
   bool success = 1;
 }
 
+message LevelBatchReq {
+  repeated uint64 ids = 1;
+}
+
+message LevelBatchResp {
+  repeated UserLevelInfo list = 1;
+}
+
 service Users {
   rpc GetUserList(GetUserListReq) returns (GetUserListResp);
   rpc GetUser(GetUserReq) returns (GetUserResp);
   rpc CreateUser(CreateUserReq) returns (CreateUserResp);
+  rpc GetLevelsBatch(LevelBatchReq) returns (LevelBatchResp);
 }
+

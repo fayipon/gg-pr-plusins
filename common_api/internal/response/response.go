@@ -3,7 +3,7 @@ package response
 import (
     "net/http"
 
-    "common_api/internal/errorx"
+    "common_api/internal/utils/errorx"
     "github.com/zeromicro/go-zero/rest/httpx"
 )
 

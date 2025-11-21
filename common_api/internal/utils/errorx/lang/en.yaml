@@ -1,0 +1,12 @@
+error:
+  "10001": "Account not found"
+  "10002": "Password wrong"
+  "10003": "PDDDDDDDDD"
+
+  "20001": "Token missing"
+  "20002": "Token invalid"
+  "20003": "Token expired"
+
+  "40001": "Invalid parameters"
+
+  "50001": "Internal server error"

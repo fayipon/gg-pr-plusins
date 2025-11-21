@@ -4,7 +4,7 @@ import (
     "context"
     "time"
 
-    "common_api/internal/errorx"
+    "common_api/internal/utils/errorx"
     "common_api/internal/svc"
     "common_api/internal/types"
 

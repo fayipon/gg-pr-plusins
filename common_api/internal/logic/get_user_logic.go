@@ -2,12 +2,12 @@ package logic
 
 import (
     "context"
-    "common_api/internal/errorx"
+
     "common_api/internal/svc"
     "common_api/internal/types"
+
     "github.com/fayipon/gg-pr-plusins/users_rpc/users"
     "github.com/zeromicro/go-zero/core/logx"
-    "google.golang.org/grpc/status"
 )
 
 type GetUserLogic struct {
@@ -24,41 +24,42 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLo
     }
 }
 
-func (l *GetUserLogic) GetUser(req *types.GetUserReq) (*types.GetUserResp, error) {
+func (l *GetUserLogic) GetUser(in *types.GetUserReq) (*types.GetUserResp, error) {
 
-    // 语言
-    lang := "en"
-    if v := l.ctx.Value("Lang"); v != nil {
-        lang = v.(string)
-    }
-
-    // 调 RPC
     rpcResp, err := l.svcCtx.UsersRpc.GetUser(l.ctx, &users.GetUserReq{
-        Id: req.Id,
+        Id: in.Id,
     })
-
-    // gRPC 错误处理
     if err != nil {
-        st, ok := status.FromError(err)
+        logx.Errorf("[GetUser] RPC error: %+v", err)
+        return nil, err
 
-        if ok && st.Code().String() == "NotFound" {
-            return nil, errorx.NewCodeError(l.ctx, errorx.ErrUserNotFound, lang)
+    }
+
+    resp := &types.GetUserResp{
+        Id:              rpcResp.Id,
+        Account:         rpcResp.Account,
+        LevelId:         rpcResp.LevelId,
+        GroupId:         rpcResp.GroupId,
+        EmailVerifiedAt: rpcResp.EmailVerifiedAt,
+        MobileVerifiedAt: rpcResp.MobileVerifiedAt,
+        KycVerifiedAt:   rpcResp.KycVerifiedAt,
+        ParentId:        rpcResp.ParentId,
+        ParentTree:      rpcResp.ParentTree,
+        Depth:           rpcResp.Depth,
+        RefererId:       rpcResp.RefererId,
+        Status:          rpcResp.Status,
+        CreatedAt:       rpcResp.CreatedAt,
+        UpdatedAt:       rpcResp.UpdatedAt,
+    }
+
+    // user level optional
+    if rpcResp.UserLevel != nil {
+        resp.UserLevel = &types.UserLevelInfo{
+            Id:          rpcResp.UserLevel.Id,
+            Name:        rpcResp.UserLevel.Name,
+            DisplayName: rpcResp.UserLevel.DisplayName,
         }
-
-        return nil, errorx.NewCodeError(l.ctx, errorx.ErrInternal, lang)
     }
 
-    // 防止 nil 指针
-    if rpcResp == nil {
-        return nil, errorx.NewCodeError(l.ctx, errorx.ErrUserNotFound, lang)
-    }
-
-    // 返回
-    return &types.GetUserResp{
-        Id:        rpcResp.Id,
-        Account:   rpcResp.Account,
-        Status:    rpcResp.Status,
-        LevelId:   rpcResp.LevelId,
-        CreatedAt: rpcResp.CreatedAt,
-    }, nil
+    return resp, nil
 }

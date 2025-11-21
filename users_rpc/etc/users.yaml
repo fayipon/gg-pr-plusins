@@ -1,4 +1,14 @@
 Name: users.rpc
 ListenOn: 127.0.0.1:8081
 
-DataSource: "aqua:123456@tcp(127.0.0.1:3306)/aqua?charset=utf8mb4&parseTime=true"
+Log:
+  Level: debug
+  Encoding: plain
+
+DB:
+  DataSource: aqua:123456@tcp(127.0.0.1:3306)/aqua?charset=utf8mb4&parseTime=true
+
+Cache:
+  - Host: 127.0.0.1:6379
+    Pass: ""
+    Type: node

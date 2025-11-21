@@ -4,75 +4,71 @@ import (
     "context"
     "database/sql"
 
-    sq "github.com/Masterminds/squirrel"
     "github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
     "github.com/fayipon/gg-pr-plusins/users_rpc/users"
     "github.com/zeromicro/go-zero/core/logx"
 )
 
 type GetUserLogic struct {
-    logx.Logger
     ctx    context.Context
     svcCtx *svc.ServiceContext
+    logx.Logger
 }
 
 func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLogic {
     return &GetUserLogic{
-        Logger: logx.WithContext(ctx),
         ctx:    ctx,
         svcCtx: svcCtx,
+        Logger: logx.WithContext(ctx),
     }
 }
 
-func (l *GetUserLogic) GetUser(req *users.GetUserReq) (*users.GetUserResp, error) {
+func (l *GetUserLogic) GetUser(in *users.GetUserReq) (*users.GetUserResp, error) {
 
-    db := l.svcCtx.DB
-
-    // Build SQL
-    qb := sq.Select(
-        "id",
-        "account",
-        "status",
-        "level_id",
-        "created_at",
-    ).From("users").
-        Where(sq.Eq{"id": req.Id})
-
-    sqlStr, args, _ := qb.ToSql()
-
-    // 结构体 mapping
-    var row struct {
-        Id        uint64       `db:"id"`
-        Account   string       `db:"account"`
-        Status    int64        `db:"status"`
-        LevelId   int64        `db:"level_id"`
-        CreatedAt sql.NullTime `db:"created_at"`
-    }
-
-    // go-zero 推荐方式：QueryRowCtx + Scan
-    err := db.QueryRowCtx(l.ctx, func(scan func(dest ...any) error) error {
-        return scan(
-            &row.Id,
-            &row.Account,
-            &row.Status,
-            &row.LevelId,
-            &row.CreatedAt,
-        )
-    }, sqlStr, args...)
-
+    u, err := l.svcCtx.UserModel.FindOne(l.ctx, in.Id)
     if err != nil {
-        // 没有找到
-        if err == sql.ErrNoRows {
-            return nil, err
-        }
+        logx.Errorf("GetUser FindOne Error: id=%d, err=%+v", in.Id, err)
         return nil, err
     }
 
-    return &users.GetUserResp{
-        Id:        row.Id,
-        Account:   row.Account,
-        Status:    row.Status,
-        LevelId:   row.LevelId,
-        CreatedAt: row.CreatedAt.Time.Unix(),
-    }, nil
+    resp := &users.GetUserResp{
+        Id:        u.Id,
+        Account:   u.Account,
+        LevelId:   uint64(u.LevelId),
+        GroupId:   uint64(u.GroupId),
+        ParentId:  u.ParentId,
+        RefererId: u.RefererId,
+        Depth:     int64(u.Depth),
+        Status:    int64(u.Status),
+        CreatedAt: u.CreatedAt,
+        UpdatedAt: u.UpdatedAt,
+    }
+
+    if u.EmailVerifiedAt.Valid {
+        resp.EmailVerifiedAt = u.EmailVerifiedAt.Int64
+    }
+    if u.MobileVerifiedAt.Valid {
+        resp.MobileVerifiedAt = u.MobileVerifiedAt.Int64
+    }
+    if u.KycVerifiedAt.Valid {
+        resp.KycVerifiedAt = u.KycVerifiedAt.Int64
+    }
+    if u.ParentTree.Valid {
+        resp.ParentTree = u.ParentTree.String
+    }
+
+    if u.LevelId > 0 {
+        level, err := l.svcCtx.UserLevelModel.FindOne(l.ctx, u.LevelId)
+        if err == nil {
+            resp.UserLevel = &users.UserLevelInfo{
+                Id:          level.Id,
+                Name:        level.Name,
+                DisplayName: level.DisplayName,
+            }
+        } else if err != sql.ErrNoRows {
+            logx.Errorf("FindUserLevel error: %v", err)
+        }
+    }
+
+    return resp, nil
 }

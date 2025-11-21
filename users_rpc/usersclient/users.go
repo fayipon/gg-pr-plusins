@@ -16,19 +16,20 @@ import (
 type (
 	CreateUserReq   = users.CreateUserReq
 	CreateUserResp  = users.CreateUserResp
-	FilterItem      = users.FilterItem
 	GetUserListReq  = users.GetUserListReq
 	GetUserListResp = users.GetUserListResp
 	GetUserReq      = users.GetUserReq
 	GetUserResp     = users.GetUserResp
-	StringArray     = users.StringArray
+	LevelBatchReq   = users.LevelBatchReq
+	LevelBatchResp  = users.LevelBatchResp
 	UserItem        = users.UserItem
-	Value           = users.Value
+	UserLevelInfo   = users.UserLevelInfo
 
 	Users interface {
 		GetUserList(ctx context.Context, in *GetUserListReq, opts ...grpc.CallOption) (*GetUserListResp, error)
 		GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 		CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserResp, error)
+		GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error)
 	}
 
 	defaultUsers struct {
@@ -55,4 +56,9 @@ func (m *defaultUsers) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc
 func (m *defaultUsers) CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserResp, error) {
 	client := users.NewUsersClient(m.cli.Conn())
 	return client.CreateUser(ctx, in, opts...)
+}
+
+func (m *defaultUsers) GetLevelsBatch(ctx context.Context, in *LevelBatchReq, opts ...grpc.CallOption) (*LevelBatchResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GetLevelsBatch(ctx, in, opts...)
 }
