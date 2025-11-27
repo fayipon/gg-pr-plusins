@@ -19,25 +19,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Users_GetUserList_FullMethodName      = "/users.Users/GetUserList"
-	Users_GetUser_FullMethodName          = "/users.Users/GetUser"
-	Users_CreateUser_FullMethodName       = "/users.Users/CreateUser"
-	Users_CreateUserLevel_FullMethodName  = "/users.Users/CreateUserLevel"
-	Users_GetUserLevel_FullMethodName     = "/users.Users/GetUserLevel"
-	Users_UpdateUserLevel_FullMethodName  = "/users.Users/UpdateUserLevel"
-	Users_DeleteUserLevel_FullMethodName  = "/users.Users/DeleteUserLevel"
-	Users_GetUserLevelList_FullMethodName = "/users.Users/GetUserLevelList"
-	Users_GetLevelsBatch_FullMethodName   = "/users.Users/GetLevelsBatch"
-	Users_CreateUserGroup_FullMethodName  = "/users.Users/CreateUserGroup"
-	Users_GetUserGroup_FullMethodName     = "/users.Users/GetUserGroup"
-	Users_UpdateUserGroup_FullMethodName  = "/users.Users/UpdateUserGroup"
-	Users_DeleteUserGroup_FullMethodName  = "/users.Users/DeleteUserGroup"
-	Users_GetUserGroupList_FullMethodName = "/users.Users/GetUserGroupList"
-	Users_CreateUserTag_FullMethodName    = "/users.Users/CreateUserTag"
-	Users_GetUserTag_FullMethodName       = "/users.Users/GetUserTag"
-	Users_UpdateUserTag_FullMethodName    = "/users.Users/UpdateUserTag"
-	Users_DeleteUserTag_FullMethodName    = "/users.Users/DeleteUserTag"
-	Users_GetUserTagList_FullMethodName   = "/users.Users/GetUserTagList"
+	Users_GetUserList_FullMethodName           = "/users.Users/GetUserList"
+	Users_GetUser_FullMethodName               = "/users.Users/GetUser"
+	Users_CreateUser_FullMethodName            = "/users.Users/CreateUser"
+	Users_CreateUserLevel_FullMethodName       = "/users.Users/CreateUserLevel"
+	Users_GetUserLevel_FullMethodName          = "/users.Users/GetUserLevel"
+	Users_UpdateUserLevel_FullMethodName       = "/users.Users/UpdateUserLevel"
+	Users_DeleteUserLevel_FullMethodName       = "/users.Users/DeleteUserLevel"
+	Users_GetUserLevelList_FullMethodName      = "/users.Users/GetUserLevelList"
+	Users_GetLevelsBatch_FullMethodName        = "/users.Users/GetLevelsBatch"
+	Users_CreateUserGroup_FullMethodName       = "/users.Users/CreateUserGroup"
+	Users_GetUserGroup_FullMethodName          = "/users.Users/GetUserGroup"
+	Users_UpdateUserGroup_FullMethodName       = "/users.Users/UpdateUserGroup"
+	Users_DeleteUserGroup_FullMethodName       = "/users.Users/DeleteUserGroup"
+	Users_GetUserGroupList_FullMethodName      = "/users.Users/GetUserGroupList"
+	Users_CreateUserTag_FullMethodName         = "/users.Users/CreateUserTag"
+	Users_GetUserTag_FullMethodName            = "/users.Users/GetUserTag"
+	Users_UpdateUserTag_FullMethodName         = "/users.Users/UpdateUserTag"
+	Users_DeleteUserTag_FullMethodName         = "/users.Users/DeleteUserTag"
+	Users_GetUserTagList_FullMethodName        = "/users.Users/GetUserTagList"
+	Users_CreateUserReferer_FullMethodName     = "/users.Users/CreateUserReferer"
+	Users_GetUserReferer_FullMethodName        = "/users.Users/GetUserReferer"
+	Users_UpdateUserReferer_FullMethodName     = "/users.Users/UpdateUserReferer"
+	Users_DeleteUserReferer_FullMethodName     = "/users.Users/DeleteUserReferer"
+	Users_GetUserRefererList_FullMethodName    = "/users.Users/GetUserRefererList"
+	Users_GenerateRefererLink_FullMethodName   = "/users.Users/GenerateRefererLink"
+	Users_RegisterByRefererLink_FullMethodName = "/users.Users/RegisterByRefererLink"
 )
 
 // UsersClient is the client API for Users service.
@@ -70,6 +77,14 @@ type UsersClient interface {
 	UpdateUserTag(ctx context.Context, in *UpdateUserTagReq, opts ...grpc.CallOption) (*UpdateUserTagResp, error)
 	DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, opts ...grpc.CallOption) (*DeleteUserTagResp, error)
 	GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error)
+	// UserReferer
+	CreateUserReferer(ctx context.Context, in *CreateUserRefererReq, opts ...grpc.CallOption) (*CreateUserRefererResp, error)
+	GetUserReferer(ctx context.Context, in *GetUserRefererReq, opts ...grpc.CallOption) (*GetUserRefererResp, error)
+	UpdateUserReferer(ctx context.Context, in *UpdateUserRefererReq, opts ...grpc.CallOption) (*UpdateUserRefererResp, error)
+	DeleteUserReferer(ctx context.Context, in *DeleteUserRefererReq, opts ...grpc.CallOption) (*DeleteUserRefererResp, error)
+	GetUserRefererList(ctx context.Context, in *GetUserRefererListReq, opts ...grpc.CallOption) (*GetUserRefererListResp, error)
+	GenerateRefererLink(ctx context.Context, in *GenerateRefererLinkReq, opts ...grpc.CallOption) (*GenerateRefererLinkResp, error)
+	RegisterByRefererLink(ctx context.Context, in *RegisterByRefererLinkReq, opts ...grpc.CallOption) (*RegisterByRefererLinkResp, error)
 }
 
 type usersClient struct {
@@ -270,6 +285,76 @@ func (c *usersClient) GetUserTagList(ctx context.Context, in *GetUserTagListReq,
 	return out, nil
 }
 
+func (c *usersClient) CreateUserReferer(ctx context.Context, in *CreateUserRefererReq, opts ...grpc.CallOption) (*CreateUserRefererResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUserRefererResp)
+	err := c.cc.Invoke(ctx, Users_CreateUserReferer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) GetUserReferer(ctx context.Context, in *GetUserRefererReq, opts ...grpc.CallOption) (*GetUserRefererResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserRefererResp)
+	err := c.cc.Invoke(ctx, Users_GetUserReferer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) UpdateUserReferer(ctx context.Context, in *UpdateUserRefererReq, opts ...grpc.CallOption) (*UpdateUserRefererResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserRefererResp)
+	err := c.cc.Invoke(ctx, Users_UpdateUserReferer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) DeleteUserReferer(ctx context.Context, in *DeleteUserRefererReq, opts ...grpc.CallOption) (*DeleteUserRefererResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserRefererResp)
+	err := c.cc.Invoke(ctx, Users_DeleteUserReferer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) GetUserRefererList(ctx context.Context, in *GetUserRefererListReq, opts ...grpc.CallOption) (*GetUserRefererListResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserRefererListResp)
+	err := c.cc.Invoke(ctx, Users_GetUserRefererList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) GenerateRefererLink(ctx context.Context, in *GenerateRefererLinkReq, opts ...grpc.CallOption) (*GenerateRefererLinkResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GenerateRefererLinkResp)
+	err := c.cc.Invoke(ctx, Users_GenerateRefererLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) RegisterByRefererLink(ctx context.Context, in *RegisterByRefererLinkReq, opts ...grpc.CallOption) (*RegisterByRefererLinkResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterByRefererLinkResp)
+	err := c.cc.Invoke(ctx, Users_RegisterByRefererLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsersServer is the server API for Users service.
 // All implementations must embed UnimplementedUsersServer
 // for forward compatibility.
@@ -300,6 +385,14 @@ type UsersServer interface {
 	UpdateUserTag(context.Context, *UpdateUserTagReq) (*UpdateUserTagResp, error)
 	DeleteUserTag(context.Context, *DeleteUserTagReq) (*DeleteUserTagResp, error)
 	GetUserTagList(context.Context, *GetUserTagListReq) (*GetUserTagListResp, error)
+	// UserReferer
+	CreateUserReferer(context.Context, *CreateUserRefererReq) (*CreateUserRefererResp, error)
+	GetUserReferer(context.Context, *GetUserRefererReq) (*GetUserRefererResp, error)
+	UpdateUserReferer(context.Context, *UpdateUserRefererReq) (*UpdateUserRefererResp, error)
+	DeleteUserReferer(context.Context, *DeleteUserRefererReq) (*DeleteUserRefererResp, error)
+	GetUserRefererList(context.Context, *GetUserRefererListReq) (*GetUserRefererListResp, error)
+	GenerateRefererLink(context.Context, *GenerateRefererLinkReq) (*GenerateRefererLinkResp, error)
+	RegisterByRefererLink(context.Context, *RegisterByRefererLinkReq) (*RegisterByRefererLinkResp, error)
 	mustEmbedUnimplementedUsersServer()
 }
 
@@ -366,6 +459,27 @@ func (UnimplementedUsersServer) DeleteUserTag(context.Context, *DeleteUserTagReq
 }
 func (UnimplementedUsersServer) GetUserTagList(context.Context, *GetUserTagListReq) (*GetUserTagListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTagList not implemented")
+}
+func (UnimplementedUsersServer) CreateUserReferer(context.Context, *CreateUserRefererReq) (*CreateUserRefererResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserReferer not implemented")
+}
+func (UnimplementedUsersServer) GetUserReferer(context.Context, *GetUserRefererReq) (*GetUserRefererResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserReferer not implemented")
+}
+func (UnimplementedUsersServer) UpdateUserReferer(context.Context, *UpdateUserRefererReq) (*UpdateUserRefererResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserReferer not implemented")
+}
+func (UnimplementedUsersServer) DeleteUserReferer(context.Context, *DeleteUserRefererReq) (*DeleteUserRefererResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserReferer not implemented")
+}
+func (UnimplementedUsersServer) GetUserRefererList(context.Context, *GetUserRefererListReq) (*GetUserRefererListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserRefererList not implemented")
+}
+func (UnimplementedUsersServer) GenerateRefererLink(context.Context, *GenerateRefererLinkReq) (*GenerateRefererLinkResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateRefererLink not implemented")
+}
+func (UnimplementedUsersServer) RegisterByRefererLink(context.Context, *RegisterByRefererLinkReq) (*RegisterByRefererLinkResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterByRefererLink not implemented")
 }
 func (UnimplementedUsersServer) mustEmbedUnimplementedUsersServer() {}
 func (UnimplementedUsersServer) testEmbeddedByValue()               {}
@@ -730,6 +844,132 @@ func _Users_GetUserTagList_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Users_CreateUserReferer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRefererReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).CreateUserReferer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_CreateUserReferer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).CreateUserReferer(ctx, req.(*CreateUserRefererReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_GetUserReferer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRefererReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GetUserReferer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GetUserReferer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GetUserReferer(ctx, req.(*GetUserRefererReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_UpdateUserReferer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRefererReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).UpdateUserReferer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_UpdateUserReferer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).UpdateUserReferer(ctx, req.(*UpdateUserRefererReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_DeleteUserReferer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserRefererReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).DeleteUserReferer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_DeleteUserReferer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).DeleteUserReferer(ctx, req.(*DeleteUserRefererReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_GetUserRefererList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRefererListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GetUserRefererList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GetUserRefererList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GetUserRefererList(ctx, req.(*GetUserRefererListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_GenerateRefererLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateRefererLinkReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).GenerateRefererLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_GenerateRefererLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).GenerateRefererLink(ctx, req.(*GenerateRefererLinkReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_RegisterByRefererLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterByRefererLinkReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).RegisterByRefererLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Users_RegisterByRefererLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).RegisterByRefererLink(ctx, req.(*RegisterByRefererLinkReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Users_ServiceDesc is the grpc.ServiceDesc for Users service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -812,6 +1052,34 @@ var Users_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserTagList",
 			Handler:    _Users_GetUserTagList_Handler,
+		},
+		{
+			MethodName: "CreateUserReferer",
+			Handler:    _Users_CreateUserReferer_Handler,
+		},
+		{
+			MethodName: "GetUserReferer",
+			Handler:    _Users_GetUserReferer_Handler,
+		},
+		{
+			MethodName: "UpdateUserReferer",
+			Handler:    _Users_UpdateUserReferer_Handler,
+		},
+		{
+			MethodName: "DeleteUserReferer",
+			Handler:    _Users_DeleteUserReferer_Handler,
+		},
+		{
+			MethodName: "GetUserRefererList",
+			Handler:    _Users_GetUserRefererList_Handler,
+		},
+		{
+			MethodName: "GenerateRefererLink",
+			Handler:    _Users_GenerateRefererLink_Handler,
+		},
+		{
+			MethodName: "RegisterByRefererLink",
+			Handler:    _Users_RegisterByRefererLink_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

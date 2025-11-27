@@ -7,55 +7,70 @@ package usersclient
 import (
 	"context"
 
-	"github.com/fayipon/gg-pr-plusins/users_rpc/users/users"
+	"github.com/fayipon/gg-pr-plusins/users_rpc/users"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	CreateUserGroupReq   = users.CreateUserGroupReq
-	CreateUserGroupResp  = users.CreateUserGroupResp
-	CreateUserLevelReq   = users.CreateUserLevelReq
-	CreateUserLevelResp  = users.CreateUserLevelResp
-	CreateUserReq        = users.CreateUserReq
-	CreateUserResp       = users.CreateUserResp
-	CreateUserTagReq     = users.CreateUserTagReq
-	CreateUserTagResp    = users.CreateUserTagResp
-	DeleteUserGroupReq   = users.DeleteUserGroupReq
-	DeleteUserGroupResp  = users.DeleteUserGroupResp
-	DeleteUserLevelReq   = users.DeleteUserLevelReq
-	DeleteUserLevelResp  = users.DeleteUserLevelResp
-	DeleteUserTagReq     = users.DeleteUserTagReq
-	DeleteUserTagResp    = users.DeleteUserTagResp
-	GetUserGroupListReq  = users.GetUserGroupListReq
-	GetUserGroupListResp = users.GetUserGroupListResp
-	GetUserGroupReq      = users.GetUserGroupReq
-	GetUserGroupResp     = users.GetUserGroupResp
-	GetUserLevelListReq  = users.GetUserLevelListReq
-	GetUserLevelListResp = users.GetUserLevelListResp
-	GetUserLevelReq      = users.GetUserLevelReq
-	GetUserLevelResp     = users.GetUserLevelResp
-	GetUserListReq       = users.GetUserListReq
-	GetUserListResp      = users.GetUserListResp
-	GetUserReq           = users.GetUserReq
-	GetUserResp          = users.GetUserResp
-	GetUserTagListReq    = users.GetUserTagListReq
-	GetUserTagListResp   = users.GetUserTagListResp
-	GetUserTagReq        = users.GetUserTagReq
-	GetUserTagResp       = users.GetUserTagResp
-	LevelBatchReq        = users.LevelBatchReq
-	LevelBatchResp       = users.LevelBatchResp
-	UpdateUserGroupReq   = users.UpdateUserGroupReq
-	UpdateUserGroupResp  = users.UpdateUserGroupResp
-	UpdateUserLevelReq   = users.UpdateUserLevelReq
-	UpdateUserLevelResp  = users.UpdateUserLevelResp
-	UpdateUserTagReq     = users.UpdateUserTagReq
-	UpdateUserTagResp    = users.UpdateUserTagResp
-	UserGroupInfo        = users.UserGroupInfo
-	UserItem             = users.UserItem
-	UserLevelInfo        = users.UserLevelInfo
-	UserTagInfo          = users.UserTagInfo
+	CreateUserGroupReq        = users.CreateUserGroupReq
+	CreateUserGroupResp       = users.CreateUserGroupResp
+	CreateUserLevelReq        = users.CreateUserLevelReq
+	CreateUserLevelResp       = users.CreateUserLevelResp
+	CreateUserRefererReq      = users.CreateUserRefererReq
+	CreateUserRefererResp     = users.CreateUserRefererResp
+	CreateUserReq             = users.CreateUserReq
+	CreateUserResp            = users.CreateUserResp
+	CreateUserTagReq          = users.CreateUserTagReq
+	CreateUserTagResp         = users.CreateUserTagResp
+	DeleteUserGroupReq        = users.DeleteUserGroupReq
+	DeleteUserGroupResp       = users.DeleteUserGroupResp
+	DeleteUserLevelReq        = users.DeleteUserLevelReq
+	DeleteUserLevelResp       = users.DeleteUserLevelResp
+	DeleteUserRefererReq      = users.DeleteUserRefererReq
+	DeleteUserRefererResp     = users.DeleteUserRefererResp
+	DeleteUserTagReq          = users.DeleteUserTagReq
+	DeleteUserTagResp         = users.DeleteUserTagResp
+	GenerateRefererLinkReq    = users.GenerateRefererLinkReq
+	GenerateRefererLinkResp   = users.GenerateRefererLinkResp
+	GetUserGroupListReq       = users.GetUserGroupListReq
+	GetUserGroupListResp      = users.GetUserGroupListResp
+	GetUserGroupReq           = users.GetUserGroupReq
+	GetUserGroupResp          = users.GetUserGroupResp
+	GetUserLevelListReq       = users.GetUserLevelListReq
+	GetUserLevelListResp      = users.GetUserLevelListResp
+	GetUserLevelReq           = users.GetUserLevelReq
+	GetUserLevelResp          = users.GetUserLevelResp
+	GetUserListReq            = users.GetUserListReq
+	GetUserListResp           = users.GetUserListResp
+	GetUserRefererListReq     = users.GetUserRefererListReq
+	GetUserRefererListResp    = users.GetUserRefererListResp
+	GetUserRefererReq         = users.GetUserRefererReq
+	GetUserRefererResp        = users.GetUserRefererResp
+	GetUserReq                = users.GetUserReq
+	GetUserResp               = users.GetUserResp
+	GetUserTagListReq         = users.GetUserTagListReq
+	GetUserTagListResp        = users.GetUserTagListResp
+	GetUserTagReq             = users.GetUserTagReq
+	GetUserTagResp            = users.GetUserTagResp
+	LevelBatchReq             = users.LevelBatchReq
+	LevelBatchResp            = users.LevelBatchResp
+	RegisterByRefererLinkReq  = users.RegisterByRefererLinkReq
+	RegisterByRefererLinkResp = users.RegisterByRefererLinkResp
+	UpdateUserGroupReq        = users.UpdateUserGroupReq
+	UpdateUserGroupResp       = users.UpdateUserGroupResp
+	UpdateUserLevelReq        = users.UpdateUserLevelReq
+	UpdateUserLevelResp       = users.UpdateUserLevelResp
+	UpdateUserRefererReq      = users.UpdateUserRefererReq
+	UpdateUserRefererResp     = users.UpdateUserRefererResp
+	UpdateUserTagReq          = users.UpdateUserTagReq
+	UpdateUserTagResp         = users.UpdateUserTagResp
+	UserGroupInfo             = users.UserGroupInfo
+	UserItem                  = users.UserItem
+	UserLevelInfo             = users.UserLevelInfo
+	UserRefererInfo           = users.UserRefererInfo
+	UserTagInfo               = users.UserTagInfo
 
 	Users interface {
 		GetUserList(ctx context.Context, in *GetUserListReq, opts ...grpc.CallOption) (*GetUserListResp, error)
@@ -80,6 +95,14 @@ type (
 		UpdateUserTag(ctx context.Context, in *UpdateUserTagReq, opts ...grpc.CallOption) (*UpdateUserTagResp, error)
 		DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, opts ...grpc.CallOption) (*DeleteUserTagResp, error)
 		GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error)
+		// UserReferer
+		CreateUserReferer(ctx context.Context, in *CreateUserRefererReq, opts ...grpc.CallOption) (*CreateUserRefererResp, error)
+		GetUserReferer(ctx context.Context, in *GetUserRefererReq, opts ...grpc.CallOption) (*GetUserRefererResp, error)
+		UpdateUserReferer(ctx context.Context, in *UpdateUserRefererReq, opts ...grpc.CallOption) (*UpdateUserRefererResp, error)
+		DeleteUserReferer(ctx context.Context, in *DeleteUserRefererReq, opts ...grpc.CallOption) (*DeleteUserRefererResp, error)
+		GetUserRefererList(ctx context.Context, in *GetUserRefererListReq, opts ...grpc.CallOption) (*GetUserRefererListResp, error)
+		GenerateRefererLink(ctx context.Context, in *GenerateRefererLinkReq, opts ...grpc.CallOption) (*GenerateRefererLinkResp, error)
+		RegisterByRefererLink(ctx context.Context, in *RegisterByRefererLinkReq, opts ...grpc.CallOption) (*RegisterByRefererLinkResp, error)
 	}
 
 	defaultUsers struct {
@@ -189,4 +212,40 @@ func (m *defaultUsers) DeleteUserTag(ctx context.Context, in *DeleteUserTagReq, 
 func (m *defaultUsers) GetUserTagList(ctx context.Context, in *GetUserTagListReq, opts ...grpc.CallOption) (*GetUserTagListResp, error) {
 	client := users.NewUsersClient(m.cli.Conn())
 	return client.GetUserTagList(ctx, in, opts...)
+}
+
+// UserReferer
+func (m *defaultUsers) CreateUserReferer(ctx context.Context, in *CreateUserRefererReq, opts ...grpc.CallOption) (*CreateUserRefererResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.CreateUserReferer(ctx, in, opts...)
+}
+
+func (m *defaultUsers) GetUserReferer(ctx context.Context, in *GetUserRefererReq, opts ...grpc.CallOption) (*GetUserRefererResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GetUserReferer(ctx, in, opts...)
+}
+
+func (m *defaultUsers) UpdateUserReferer(ctx context.Context, in *UpdateUserRefererReq, opts ...grpc.CallOption) (*UpdateUserRefererResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.UpdateUserReferer(ctx, in, opts...)
+}
+
+func (m *defaultUsers) DeleteUserReferer(ctx context.Context, in *DeleteUserRefererReq, opts ...grpc.CallOption) (*DeleteUserRefererResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.DeleteUserReferer(ctx, in, opts...)
+}
+
+func (m *defaultUsers) GetUserRefererList(ctx context.Context, in *GetUserRefererListReq, opts ...grpc.CallOption) (*GetUserRefererListResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GetUserRefererList(ctx, in, opts...)
+}
+
+func (m *defaultUsers) GenerateRefererLink(ctx context.Context, in *GenerateRefererLinkReq, opts ...grpc.CallOption) (*GenerateRefererLinkResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.GenerateRefererLink(ctx, in, opts...)
+}
+
+func (m *defaultUsers) RegisterByRefererLink(ctx context.Context, in *RegisterByRefererLinkReq, opts ...grpc.CallOption) (*RegisterByRefererLinkResp, error) {
+	client := users.NewUsersClient(m.cli.Conn())
+	return client.RegisterByRefererLink(ctx, in, opts...)
 }

@@ -2393,6 +2393,813 @@ func (x *GetUserTagListResp) GetList() []*UserTagInfo {
 	return nil
 }
 
+// =============================
+// UserReferer
+// =============================
+type UserRefererInfo struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId            uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ParentTree        string                 `protobuf:"bytes,3,opt,name=parent_tree,json=parentTree,proto3" json:"parent_tree,omitempty"`
+	Name              string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName       string                 `protobuf:"bytes,5,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	VisitCount        int64                  `protobuf:"varint,6,opt,name=visit_count,json=visitCount,proto3" json:"visit_count,omitempty"`
+	RegisterCount     int64                  `protobuf:"varint,7,opt,name=register_count,json=registerCount,proto3" json:"register_count,omitempty"`
+	FirstDepositCount int64                  `protobuf:"varint,8,opt,name=first_deposit_count,json=firstDepositCount,proto3" json:"first_deposit_count,omitempty"`
+	CreatedAt         int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         int64                  `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *UserRefererInfo) Reset() {
+	*x = UserRefererInfo{}
+	mi := &file_users_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRefererInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRefererInfo) ProtoMessage() {}
+
+func (x *UserRefererInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRefererInfo.ProtoReflect.Descriptor instead.
+func (*UserRefererInfo) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *UserRefererInfo) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UserRefererInfo) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserRefererInfo) GetParentTree() string {
+	if x != nil {
+		return x.ParentTree
+	}
+	return ""
+}
+
+func (x *UserRefererInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UserRefererInfo) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *UserRefererInfo) GetVisitCount() int64 {
+	if x != nil {
+		return x.VisitCount
+	}
+	return 0
+}
+
+func (x *UserRefererInfo) GetRegisterCount() int64 {
+	if x != nil {
+		return x.RegisterCount
+	}
+	return 0
+}
+
+func (x *UserRefererInfo) GetFirstDepositCount() int64 {
+	if x != nil {
+		return x.FirstDepositCount
+	}
+	return 0
+}
+
+func (x *UserRefererInfo) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *UserRefererInfo) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+type CreateUserRefererReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ParentTree    string                 `protobuf:"bytes,2,opt,name=parent_tree,json=parentTree,proto3" json:"parent_tree,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserRefererReq) Reset() {
+	*x = CreateUserRefererReq{}
+	mi := &file_users_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserRefererReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserRefererReq) ProtoMessage() {}
+
+func (x *CreateUserRefererReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserRefererReq.ProtoReflect.Descriptor instead.
+func (*CreateUserRefererReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *CreateUserRefererReq) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateUserRefererReq) GetParentTree() string {
+	if x != nil {
+		return x.ParentTree
+	}
+	return ""
+}
+
+func (x *CreateUserRefererReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateUserRefererReq) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+type CreateUserRefererResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserRefererResp) Reset() {
+	*x = CreateUserRefererResp{}
+	mi := &file_users_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserRefererResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserRefererResp) ProtoMessage() {}
+
+func (x *CreateUserRefererResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserRefererResp.ProtoReflect.Descriptor instead.
+func (*CreateUserRefererResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *CreateUserRefererResp) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetUserRefererReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserRefererReq) Reset() {
+	*x = GetUserRefererReq{}
+	mi := &file_users_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserRefererReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRefererReq) ProtoMessage() {}
+
+func (x *GetUserRefererReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRefererReq.ProtoReflect.Descriptor instead.
+func (*GetUserRefererReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *GetUserRefererReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetUserRefererResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Info          *UserRefererInfo       `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserRefererResp) Reset() {
+	*x = GetUserRefererResp{}
+	mi := &file_users_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserRefererResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRefererResp) ProtoMessage() {}
+
+func (x *GetUserRefererResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRefererResp.ProtoReflect.Descriptor instead.
+func (*GetUserRefererResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *GetUserRefererResp) GetInfo() *UserRefererInfo {
+	if x != nil {
+		return x.Info
+	}
+	return nil
+}
+
+type UpdateUserRefererReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	ParentTree    string                 `protobuf:"bytes,4,opt,name=parent_tree,json=parentTree,proto3" json:"parent_tree,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserRefererReq) Reset() {
+	*x = UpdateUserRefererReq{}
+	mi := &file_users_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserRefererReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRefererReq) ProtoMessage() {}
+
+func (x *UpdateUserRefererReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRefererReq.ProtoReflect.Descriptor instead.
+func (*UpdateUserRefererReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *UpdateUserRefererReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateUserRefererReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateUserRefererReq) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *UpdateUserRefererReq) GetParentTree() string {
+	if x != nil {
+		return x.ParentTree
+	}
+	return ""
+}
+
+type UpdateUserRefererResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserRefererResp) Reset() {
+	*x = UpdateUserRefererResp{}
+	mi := &file_users_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserRefererResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRefererResp) ProtoMessage() {}
+
+func (x *UpdateUserRefererResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRefererResp.ProtoReflect.Descriptor instead.
+func (*UpdateUserRefererResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *UpdateUserRefererResp) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type DeleteUserRefererReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserRefererReq) Reset() {
+	*x = DeleteUserRefererReq{}
+	mi := &file_users_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserRefererReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserRefererReq) ProtoMessage() {}
+
+func (x *DeleteUserRefererReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserRefererReq.ProtoReflect.Descriptor instead.
+func (*DeleteUserRefererReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *DeleteUserRefererReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteUserRefererResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserRefererResp) Reset() {
+	*x = DeleteUserRefererResp{}
+	mi := &file_users_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserRefererResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserRefererResp) ProtoMessage() {}
+
+func (x *DeleteUserRefererResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserRefererResp.ProtoReflect.Descriptor instead.
+func (*DeleteUserRefererResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *DeleteUserRefererResp) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type GetUserRefererListReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserRefererListReq) Reset() {
+	*x = GetUserRefererListReq{}
+	mi := &file_users_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserRefererListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRefererListReq) ProtoMessage() {}
+
+func (x *GetUserRefererListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRefererListReq.ProtoReflect.Descriptor instead.
+func (*GetUserRefererListReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *GetUserRefererListReq) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetUserRefererListReq) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type GetUserRefererListResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Total         int64                  `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	List          []*UserRefererInfo     `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserRefererListResp) Reset() {
+	*x = GetUserRefererListResp{}
+	mi := &file_users_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserRefererListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRefererListResp) ProtoMessage() {}
+
+func (x *GetUserRefererListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRefererListResp.ProtoReflect.Descriptor instead.
+func (*GetUserRefererListResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *GetUserRefererListResp) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *GetUserRefererListResp) GetList() []*UserRefererInfo {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+type GenerateRefererLinkReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GenerateRefererLinkReq) Reset() {
+	*x = GenerateRefererLinkReq{}
+	mi := &file_users_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateRefererLinkReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateRefererLinkReq) ProtoMessage() {}
+
+func (x *GenerateRefererLinkReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateRefererLinkReq.ProtoReflect.Descriptor instead.
+func (*GenerateRefererLinkReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *GenerateRefererLinkReq) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type GenerateRefererLinkResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefererLink   string                 `protobuf:"bytes,1,opt,name=referer_link,json=refererLink,proto3" json:"referer_link,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GenerateRefererLinkResp) Reset() {
+	*x = GenerateRefererLinkResp{}
+	mi := &file_users_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateRefererLinkResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateRefererLinkResp) ProtoMessage() {}
+
+func (x *GenerateRefererLinkResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateRefererLinkResp.ProtoReflect.Descriptor instead.
+func (*GenerateRefererLinkResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *GenerateRefererLinkResp) GetRefererLink() string {
+	if x != nil {
+		return x.RefererLink
+	}
+	return ""
+}
+
+type RegisterByRefererLinkReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefererCode   string                 `protobuf:"bytes,1,opt,name=referer_code,json=refererCode,proto3" json:"referer_code,omitempty"`
+	NewUserId     uint64                 `protobuf:"varint,2,opt,name=new_user_id,json=newUserId,proto3" json:"new_user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterByRefererLinkReq) Reset() {
+	*x = RegisterByRefererLinkReq{}
+	mi := &file_users_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterByRefererLinkReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterByRefererLinkReq) ProtoMessage() {}
+
+func (x *RegisterByRefererLinkReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterByRefererLinkReq.ProtoReflect.Descriptor instead.
+func (*RegisterByRefererLinkReq) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *RegisterByRefererLinkReq) GetRefererCode() string {
+	if x != nil {
+		return x.RefererCode
+	}
+	return ""
+}
+
+func (x *RegisterByRefererLinkReq) GetNewUserId() uint64 {
+	if x != nil {
+		return x.NewUserId
+	}
+	return 0
+}
+
+type RegisterByRefererLinkResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterByRefererLinkResp) Reset() {
+	*x = RegisterByRefererLinkResp{}
+	mi := &file_users_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterByRefererLinkResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterByRefererLinkResp) ProtoMessage() {}
+
+func (x *RegisterByRefererLinkResp) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterByRefererLinkResp.ProtoReflect.Descriptor instead.
+func (*RegisterByRefererLinkResp) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *RegisterByRefererLinkResp) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_users_proto protoreflect.FileDescriptor
 
 const file_users_proto_rawDesc = "" +
@@ -2563,8 +3370,62 @@ const file_users_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"R\n" +
 	"\x12GetUserTagListResp\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12&\n" +
-	"\x04list\x18\x02 \x03(\v2\x12.users.UserTagInfoR\x04list2\x97\n" +
+	"\x04list\x18\x02 \x03(\v2\x12.users.UserTagInfoR\x04list\"\xc8\x02\n" +
+	"\x0fUserRefererInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x1f\n" +
+	"\vparent_tree\x18\x03 \x01(\tR\n" +
+	"parentTree\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x05 \x01(\tR\vdisplayName\x12\x1f\n" +
+	"\vvisit_count\x18\x06 \x01(\x03R\n" +
+	"visitCount\x12%\n" +
+	"\x0eregister_count\x18\a \x01(\x03R\rregisterCount\x12.\n" +
+	"\x13first_deposit_count\x18\b \x01(\x03R\x11firstDepositCount\x12\x1d\n" +
 	"\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\n" +
+	" \x01(\x03R\tupdatedAt\"\x87\x01\n" +
+	"\x14CreateUserRefererReq\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1f\n" +
+	"\vparent_tree\x18\x02 \x01(\tR\n" +
+	"parentTree\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x04 \x01(\tR\vdisplayName\"'\n" +
+	"\x15CreateUserRefererResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"#\n" +
+	"\x11GetUserRefererReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
+	"\x12GetUserRefererResp\x12*\n" +
+	"\x04info\x18\x01 \x01(\v2\x16.users.UserRefererInfoR\x04info\"~\n" +
+	"\x14UpdateUserRefererReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\x12\x1f\n" +
+	"\vparent_tree\x18\x04 \x01(\tR\n" +
+	"parentTree\"1\n" +
+	"\x15UpdateUserRefererResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"&\n" +
+	"\x14DeleteUserRefererReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"1\n" +
+	"\x15DeleteUserRefererResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"H\n" +
+	"\x15GetUserRefererListReq\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"Z\n" +
+	"\x16GetUserRefererListResp\x12\x14\n" +
+	"\x05total\x18\x01 \x01(\x03R\x05total\x12*\n" +
+	"\x04list\x18\x02 \x03(\v2\x16.users.UserRefererInfoR\x04list\"1\n" +
+	"\x16GenerateRefererLinkReq\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\"<\n" +
+	"\x17GenerateRefererLinkResp\x12!\n" +
+	"\freferer_link\x18\x01 \x01(\tR\vrefererLink\"]\n" +
+	"\x18RegisterByRefererLinkReq\x12!\n" +
+	"\freferer_code\x18\x01 \x01(\tR\vrefererCode\x12\x1e\n" +
+	"\vnew_user_id\x18\x02 \x01(\x04R\tnewUserId\"5\n" +
+	"\x19RegisterByRefererLinkResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xd3\x0e\n" +
 	"\x05Users\x12<\n" +
 	"\vGetUserList\x12\x15.users.GetUserListReq\x1a\x16.users.GetUserListResp\x120\n" +
 	"\aGetUser\x12\x11.users.GetUserReq\x1a\x12.users.GetUserResp\x129\n" +
@@ -2586,7 +3447,14 @@ const file_users_proto_rawDesc = "" +
 	"GetUserTag\x12\x14.users.GetUserTagReq\x1a\x15.users.GetUserTagResp\x12B\n" +
 	"\rUpdateUserTag\x12\x17.users.UpdateUserTagReq\x1a\x18.users.UpdateUserTagResp\x12B\n" +
 	"\rDeleteUserTag\x12\x17.users.DeleteUserTagReq\x1a\x18.users.DeleteUserTagResp\x12E\n" +
-	"\x0eGetUserTagList\x12\x18.users.GetUserTagListReq\x1a\x19.users.GetUserTagListRespB\tZ\a./usersb\x06proto3"
+	"\x0eGetUserTagList\x12\x18.users.GetUserTagListReq\x1a\x19.users.GetUserTagListResp\x12N\n" +
+	"\x11CreateUserReferer\x12\x1b.users.CreateUserRefererReq\x1a\x1c.users.CreateUserRefererResp\x12E\n" +
+	"\x0eGetUserReferer\x12\x18.users.GetUserRefererReq\x1a\x19.users.GetUserRefererResp\x12N\n" +
+	"\x11UpdateUserReferer\x12\x1b.users.UpdateUserRefererReq\x1a\x1c.users.UpdateUserRefererResp\x12N\n" +
+	"\x11DeleteUserReferer\x12\x1b.users.DeleteUserRefererReq\x1a\x1c.users.DeleteUserRefererResp\x12Q\n" +
+	"\x12GetUserRefererList\x12\x1c.users.GetUserRefererListReq\x1a\x1d.users.GetUserRefererListResp\x12T\n" +
+	"\x13GenerateRefererLink\x12\x1d.users.GenerateRefererLinkReq\x1a\x1e.users.GenerateRefererLinkResp\x12Z\n" +
+	"\x15RegisterByRefererLink\x12\x1f.users.RegisterByRefererLinkReq\x1a .users.RegisterByRefererLinkRespB\tZ\a./usersb\x06proto3"
 
 var (
 	file_users_proto_rawDescOnce sync.Once
@@ -2600,50 +3468,65 @@ func file_users_proto_rawDescGZIP() []byte {
 	return file_users_proto_rawDescData
 }
 
-var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
+var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
 var file_users_proto_goTypes = []any{
-	(*GetUserListReq)(nil),       // 0: users.GetUserListReq
-	(*UserItem)(nil),             // 1: users.UserItem
-	(*GetUserListResp)(nil),      // 2: users.GetUserListResp
-	(*GetUserReq)(nil),           // 3: users.GetUserReq
-	(*UserLevelInfo)(nil),        // 4: users.UserLevelInfo
-	(*GetUserResp)(nil),          // 5: users.GetUserResp
-	(*CreateUserReq)(nil),        // 6: users.CreateUserReq
-	(*CreateUserResp)(nil),       // 7: users.CreateUserResp
-	(*CreateUserLevelReq)(nil),   // 8: users.CreateUserLevelReq
-	(*CreateUserLevelResp)(nil),  // 9: users.CreateUserLevelResp
-	(*GetUserLevelReq)(nil),      // 10: users.GetUserLevelReq
-	(*GetUserLevelResp)(nil),     // 11: users.GetUserLevelResp
-	(*UpdateUserLevelReq)(nil),   // 12: users.UpdateUserLevelReq
-	(*UpdateUserLevelResp)(nil),  // 13: users.UpdateUserLevelResp
-	(*DeleteUserLevelReq)(nil),   // 14: users.DeleteUserLevelReq
-	(*DeleteUserLevelResp)(nil),  // 15: users.DeleteUserLevelResp
-	(*GetUserLevelListReq)(nil),  // 16: users.GetUserLevelListReq
-	(*GetUserLevelListResp)(nil), // 17: users.GetUserLevelListResp
-	(*LevelBatchReq)(nil),        // 18: users.LevelBatchReq
-	(*LevelBatchResp)(nil),       // 19: users.LevelBatchResp
-	(*UserGroupInfo)(nil),        // 20: users.UserGroupInfo
-	(*CreateUserGroupReq)(nil),   // 21: users.CreateUserGroupReq
-	(*CreateUserGroupResp)(nil),  // 22: users.CreateUserGroupResp
-	(*GetUserGroupReq)(nil),      // 23: users.GetUserGroupReq
-	(*GetUserGroupResp)(nil),     // 24: users.GetUserGroupResp
-	(*UpdateUserGroupReq)(nil),   // 25: users.UpdateUserGroupReq
-	(*UpdateUserGroupResp)(nil),  // 26: users.UpdateUserGroupResp
-	(*DeleteUserGroupReq)(nil),   // 27: users.DeleteUserGroupReq
-	(*DeleteUserGroupResp)(nil),  // 28: users.DeleteUserGroupResp
-	(*GetUserGroupListReq)(nil),  // 29: users.GetUserGroupListReq
-	(*GetUserGroupListResp)(nil), // 30: users.GetUserGroupListResp
-	(*UserTagInfo)(nil),          // 31: users.UserTagInfo
-	(*CreateUserTagReq)(nil),     // 32: users.CreateUserTagReq
-	(*CreateUserTagResp)(nil),    // 33: users.CreateUserTagResp
-	(*GetUserTagReq)(nil),        // 34: users.GetUserTagReq
-	(*GetUserTagResp)(nil),       // 35: users.GetUserTagResp
-	(*UpdateUserTagReq)(nil),     // 36: users.UpdateUserTagReq
-	(*UpdateUserTagResp)(nil),    // 37: users.UpdateUserTagResp
-	(*DeleteUserTagReq)(nil),     // 38: users.DeleteUserTagReq
-	(*DeleteUserTagResp)(nil),    // 39: users.DeleteUserTagResp
-	(*GetUserTagListReq)(nil),    // 40: users.GetUserTagListReq
-	(*GetUserTagListResp)(nil),   // 41: users.GetUserTagListResp
+	(*GetUserListReq)(nil),            // 0: users.GetUserListReq
+	(*UserItem)(nil),                  // 1: users.UserItem
+	(*GetUserListResp)(nil),           // 2: users.GetUserListResp
+	(*GetUserReq)(nil),                // 3: users.GetUserReq
+	(*UserLevelInfo)(nil),             // 4: users.UserLevelInfo
+	(*GetUserResp)(nil),               // 5: users.GetUserResp
+	(*CreateUserReq)(nil),             // 6: users.CreateUserReq
+	(*CreateUserResp)(nil),            // 7: users.CreateUserResp
+	(*CreateUserLevelReq)(nil),        // 8: users.CreateUserLevelReq
+	(*CreateUserLevelResp)(nil),       // 9: users.CreateUserLevelResp
+	(*GetUserLevelReq)(nil),           // 10: users.GetUserLevelReq
+	(*GetUserLevelResp)(nil),          // 11: users.GetUserLevelResp
+	(*UpdateUserLevelReq)(nil),        // 12: users.UpdateUserLevelReq
+	(*UpdateUserLevelResp)(nil),       // 13: users.UpdateUserLevelResp
+	(*DeleteUserLevelReq)(nil),        // 14: users.DeleteUserLevelReq
+	(*DeleteUserLevelResp)(nil),       // 15: users.DeleteUserLevelResp
+	(*GetUserLevelListReq)(nil),       // 16: users.GetUserLevelListReq
+	(*GetUserLevelListResp)(nil),      // 17: users.GetUserLevelListResp
+	(*LevelBatchReq)(nil),             // 18: users.LevelBatchReq
+	(*LevelBatchResp)(nil),            // 19: users.LevelBatchResp
+	(*UserGroupInfo)(nil),             // 20: users.UserGroupInfo
+	(*CreateUserGroupReq)(nil),        // 21: users.CreateUserGroupReq
+	(*CreateUserGroupResp)(nil),       // 22: users.CreateUserGroupResp
+	(*GetUserGroupReq)(nil),           // 23: users.GetUserGroupReq
+	(*GetUserGroupResp)(nil),          // 24: users.GetUserGroupResp
+	(*UpdateUserGroupReq)(nil),        // 25: users.UpdateUserGroupReq
+	(*UpdateUserGroupResp)(nil),       // 26: users.UpdateUserGroupResp
+	(*DeleteUserGroupReq)(nil),        // 27: users.DeleteUserGroupReq
+	(*DeleteUserGroupResp)(nil),       // 28: users.DeleteUserGroupResp
+	(*GetUserGroupListReq)(nil),       // 29: users.GetUserGroupListReq
+	(*GetUserGroupListResp)(nil),      // 30: users.GetUserGroupListResp
+	(*UserTagInfo)(nil),               // 31: users.UserTagInfo
+	(*CreateUserTagReq)(nil),          // 32: users.CreateUserTagReq
+	(*CreateUserTagResp)(nil),         // 33: users.CreateUserTagResp
+	(*GetUserTagReq)(nil),             // 34: users.GetUserTagReq
+	(*GetUserTagResp)(nil),            // 35: users.GetUserTagResp
+	(*UpdateUserTagReq)(nil),          // 36: users.UpdateUserTagReq
+	(*UpdateUserTagResp)(nil),         // 37: users.UpdateUserTagResp
+	(*DeleteUserTagReq)(nil),          // 38: users.DeleteUserTagReq
+	(*DeleteUserTagResp)(nil),         // 39: users.DeleteUserTagResp
+	(*GetUserTagListReq)(nil),         // 40: users.GetUserTagListReq
+	(*GetUserTagListResp)(nil),        // 41: users.GetUserTagListResp
+	(*UserRefererInfo)(nil),           // 42: users.UserRefererInfo
+	(*CreateUserRefererReq)(nil),      // 43: users.CreateUserRefererReq
+	(*CreateUserRefererResp)(nil),     // 44: users.CreateUserRefererResp
+	(*GetUserRefererReq)(nil),         // 45: users.GetUserRefererReq
+	(*GetUserRefererResp)(nil),        // 46: users.GetUserRefererResp
+	(*UpdateUserRefererReq)(nil),      // 47: users.UpdateUserRefererReq
+	(*UpdateUserRefererResp)(nil),     // 48: users.UpdateUserRefererResp
+	(*DeleteUserRefererReq)(nil),      // 49: users.DeleteUserRefererReq
+	(*DeleteUserRefererResp)(nil),     // 50: users.DeleteUserRefererResp
+	(*GetUserRefererListReq)(nil),     // 51: users.GetUserRefererListReq
+	(*GetUserRefererListResp)(nil),    // 52: users.GetUserRefererListResp
+	(*GenerateRefererLinkReq)(nil),    // 53: users.GenerateRefererLinkReq
+	(*GenerateRefererLinkResp)(nil),   // 54: users.GenerateRefererLinkResp
+	(*RegisterByRefererLinkReq)(nil),  // 55: users.RegisterByRefererLinkReq
+	(*RegisterByRefererLinkResp)(nil), // 56: users.RegisterByRefererLinkResp
 }
 var file_users_proto_depIdxs = []int32{
 	1,  // 0: users.GetUserListResp.list:type_name -> users.UserItem
@@ -2652,49 +3535,65 @@ var file_users_proto_depIdxs = []int32{
 	4,  // 3: users.LevelBatchResp.list:type_name -> users.UserLevelInfo
 	20, // 4: users.GetUserGroupListResp.list:type_name -> users.UserGroupInfo
 	31, // 5: users.GetUserTagListResp.list:type_name -> users.UserTagInfo
-	0,  // 6: users.Users.GetUserList:input_type -> users.GetUserListReq
-	3,  // 7: users.Users.GetUser:input_type -> users.GetUserReq
-	6,  // 8: users.Users.CreateUser:input_type -> users.CreateUserReq
-	8,  // 9: users.Users.CreateUserLevel:input_type -> users.CreateUserLevelReq
-	10, // 10: users.Users.GetUserLevel:input_type -> users.GetUserLevelReq
-	12, // 11: users.Users.UpdateUserLevel:input_type -> users.UpdateUserLevelReq
-	14, // 12: users.Users.DeleteUserLevel:input_type -> users.DeleteUserLevelReq
-	16, // 13: users.Users.GetUserLevelList:input_type -> users.GetUserLevelListReq
-	18, // 14: users.Users.GetLevelsBatch:input_type -> users.LevelBatchReq
-	21, // 15: users.Users.CreateUserGroup:input_type -> users.CreateUserGroupReq
-	23, // 16: users.Users.GetUserGroup:input_type -> users.GetUserGroupReq
-	25, // 17: users.Users.UpdateUserGroup:input_type -> users.UpdateUserGroupReq
-	27, // 18: users.Users.DeleteUserGroup:input_type -> users.DeleteUserGroupReq
-	29, // 19: users.Users.GetUserGroupList:input_type -> users.GetUserGroupListReq
-	32, // 20: users.Users.CreateUserTag:input_type -> users.CreateUserTagReq
-	34, // 21: users.Users.GetUserTag:input_type -> users.GetUserTagReq
-	36, // 22: users.Users.UpdateUserTag:input_type -> users.UpdateUserTagReq
-	38, // 23: users.Users.DeleteUserTag:input_type -> users.DeleteUserTagReq
-	40, // 24: users.Users.GetUserTagList:input_type -> users.GetUserTagListReq
-	2,  // 25: users.Users.GetUserList:output_type -> users.GetUserListResp
-	5,  // 26: users.Users.GetUser:output_type -> users.GetUserResp
-	7,  // 27: users.Users.CreateUser:output_type -> users.CreateUserResp
-	9,  // 28: users.Users.CreateUserLevel:output_type -> users.CreateUserLevelResp
-	11, // 29: users.Users.GetUserLevel:output_type -> users.GetUserLevelResp
-	13, // 30: users.Users.UpdateUserLevel:output_type -> users.UpdateUserLevelResp
-	15, // 31: users.Users.DeleteUserLevel:output_type -> users.DeleteUserLevelResp
-	17, // 32: users.Users.GetUserLevelList:output_type -> users.GetUserLevelListResp
-	19, // 33: users.Users.GetLevelsBatch:output_type -> users.LevelBatchResp
-	22, // 34: users.Users.CreateUserGroup:output_type -> users.CreateUserGroupResp
-	24, // 35: users.Users.GetUserGroup:output_type -> users.GetUserGroupResp
-	26, // 36: users.Users.UpdateUserGroup:output_type -> users.UpdateUserGroupResp
-	28, // 37: users.Users.DeleteUserGroup:output_type -> users.DeleteUserGroupResp
-	30, // 38: users.Users.GetUserGroupList:output_type -> users.GetUserGroupListResp
-	33, // 39: users.Users.CreateUserTag:output_type -> users.CreateUserTagResp
-	35, // 40: users.Users.GetUserTag:output_type -> users.GetUserTagResp
-	37, // 41: users.Users.UpdateUserTag:output_type -> users.UpdateUserTagResp
-	39, // 42: users.Users.DeleteUserTag:output_type -> users.DeleteUserTagResp
-	41, // 43: users.Users.GetUserTagList:output_type -> users.GetUserTagListResp
-	25, // [25:44] is the sub-list for method output_type
-	6,  // [6:25] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	42, // 6: users.GetUserRefererResp.info:type_name -> users.UserRefererInfo
+	42, // 7: users.GetUserRefererListResp.list:type_name -> users.UserRefererInfo
+	0,  // 8: users.Users.GetUserList:input_type -> users.GetUserListReq
+	3,  // 9: users.Users.GetUser:input_type -> users.GetUserReq
+	6,  // 10: users.Users.CreateUser:input_type -> users.CreateUserReq
+	8,  // 11: users.Users.CreateUserLevel:input_type -> users.CreateUserLevelReq
+	10, // 12: users.Users.GetUserLevel:input_type -> users.GetUserLevelReq
+	12, // 13: users.Users.UpdateUserLevel:input_type -> users.UpdateUserLevelReq
+	14, // 14: users.Users.DeleteUserLevel:input_type -> users.DeleteUserLevelReq
+	16, // 15: users.Users.GetUserLevelList:input_type -> users.GetUserLevelListReq
+	18, // 16: users.Users.GetLevelsBatch:input_type -> users.LevelBatchReq
+	21, // 17: users.Users.CreateUserGroup:input_type -> users.CreateUserGroupReq
+	23, // 18: users.Users.GetUserGroup:input_type -> users.GetUserGroupReq
+	25, // 19: users.Users.UpdateUserGroup:input_type -> users.UpdateUserGroupReq
+	27, // 20: users.Users.DeleteUserGroup:input_type -> users.DeleteUserGroupReq
+	29, // 21: users.Users.GetUserGroupList:input_type -> users.GetUserGroupListReq
+	32, // 22: users.Users.CreateUserTag:input_type -> users.CreateUserTagReq
+	34, // 23: users.Users.GetUserTag:input_type -> users.GetUserTagReq
+	36, // 24: users.Users.UpdateUserTag:input_type -> users.UpdateUserTagReq
+	38, // 25: users.Users.DeleteUserTag:input_type -> users.DeleteUserTagReq
+	40, // 26: users.Users.GetUserTagList:input_type -> users.GetUserTagListReq
+	43, // 27: users.Users.CreateUserReferer:input_type -> users.CreateUserRefererReq
+	45, // 28: users.Users.GetUserReferer:input_type -> users.GetUserRefererReq
+	47, // 29: users.Users.UpdateUserReferer:input_type -> users.UpdateUserRefererReq
+	49, // 30: users.Users.DeleteUserReferer:input_type -> users.DeleteUserRefererReq
+	51, // 31: users.Users.GetUserRefererList:input_type -> users.GetUserRefererListReq
+	53, // 32: users.Users.GenerateRefererLink:input_type -> users.GenerateRefererLinkReq
+	55, // 33: users.Users.RegisterByRefererLink:input_type -> users.RegisterByRefererLinkReq
+	2,  // 34: users.Users.GetUserList:output_type -> users.GetUserListResp
+	5,  // 35: users.Users.GetUser:output_type -> users.GetUserResp
+	7,  // 36: users.Users.CreateUser:output_type -> users.CreateUserResp
+	9,  // 37: users.Users.CreateUserLevel:output_type -> users.CreateUserLevelResp
+	11, // 38: users.Users.GetUserLevel:output_type -> users.GetUserLevelResp
+	13, // 39: users.Users.UpdateUserLevel:output_type -> users.UpdateUserLevelResp
+	15, // 40: users.Users.DeleteUserLevel:output_type -> users.DeleteUserLevelResp
+	17, // 41: users.Users.GetUserLevelList:output_type -> users.GetUserLevelListResp
+	19, // 42: users.Users.GetLevelsBatch:output_type -> users.LevelBatchResp
+	22, // 43: users.Users.CreateUserGroup:output_type -> users.CreateUserGroupResp
+	24, // 44: users.Users.GetUserGroup:output_type -> users.GetUserGroupResp
+	26, // 45: users.Users.UpdateUserGroup:output_type -> users.UpdateUserGroupResp
+	28, // 46: users.Users.DeleteUserGroup:output_type -> users.DeleteUserGroupResp
+	30, // 47: users.Users.GetUserGroupList:output_type -> users.GetUserGroupListResp
+	33, // 48: users.Users.CreateUserTag:output_type -> users.CreateUserTagResp
+	35, // 49: users.Users.GetUserTag:output_type -> users.GetUserTagResp
+	37, // 50: users.Users.UpdateUserTag:output_type -> users.UpdateUserTagResp
+	39, // 51: users.Users.DeleteUserTag:output_type -> users.DeleteUserTagResp
+	41, // 52: users.Users.GetUserTagList:output_type -> users.GetUserTagListResp
+	44, // 53: users.Users.CreateUserReferer:output_type -> users.CreateUserRefererResp
+	46, // 54: users.Users.GetUserReferer:output_type -> users.GetUserRefererResp
+	48, // 55: users.Users.UpdateUserReferer:output_type -> users.UpdateUserRefererResp
+	50, // 56: users.Users.DeleteUserReferer:output_type -> users.DeleteUserRefererResp
+	52, // 57: users.Users.GetUserRefererList:output_type -> users.GetUserRefererListResp
+	54, // 58: users.Users.GenerateRefererLink:output_type -> users.GenerateRefererLinkResp
+	56, // 59: users.Users.RegisterByRefererLink:output_type -> users.RegisterByRefererLinkResp
+	34, // [34:60] is the sub-list for method output_type
+	8,  // [8:34] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_users_proto_init() }
@@ -2708,7 +3607,7 @@ func file_users_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_users_proto_rawDesc), len(file_users_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   42,
+			NumMessages:   57,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

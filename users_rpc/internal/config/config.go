@@ -13,4 +13,5 @@ type Config struct {
     }
 
     Cache cache.CacheConf
+    AppUrl string
 }

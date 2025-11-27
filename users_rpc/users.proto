@@ -263,4 +263,91 @@ service Users {
   rpc UpdateUserTag(UpdateUserTagReq) returns (UpdateUserTagResp);
   rpc DeleteUserTag(DeleteUserTagReq) returns (DeleteUserTagResp);
   rpc GetUserTagList(GetUserTagListReq) returns (GetUserTagListResp);
+
+  
+  // UserReferer
+  rpc CreateUserReferer(CreateUserRefererReq) returns (CreateUserRefererResp);
+  rpc GetUserReferer(GetUserRefererReq) returns (GetUserRefererResp);
+  rpc UpdateUserReferer(UpdateUserRefererReq) returns (UpdateUserRefererResp);
+  rpc DeleteUserReferer(DeleteUserRefererReq) returns (DeleteUserRefererResp);
+  rpc GetUserRefererList(GetUserRefererListReq) returns (GetUserRefererListResp);
+  
+  rpc GenerateRefererLink(GenerateRefererLinkReq) returns (GenerateRefererLinkResp);
+  rpc RegisterByRefererLink(RegisterByRefererLinkReq) returns (RegisterByRefererLinkResp);
+}
+
+// =============================
+// UserReferer
+// =============================
+message UserRefererInfo {
+  uint64 id = 1;
+  uint64 user_id = 2;
+  string parent_tree = 3;
+  string name = 4;
+  string display_name = 5;
+
+  int64 visit_count = 6;
+  int64 register_count = 7;
+  int64 first_deposit_count = 8;
+
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
+
+message CreateUserRefererReq {
+  uint64 user_id = 1;
+  string parent_tree = 2;
+  string name = 3;
+  string display_name = 4;
+}
+message CreateUserRefererResp {
+  uint64 id = 1;
+}
+
+message GetUserRefererReq {
+  uint64 id = 1;
+}
+message GetUserRefererResp {
+  UserRefererInfo info = 1;
+}
+
+message UpdateUserRefererReq {
+  uint64 id = 1;
+  string name = 2;
+  string display_name = 3;
+  string parent_tree = 4;
+}
+message UpdateUserRefererResp {
+  bool success = 1;
+}
+
+message DeleteUserRefererReq {
+  uint64 id = 1;
+}
+message DeleteUserRefererResp {
+  bool success = 1;
+}
+
+message GetUserRefererListReq {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+message GetUserRefererListResp {
+  int64 total = 1;
+  repeated UserRefererInfo list = 2;
+}
+
+message GenerateRefererLinkReq {
+  uint64 user_id = 1;
+}
+message GenerateRefererLinkResp {
+  string referer_link = 1;
+}
+
+message RegisterByRefererLinkReq {
+  string referer_code = 1;
+  uint64 new_user_id = 2;
+}
+message RegisterByRefererLinkResp {
+  bool success = 1;
 }

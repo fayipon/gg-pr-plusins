@@ -7,6 +7,7 @@ import (
     logicUserLevel "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/userlevel"
     logicUserGroup "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/usergroup"
     logicUserTag "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/usertag"
+    logicUserReferer "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/userreferer"
     logicCommon "github.com/fayipon/gg-pr-plusins/users_rpc/internal/logic/common"
     "github.com/fayipon/gg-pr-plusins/users_rpc/internal/svc"
     "github.com/fayipon/gg-pr-plusins/users_rpc/users"
@@ -128,6 +129,46 @@ func (s *UsersServer) DeleteUserTag(ctx context.Context, req *users.DeleteUserTa
 func (s *UsersServer) GetUserTagList(ctx context.Context, req *users.GetUserTagListReq) (*users.GetUserTagListResp, error) {
     l := logicUserTag.NewGetUserTagListLogic(ctx, s.svcCtx)
     return l.GetUserTagList(req)
+}
+
+//
+// ----------------------
+// UserReferer
+// ----------------------
+
+func (s *UsersServer) CreateUserReferer(ctx context.Context, req *users.CreateUserRefererReq) (*users.CreateUserRefererResp, error) {
+    l := logicUserReferer.NewCreateUserRefererLogic(ctx, s.svcCtx)
+    return l.CreateUserReferer(req)
+}
+
+func (s *UsersServer) GetUserReferer(ctx context.Context, req *users.GetUserRefererReq) (*users.GetUserRefererResp, error) {
+    l := logicUserReferer.NewGetUserRefererLogic(ctx, s.svcCtx)
+    return l.GetUserReferer(req)
+}
+
+func (s *UsersServer) UpdateUserReferer(ctx context.Context, req *users.UpdateUserRefererReq) (*users.UpdateUserRefererResp, error) {
+    l := logicUserReferer.NewUpdateUserRefererLogic(ctx, s.svcCtx)
+    return l.UpdateUserReferer(req)
+}
+
+func (s *UsersServer) DeleteUserReferer(ctx context.Context, req *users.DeleteUserRefererReq) (*users.DeleteUserRefererResp, error) {
+    l := logicUserReferer.NewDeleteUserRefererLogic(ctx, s.svcCtx)
+    return l.DeleteUserReferer(req)
+}
+
+func (s *UsersServer) GetUserRefererList(ctx context.Context, req *users.GetUserRefererListReq) (*users.GetUserRefererListResp, error) {
+    l := logicUserReferer.NewGetUserRefererListLogic(ctx, s.svcCtx)
+    return l.GetUserRefererList(req)
+}
+
+func (s *UsersServer) GenerateRefererLink(ctx context.Context, req *users.GenerateRefererLinkReq) (*users.GenerateRefererLinkResp, error) {
+    l := logicUserReferer.NewGenerateRefererLinkLogic(ctx, s.svcCtx)
+    return l.GenerateRefererLink(req)
+}
+
+func (s *UsersServer) RegisterByRefererLink(ctx context.Context, req *users.RegisterByRefererLinkReq) (*users.RegisterByRefererLinkResp, error) {
+    l := logicUserReferer.NewRegisterByRefererLinkLogic(ctx, s.svcCtx)
+    return l.RegisterByRefererLink(req)
 }
 
 //

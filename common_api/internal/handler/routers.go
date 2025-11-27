@@ -7,6 +7,7 @@ import (
     userlevel "common_api/internal/handler/userlevel"
     usergroup "common_api/internal/handler/usergroup"
     usertag "common_api/internal/handler/usertag"
+    userreferer "common_api/internal/handler/userreferer"
     "common_api/internal/svc"
     "github.com/zeromicro/go-zero/rest"
 )
@@ -144,5 +145,38 @@ func RegisterHandlers(server *rest.Server, ctx *svc.ServiceContext) {
         Method:  http.MethodGet,
         Path:    "/usertag",
         Handler: ctx.JwtMiddleware(usertag.GetUserTagListHandler(ctx)),
+    })
+
+	// --------------------
+    // User Referer
+    // --------------------
+    server.AddRoute(rest.Route{
+        Method:  http.MethodPost,
+        Path:    "/userreferer",
+        Handler: ctx.JwtMiddleware(userreferer.CreateUserRefererHandler(ctx)),
+    })
+
+    server.AddRoute(rest.Route{
+        Method:  http.MethodGet,
+        Path:    "/userreferer/:id",
+        Handler: ctx.JwtMiddleware(userreferer.GetUserRefererHandler(ctx)),
+    })
+
+    server.AddRoute(rest.Route{
+        Method:  http.MethodPut,
+        Path:    "/userreferer/:id",
+        Handler: ctx.JwtMiddleware(userreferer.UpdateUserRefererHandler(ctx)),
+    })
+
+    server.AddRoute(rest.Route{
+        Method:  http.MethodDelete,
+        Path:    "/userreferer/:id",
+        Handler: ctx.JwtMiddleware(userreferer.DeleteUserRefererHandler(ctx)),
+    })
+
+    server.AddRoute(rest.Route{
+        Method:  http.MethodGet,
+        Path:    "/userreferer",
+        Handler: ctx.JwtMiddleware(userreferer.GetUserRefererListHandler(ctx)),
     })
 }

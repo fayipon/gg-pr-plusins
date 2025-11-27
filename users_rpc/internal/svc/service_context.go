@@ -12,6 +12,7 @@ type ServiceContext struct {
     UserLevelModel  model.UserLevelsModel
     UserGroupModel model.UserGroupsModel
     UserTagModel     model.UserTagModel
+    UserRefererModel model.UserRefererModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -23,5 +24,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
         UserLevelModel: model.NewUserLevelsModel(conn, c.Cache),
         UserGroupModel: model.NewUserGroupsModel(conn, c.Cache),
         UserTagModel:   model.NewUserTagModel(conn, c.Cache),
+        UserRefererModel: model.NewUserRefererModel(conn, c.Cache),
     }
 }
